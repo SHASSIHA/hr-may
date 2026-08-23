@@ -1,15 +1,25 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>نظام الموارد البشرية</title>
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
 
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+<title>الموظفين - Shassiha HR</title>
+
+<link
+href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap"
+rel="stylesheet">
+
 
 <style>
+
+/* =========================
+   GENERAL
+========================= */
 
 *{
     margin:0;
@@ -20,231 +30,1236 @@
 
 body{
     background:#f4f6f9;
-}
-
-.header{
-    background:#ff7a00;
-    color:white;
-    padding:20px;
-    text-align:center;
-    font-size:24px;
-    font-weight:bold;
-}
-
-.container{
-    padding:20px;
-}
-
-.cards{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:15px;
-}
-
-.card{
-    background:white;
-    padding:25px;
-    border-radius:15px;
-    box-shadow:0 2px 10px rgba(0,0,0,0.1);
-    text-align:center;
-    cursor:pointer;
-    transition:0.3s;
-    text-decoration:none;
     color:#222;
 }
 
-.card:hover{
-    transform:translateY(-5px);
+
+/* =========================
+   HEADER
+========================= */
+
+.header{
+
+    background:#ff7a00;
+
+    color:white;
+
+    padding:18px 25px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    box-shadow:
+        0 3px 10px rgba(0,0,0,.12);
+
 }
 
-.icon{
-    font-size:40px;
-    margin-bottom:10px;
+.header h1{
+
+    margin:0;
+
+    font-size:22px;
+
 }
 
-.title{
-    font-size:18px;
-    font-weight:bold;
+.header a{
+
+    color:white;
+
+    text-decoration:none;
+
+    font-size:14px;
+
 }
 
-.count{
+
+/* =========================
+   CONTAINER
+========================= */
+
+.container{
+
+    max-width:1200px;
+
+    margin:25px auto;
+
+    padding:0 15px;
+
+}
+
+
+/* =========================
+   TOP BAR
+========================= */
+
+.topbar{
+
+    background:white;
+
+    padding:20px;
+
+    border-radius:16px;
+
+    box-shadow:
+        0 2px 10px rgba(0,0,0,.07);
+
+    margin-bottom:20px;
+
+    display:flex;
+
+    gap:12px;
+
+    flex-wrap:wrap;
+
+    align-items:center;
+
+}
+
+.search{
+
+    flex:1;
+
+    min-width:220px;
+
+    padding:12px 15px;
+
+    border:1px solid #ddd;
+
+    border-radius:10px;
+
+    font-family:inherit;
+
+    font-size:14px;
+
+    outline:none;
+
+}
+
+.search:focus{
+
+    border-color:#ff7a00;
+
+}
+
+
+.btn{
+
+    border:none;
+
+    padding:12px 18px;
+
+    border-radius:10px;
+
+    font-family:inherit;
+
+    cursor:pointer;
+
+    font-size:14px;
+
+}
+
+.primary{
+
+    background:#ff7a00;
+
+    color:white;
+
+}
+
+.secondary{
+
+    background:#333;
+
+    color:white;
+
+}
+
+
+/* =========================
+   STATS
+========================= */
+
+.stats{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(180px,1fr)
+        );
+
+    gap:15px;
+
+    margin-bottom:20px;
+
+}
+
+.stat{
+
+    background:white;
+
+    padding:20px;
+
+    border-radius:14px;
+
+    box-shadow:
+        0 2px 8px rgba(0,0,0,.06);
+
+    text-align:center;
+
+}
+
+.stat-number{
+
     font-size:28px;
+
+    font-weight:bold;
+
     color:#ff7a00;
-    margin-top:10px;
+
+}
+
+.stat-title{
+
+    color:#777;
+
+    font-size:13px;
+
+    margin-top:5px;
+
+}
+
+
+/* =========================
+   EMPLOYEES
+========================= */
+
+.employees{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(280px,1fr)
+        );
+
+    gap:15px;
+
+}
+
+
+.employee{
+
+    background:white;
+
+    border-radius:16px;
+
+    padding:20px;
+
+    box-shadow:
+        0 2px 10px rgba(0,0,0,.07);
+
+    transition:.25s;
+
+}
+
+.employee:hover{
+
+    transform:translateY(-3px);
+
+}
+
+
+.employee-top{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+    margin-bottom:15px;
+
+}
+
+
+.avatar{
+
+    width:55px;
+
+    height:55px;
+
+    border-radius:50%;
+
+    background:#fff0e5;
+
+    color:#ff7a00;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:28px;
+
+}
+
+
+.employee-name{
+
+    font-size:18px;
+
+    font-weight:bold;
+
+}
+
+.employee-id{
+
+    color:#ff7a00;
+
+    font-size:12px;
+
+    font-weight:bold;
+
+}
+
+
+.employee-info{
+
+    border-top:1px solid #eee;
+
+    padding-top:12px;
+
+}
+
+
+.row{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    gap:10px;
+
+    padding:6px 0;
+
+    font-size:13px;
+
+}
+
+
+.label{
+
+    color:#888;
+
+}
+
+.value{
+
+    font-weight:600;
+
+}
+
+
+.status{
+
+    display:inline-block;
+
+    padding:4px 10px;
+
+    border-radius:15px;
+
+    font-size:11px;
+
+}
+
+.active{
+
+    background:#e7f7ed;
+
+    color:#16833b;
+
+}
+
+.inactive{
+
+    background:#ffe5e5;
+
+    color:#c62828;
+
+}
+
+.leave{
+
+    background:#fff4dc;
+
+    color:#a56a00;
+
+}
+
+
+.actions{
+
+    display:flex;
+
+    gap:8px;
+
+    margin-top:15px;
+
+}
+
+
+.view{
+
+    flex:1;
+
+    background:#ff7a00;
+
+    color:white;
+
+}
+
+.edit{
+
+    background:#333;
+
+    color:white;
+
+}
+
+
+/* =========================
+   LOADING
+========================= */
+
+.loading{
+
+    background:white;
+
+    border-radius:16px;
+
+    padding:50px;
+
+    text-align:center;
+
+    color:#777;
+
+}
+
+
+/* =========================
+   EMPTY
+========================= */
+
+.empty{
+
+    background:white;
+
+    border-radius:16px;
+
+    padding:50px;
+
+    text-align:center;
+
+    color:#777;
+
+}
+
+
+/* =========================
+   ERROR
+========================= */
+
+.error{
+
+    background:#ffe5e5;
+
+    color:#c62828;
+
+    border-radius:12px;
+
+    padding:20px;
+
+    text-align:center;
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:600px){
+
+    .header{
+
+        flex-direction:column;
+
+        gap:8px;
+
+        text-align:center;
+
+    }
+
+    .topbar{
+
+        flex-direction:column;
+
+        align-items:stretch;
+
+    }
+
+    .search{
+
+        width:100%;
+
+    }
+
+    .btn{
+
+        width:100%;
+
+    }
+
 }
 
 </style>
 
 </head>
 
+
 <body>
 
 
+<!-- =========================
+     HEADER
+========================= -->
+
 <div class="header">
-    نظام الموارد البشرية HR
+
+    <h1>
+        👥 إدارة الموظفين
+    </h1>
+
+    <a href="index.html">
+        ← الرئيسية
+    </a>
+
 </div>
+
 
 
 <div class="container">
 
-<div class="cards">
+
+<!-- =========================
+     TOP BAR
+========================= -->
+
+<div class="topbar">
+
+    <input
+        type="text"
+        id="search"
+        class="search"
+        placeholder="🔎 بحث عن موظف بالاسم أو الرقم أو الهاتف..."
+        oninput="filterEmployees()"
+    >
+
+    <button
+        class="btn primary"
+        onclick="addEmployee()">
+
+        ➕ إضافة موظف
+
+    </button>
 
 
-<!-- الموظفين -->
+    <button
+        class="btn secondary"
+        onclick="loadEmployees()">
 
-<a class="card" href="employees.html">
+        🔄 تحديث
 
-    <div class="icon">👥</div>
+    </button>
 
-    <div class="title">
-        الموظفين
+</div>
+
+
+
+<!-- =========================
+     STATS
+========================= -->
+
+<div class="stats">
+
+
+    <div class="stat">
+
+        <div
+            class="stat-number"
+            id="totalEmployees">
+
+            0
+
+        </div>
+
+        <div class="stat-title">
+
+            إجمالي الموظفين
+
+        </div>
+
     </div>
 
-    <div class="count" id="employeesCount">
-        0
+
+
+    <div class="stat">
+
+        <div
+            class="stat-number"
+            id="activeEmployees">
+
+            0
+
+        </div>
+
+        <div class="stat-title">
+
+            الموظفين المستمرين
+
+        </div>
+
     </div>
 
-</a>
 
 
-<!-- إضافة موظف -->
+    <div class="stat">
 
-<a class="card" href="employees.html">
+        <div
+            class="stat-number"
+            id="leaveEmployees">
 
-    <div class="icon">➕</div>
+            0
 
-    <div class="title">
-        إضافة موظف
+        </div>
+
+        <div class="stat-title">
+
+            في إجازة
+
+        </div>
+
     </div>
 
-</a>
+
+</div>
 
 
-<!-- المعاملات -->
 
-<div class="card" onclick="comingSoon('المعاملات')">
+<!-- =========================
+     EMPLOYEES LIST
+========================= -->
 
-    <div class="icon">📄</div>
+<div
+    id="employees"
+    class="employees">
 
-    <div class="title">
-        المعاملات
+    <div class="loading">
+
+        جاري تحميل الموظفين...
+
     </div>
 
 </div>
 
 
-<!-- الحضور -->
-
-<div class="card" onclick="comingSoon('الحضور والإجازات')">
-
-    <div class="icon">🕐</div>
-
-    <div class="title">
-        الحضور والإجازات
-    </div>
-
 </div>
 
-
-<!-- التقارير -->
-
-<div class="card" onclick="comingSoon('التقارير')">
-
-    <div class="icon">📊</div>
-
-    <div class="title">
-        التقارير
-    </div>
-
-</div>
-
-
-<!-- الإعدادات -->
-
-<div class="card" onclick="comingSoon('الإعدادات')">
-
-    <div class="icon">⚙️</div>
-
-    <div class="title">
-        الإعدادات
-    </div>
-
-</div>
-
-
-</div>
-
-</div>
 
 
 <script>
 
 
+// =====================================================
+// API
+// =====================================================
+
 const API =
 "https://script.google.com/macros/s/AKfycbw6pnqbRn3VyJvFjk0RGfEt8VXdBkOq2uqooSvxi0onjcUStpJ_hOGNZVPLimRA-ZNAGQ/exec";
 
 
-// ================================
-// عدد الموظفين
-// ================================
+
+let allEmployees = [];
+
+
+
+// =====================================================
+// LOAD EMPLOYEES
+// =====================================================
 
 async function loadEmployees(){
 
+    const container =
+        document.getElementById("employees");
+
+    container.innerHTML = `
+        <div class="loading">
+            ⏳ جاري تحميل الموظفين...
+        </div>
+    `;
+
+
     try{
 
-        const response = await fetch(API,{
+        const response =
+            await fetch(
 
-            method:"POST",
+                API,
 
-            body:JSON.stringify({
+                {
 
-                action:"getEmployees"
+                    method:"POST",
 
-            })
+                    body:
+                        JSON.stringify({
 
-        });
+                            action:
+                                "getEmployees"
+
+                        })
+
+                }
+
+            );
 
 
         const data =
             await response.json();
 
 
-        if(data.status === "success"){
+        if(
+            data.status !==
+            "success"
+        ){
 
-            document.getElementById(
-                "employeesCount"
-            ).innerText =
-                data.employees.length;
+            throw new Error(
+                data.message ||
+                "حدث خطأ"
+            );
 
         }
 
 
-    }catch(error){
+        allEmployees =
+            data.employees || [];
 
-        console.log(error);
+
+        updateStats();
+
+
+        renderEmployees(
+            allEmployees
+        );
+
+
+    }
+
+    catch(error){
+
+        container.innerHTML = `
+
+            <div class="error">
+
+                ❌ تعذر تحميل الموظفين
+
+                <br><br>
+
+                ${safe(error.message)}
+
+            </div>
+
+        `;
 
     }
 
 }
 
 
-loadEmployees();
+
+// =====================================================
+// RENDER
+// =====================================================
+
+function renderEmployees(list){
+
+    const container =
+        document.getElementById(
+            "employees"
+        );
 
 
-// ================================
-// الميزات القادمة
-// ================================
+    if(!list.length){
 
-function comingSoon(name){
+        container.innerHTML = `
 
-    alert(
-        "قسم " + name + " راح يتم تفعيله بالمرحلة القادمة 🔥"
+            <div class="empty">
+
+                👤 لا يوجد موظفين
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    container.innerHTML =
+        list.map(
+            employeeCard
+        ).join("");
+
+}
+
+
+
+// =====================================================
+// EMPLOYEE CARD
+// =====================================================
+
+function employeeCard(e){
+
+    const id =
+        e["Employee ID"] || "";
+
+    const name =
+        e["الاسم"] || "بدون اسم";
+
+    const department =
+        e["القسم"] || "-";
+
+    const position =
+        e["الوظيفة"] || "-";
+
+    const phone =
+        e["الهاتف"] || "-";
+
+    const status =
+        e["الحالة"] || "-";
+
+
+    return `
+
+        <div class="employee">
+
+
+            <div class="employee-top">
+
+
+                <div class="avatar">
+
+                    👤
+
+                </div>
+
+
+                <div>
+
+                    <div class="employee-name">
+
+                        ${safe(name)}
+
+                    </div>
+
+
+                    <div class="employee-id">
+
+                        ${safe(id)}
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+
+            <div class="employee-info">
+
+
+                <div class="row">
+
+                    <span class="label">
+                        القسم
+                    </span>
+
+                    <span class="value">
+                        ${safe(department)}
+                    </span>
+
+                </div>
+
+
+                <div class="row">
+
+                    <span class="label">
+                        الوظيفة
+                    </span>
+
+                    <span class="value">
+                        ${safe(position)}
+                    </span>
+
+                </div>
+
+
+                <div class="row">
+
+                    <span class="label">
+                        الهاتف
+                    </span>
+
+                    <span class="value">
+                        ${safe(phone)}
+                    </span>
+
+                </div>
+
+
+                <div class="row">
+
+                    <span class="label">
+                        الحالة
+                    </span>
+
+                    <span>
+                        ${statusBadge(status)}
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+
+            <div class="actions">
+
+
+                <button
+                    class="btn view"
+                    onclick="viewEmployee('${encodeURIComponent(id)}')">
+
+                    👁️ عرض الملف
+
+                </button>
+
+
+                <button
+                    class="btn edit"
+                    onclick="editEmployee('${encodeURIComponent(id)}')">
+
+                    ✏️ تعديل
+
+                </button>
+
+
+            </div>
+
+
+        </div>
+
+    `;
+
+}
+
+
+
+// =====================================================
+// SEARCH
+// =====================================================
+
+function filterEmployees(){
+
+    const query =
+        document
+        .getElementById("search")
+        .value
+        .trim()
+        .toLowerCase();
+
+
+    if(!query){
+
+        renderEmployees(
+            allEmployees
+        );
+
+        return;
+
+    }
+
+
+    const filtered =
+        allEmployees.filter(
+            e => {
+
+                const id =
+                    String(
+                        e["Employee ID"] || ""
+                    ).toLowerCase();
+
+
+                const name =
+                    String(
+                        e["الاسم"] || ""
+                    ).toLowerCase();
+
+
+                const phone =
+                    String(
+                        e["الهاتف"] || ""
+                    ).toLowerCase();
+
+
+                const department =
+                    String(
+                        e["القسم"] || ""
+                    ).toLowerCase();
+
+
+                return (
+
+                    id.includes(query) ||
+
+                    name.includes(query) ||
+
+                    phone.includes(query) ||
+
+                    department.includes(query)
+
+                );
+
+            }
+        );
+
+
+    renderEmployees(
+        filtered
     );
 
 }
 
 
+
+// =====================================================
+// STATS
+// =====================================================
+
+function updateStats(){
+
+    const total =
+        allEmployees.length;
+
+
+    const active =
+        allEmployees.filter(
+            e =>
+                e["الحالة"] ===
+                "مستمر"
+        ).length;
+
+
+    const leave =
+        allEmployees.filter(
+            e =>
+                e["الحالة"] ===
+                "إجازة"
+        ).length;
+
+
+    document.getElementById(
+        "totalEmployees"
+    ).innerText =
+        total;
+
+
+    document.getElementById(
+        "activeEmployees"
+    ).innerText =
+        active;
+
+
+    document.getElementById(
+        "leaveEmployees"
+    ).innerText =
+        leave;
+
+}
+
+
+
+// =====================================================
+// STATUS
+// =====================================================
+
+function statusBadge(status){
+
+    if(status === "مستمر"){
+
+        return `
+            <span class="status active">
+                🟢 مستمر
+            </span>
+        `;
+
+    }
+
+
+    if(status === "إجازة"){
+
+        return `
+            <span class="status leave">
+                🟠 إجازة
+            </span>
+        `;
+
+    }
+
+
+    if(status === "منتهي الخدمة"){
+
+        return `
+            <span class="status inactive">
+                🔴 منتهي الخدمة
+            </span>
+        `;
+
+    }
+
+
+    return `
+        <span class="status">
+            ${safe(status)}
+        </span>
+    `;
+
+}
+
+
+
+// =====================================================
+// VIEW EMPLOYEE
+// =====================================================
+
+function viewEmployee(id){
+
+    window.location.href =
+        "employee.html?id=" +
+        id;
+
+}
+
+
+
+// =====================================================
+// ADD EMPLOYEE
+// =====================================================
+
+function addEmployee(){
+
+    alert(
+        "➕ إضافة موظف\n\n" +
+        "راح نفعّل نموذج إضافة الموظف بالخطوة القادمة."
+    );
+
+}
+
+
+
+// =====================================================
+// EDIT EMPLOYEE
+// =====================================================
+
+function editEmployee(id){
+
+    alert(
+        "✏️ تعديل الموظف\n\n" +
+        "رقم الموظف: " +
+        decodeURIComponent(id) +
+        "\n\nراح نفعّل التعديل بالخطوة القادمة."
+    );
+
+}
+
+
+
+// =====================================================
+// SAFE
+// =====================================================
+
+function safe(value){
+
+    if(
+        value === null ||
+        value === undefined
+    ){
+
+        return "";
+
+    }
+
+
+    return String(value)
+
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+
+        .replace(
+            /</g,
+            "&lt;"
+        )
+
+        .replace(
+            />/g,
+            "&gt;"
+        )
+
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+
+// =====================================================
+// START
+// =====================================================
+
+loadEmployees();
+
+
 </script>
 
+
 </body>
+
 </html>
