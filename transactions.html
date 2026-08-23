@@ -364,14 +364,22 @@ const API =
 
 function openTransaction(type){
 
+    if(type === "مباشرة"){
+
+        window.location.href =
+            "direct.html";
+
+        return;
+
+    }
+
     alert(
         "📄 " +
         type +
-        "\n\nراح نفتح نموذج المعاملة بالخطوة القادمة."
+        "\n\nراح نفعّلها بالمرحلة القادمة."
     );
 
 }
-
 
 // ======================================
 // تحميل المعاملات
