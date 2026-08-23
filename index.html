@@ -1,17 +1,13 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-
 <head>
 
 <meta charset="UTF-8">
-
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>نظام الموارد البشرية</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap"
-rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
 
@@ -41,8 +37,7 @@ body{
 
 .cards{
     display:grid;
-    grid-template-columns:
-    repeat(auto-fit,minmax(220px,1fr));
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
     gap:15px;
 }
 
@@ -50,17 +45,11 @@ body{
     background:white;
     padding:25px;
     border-radius:15px;
-    box-shadow:
-    0 2px 10px rgba(0,0,0,0.1);
-
+    box-shadow:0 2px 10px rgba(0,0,0,0.1);
     text-align:center;
-
     cursor:pointer;
-
     transition:0.3s;
-
     text-decoration:none;
-
     color:#222;
 }
 
@@ -88,77 +77,55 @@ body{
 
 </head>
 
-
 <body>
 
-
 <div class="header">
-
     نظام الموارد البشرية HR
-
 </div>
-
-
 
 <div class="container">
 
 <div class="cards">
 
 
-
 <!-- الموظفين -->
 
-<a
-class="card"
-href="employees.html">
+<div class="card"
+     onclick="window.location.href='employees.html'">
 
-    <div class="icon">
-        👥
-    </div>
+    <div class="icon">👥</div>
 
     <div class="title">
         الموظفين
     </div>
 
-    <div
-    class="count"
-    id="employeesCount">
-
+    <div class="count" id="employeesCount">
         0
-
     </div>
 
-</a>
-
+</div>
 
 
 <!-- إضافة موظف -->
 
-<a
-class="card"
-href="employees.html">
+<div class="card"
+     onclick="window.location.href='employees.html'">
 
-    <div class="icon">
-        ➕
-    </div>
+    <div class="icon">➕</div>
 
     <div class="title">
         إضافة موظف
     </div>
 
-</a>
-
+</div>
 
 
 <!-- المعاملات -->
 
-<div
-class="card"
-onclick="comingSoon('المعاملات')">
+<div class="card"
+     onclick="comingSoon('المعاملات')">
 
-    <div class="icon">
-        📄
-    </div>
+    <div class="icon">📄</div>
 
     <div class="title">
         المعاملات
@@ -167,34 +134,26 @@ onclick="comingSoon('المعاملات')">
 </div>
 
 
-
 <!-- الحضور والغياب -->
 
-<a
-class="card"
-href="attendance.html">
+<div class="card"
+     onclick="window.location.href='attendance.html'">
 
-    <div class="icon">
-        🕐
-    </div>
+    <div class="icon">🕐</div>
 
     <div class="title">
         الحضور والغياب
     </div>
 
-</a>
-
+</div>
 
 
 <!-- التقارير -->
 
-<div
-class="card"
-onclick="comingSoon('التقارير')">
+<div class="card"
+     onclick="comingSoon('التقارير')">
 
-    <div class="icon">
-        📊
-    </div>
+    <div class="icon">📊</div>
 
     <div class="title">
         التقارير
@@ -203,16 +162,12 @@ onclick="comingSoon('التقارير')">
 </div>
 
 
-
 <!-- الإعدادات -->
 
-<div
-class="card"
-onclick="comingSoon('الإعدادات')">
+<div class="card"
+     onclick="comingSoon('الإعدادات')">
 
-    <div class="icon">
-        ⚙️
-    </div>
+    <div class="icon">⚙️</div>
 
     <div class="title">
         الإعدادات
@@ -226,21 +181,21 @@ onclick="comingSoon('الإعدادات')">
 </div>
 
 
-
 <script>
-
 
 const API =
 "https://script.google.com/macros/s/AKfycbw6pnqbRn3VyJvFjk0RGfEt8VXdBkOq2uqooSvxi0onjcUStpJ_hOGNZVPLimRA-ZNAGQ/exec";
 
 
+// ================================
+// عدد الموظفين
+// ================================
 
 async function loadEmployees(){
 
     try{
 
-        const response =
-        await fetch(API,{
+        const response = await fetch(API,{
 
             method:"POST",
 
@@ -254,21 +209,17 @@ async function loadEmployees(){
 
 
         const data =
-        await response.json();
+            await response.json();
 
 
-        if(
-            data.status ===
-            "success"
-        ){
+        if(data.status === "success"){
 
             document.getElementById(
                 "employeesCount"
             ).innerText =
-            data.employees.length;
+                data.employees.length;
 
         }
-
 
     }catch(error){
 
@@ -282,12 +233,14 @@ async function loadEmployees(){
 loadEmployees();
 
 
+// ================================
+// الميزات القادمة
+// ================================
 
 function comingSoon(name){
 
     alert(
-        "قسم " +
-        name +
+        "قسم " + name +
         " راح يتم تفعيله بالمرحلة القادمة 🔥"
     );
 
@@ -295,7 +248,5 @@ function comingSoon(name){
 
 </script>
 
-
 </body>
-
 </html>
