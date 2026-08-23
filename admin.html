@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>نظام الموارد البشرية</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Cairo',sans-serif;
+}
+
+body{
+    background:#f4f6f9;
+}
+
+.header{
+    background:#ff7a00;
+    color:white;
+    padding:20px;
+    text-align:center;
+    font-size:24px;
+    font-weight:bold;
+}
+
+.container{
+    padding:20px;
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:15px;
+}
+
+.card{
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 2px 10px rgba(0,0,0,0.1);
+    text-align:center;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+}
+
+.icon{
+    font-size:40px;
+    margin-bottom:10px;
+}
+
+.title{
+    font-size:18px;
+    font-weight:bold;
+}
+
+.count{
+    font-size:28px;
+    color:#ff7a00;
+    margin-top:10px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="header">
+نظام الموارد البشرية HR
+</div>
+
+<div class="container">
+
+<div class="cards">
+
+<div class="card">
+<div class="icon">👥</div>
+<div class="title">الموظفين</div>
+<div class="count" id="employeesCount">0</div>
+</div>
+
+<div class="card">
+<div class="icon">➕</div>
+<div class="title">إضافة موظف</div>
+</div>
+
+<div class="card">
+<div class="icon">📄</div>
+<div class="title">المعاملات</div>
+</div>
+
+<div class="card">
+<div class="icon">🕐</div>
+<div class="title">الحضور</div>
+</div>
+
+<div class="card">
+<div class="icon">📊</div>
+<div class="title">التقارير</div>
+</div>
+
+<div class="card">
+<div class="icon">⚙️</div>
+<div class="title">الإعدادات</div>
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+const API =
+"https://script.google.com/macros/s/AKfycbw6pnqbRn3VyJvFjk0RGfEt8VXdBkOq2uqooSvxi0onjcUStpJ_hOGNZVPLimRA-ZNAGQ/exec";
+
+async function loadEmployees(){
+
+    try{
+
+        const response = await fetch(API,{
+            method:"POST",
+            body:JSON.stringify({
+                action:"getEmployees"
+            })
+        });
+
+        const data = await response.json();
+
+        if(data.status=="success"){
+            document.getElementById("employeesCount").innerText =
+            data.employees.length;
+        }
+
+    }catch(error){
+        console.log(error);
+    }
+
+}
+
+loadEmployees();
+
+</script>
+
+</body>
+</html>
