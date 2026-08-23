@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>ملف الموظف - Shassiha HR</title>
+<title>الموظفين - Shassiha HR</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet">
 
@@ -19,15 +19,12 @@
 body{
     margin:0;
     font-family:'Cairo',sans-serif;
-    background:#f4f6f9;
+    background:#f5f6f8;
     color:#222;
 }
 
-
-/* HEADER */
-
 .header{
-    background:#ff7a00;
+    background:#ff6b00;
     color:white;
     padding:18px 25px;
     display:flex;
@@ -47,64 +44,100 @@ body{
     font-size:14px;
 }
 
-
-/* CONTAINER */
-
 .container{
-    max-width:1100px;
+    max-width:1200px;
     margin:25px auto;
     padding:0 15px;
 }
 
-
-/* PROFILE HEADER */
-
-.profile{
-    background:white;
-    border-radius:18px;
-    padding:25px;
+.top{
     display:flex;
+    justify-content:space-between;
     align-items:center;
-    gap:20px;
-    box-shadow:0 2px 10px rgba(0,0,0,.07);
     margin-bottom:20px;
+    gap:15px;
 }
 
-.avatar{
-    width:80px;
-    height:80px;
-    border-radius:50%;
-    background:#fff0e5;
-    color:#ff7a00;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:38px;
+.title h2{
+    margin:0;
 }
 
-.profile-info h2{
-    margin:0 0 5px;
-}
-
-.profile-info p{
-    margin:3px 0;
+.title p{
+    margin:5px 0 0;
     color:#777;
 }
 
-.employee-id{
-    color:#ff7a00 !important;
-    font-weight:bold;
+.btn{
+    border:none;
+    border-radius:10px;
+    padding:12px 18px;
+    font-family:inherit;
+    cursor:pointer;
+    font-size:14px;
 }
 
+.btn-primary{
+    background:#ff6b00;
+    color:white;
+}
 
-/* STATUS */
+.btn-secondary{
+    background:#333;
+    color:white;
+}
+
+.search-box{
+    background:white;
+    padding:15px;
+    border-radius:14px;
+    box-shadow:0 2px 8px rgba(0,0,0,.06);
+    margin-bottom:20px;
+}
+
+.search-box input{
+    width:100%;
+    padding:12px;
+    border:1px solid #ddd;
+    border-radius:9px;
+    font-family:inherit;
+    font-size:14px;
+}
+
+.table-box{
+    background:white;
+    border-radius:15px;
+    overflow:auto;
+    box-shadow:0 2px 10px rgba(0,0,0,.07);
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:900px;
+}
+
+thead{
+    background:#333;
+    color:white;
+}
+
+th,
+td{
+    padding:13px 10px;
+    text-align:center;
+    border-bottom:1px solid #eee;
+    white-space:nowrap;
+}
+
+tbody tr:hover{
+    background:#fafafa;
+}
 
 .status{
     display:inline-block;
-    padding:6px 14px;
+    padding:5px 12px;
     border-radius:20px;
     font-size:12px;
-    margin-top:5px;
 }
 
 .active{
@@ -113,7 +146,7 @@ body{
 }
 
 .inactive{
-    background:#ffe5e5;
+    background:#ffe9e9;
     color:#c62828;
 }
 
@@ -122,141 +155,154 @@ body{
     color:#a56a00;
 }
 
+.actions{
+    display:flex;
+    justify-content:center;
+    gap:5px;
+}
 
-/* SECTIONS */
+.action{
+    border:none;
+    padding:7px 10px;
+    border-radius:7px;
+    cursor:pointer;
+    font-family:inherit;
+    font-size:12px;
+}
 
-.section{
+.view{
+    background:#eee;
+}
+
+.edit{
+    background:#fff0e5;
+    color:#d95d00;
+}
+
+.end{
+    background:#ffe5e5;
+    color:#c62828;
+}
+
+.loading{
+    padding:35px;
+    text-align:center;
+    color:#777;
+}
+
+.message{
+    display:none;
+    padding:12px;
+    border-radius:10px;
+    margin-bottom:15px;
+    text-align:center;
+}
+
+.success{
+    background:#e7f7ed;
+    color:#16833b;
+}
+
+.error{
+    background:#ffe9e9;
+    color:#c62828;
+}
+
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.55);
+    z-index:1000;
+    padding:20px;
+    overflow:auto;
+}
+
+.modal-content{
     background:white;
-    border-radius:16px;
-    padding:22px;
-    margin-bottom:18px;
-    box-shadow:0 2px 8px rgba(0,0,0,.06);
+    max-width:800px;
+    margin:30px auto;
+    border-radius:18px;
+    padding:25px;
 }
 
-.section h3{
-    margin:0 0 18px;
-    padding-bottom:10px;
-    border-bottom:1px solid #eee;
-    color:#333;
+.modal-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
 }
 
+.modal-header h2{
+    margin:0;
+}
 
-/* INFO GRID */
+.close{
+    border:none;
+    background:#eee;
+    width:35px;
+    height:35px;
+    border-radius:50%;
+    cursor:pointer;
+    font-size:18px;
+}
 
-.info-grid{
+.form-grid{
     display:grid;
     grid-template-columns:repeat(2,1fr);
     gap:15px;
 }
 
-.info{
-    background:#fafafa;
-    padding:13px;
-    border-radius:10px;
+.field{
+    display:flex;
+    flex-direction:column;
 }
 
-.info label{
-    display:block;
-    font-size:12px;
-    color:#888;
-    margin-bottom:4px;
+.field.full{
+    grid-column:1/-1;
 }
 
-.info span{
+.field label{
+    margin-bottom:6px;
+    font-size:13px;
     font-weight:600;
 }
 
-
-/* BUTTONS */
-
-.actions{
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px;
-}
-
-.btn{
-    border:none;
-    padding:12px 18px;
-    border-radius:10px;
+.field input,
+.field select,
+.field textarea{
+    padding:11px;
+    border:1px solid #ddd;
+    border-radius:9px;
     font-family:inherit;
-    cursor:pointer;
     font-size:14px;
 }
 
-.primary{
-    background:#ff7a00;
-    color:white;
+.field textarea{
+    min-height:90px;
+    resize:vertical;
 }
 
-.dark{
-    background:#333;
-    color:white;
+.form-footer{
+    margin-top:20px;
+    display:flex;
+    justify-content:flex-start;
+    gap:10px;
 }
-
-.green{
-    background:#16833b;
-    color:white;
-}
-
-.blue{
-    background:#2878d0;
-    color:white;
-}
-
-.red{
-    background:#c62828;
-    color:white;
-}
-
-
-/* LOADING */
-
-.loading{
-    text-align:center;
-    padding:50px;
-    color:#777;
-}
-
-
-/* ERROR */
-
-.error{
-    text-align:center;
-    padding:50px;
-    color:#c62828;
-}
-
-
-/* NOTES */
-
-.notes{
-    background:#fafafa;
-    padding:15px;
-    border-radius:10px;
-    min-height:60px;
-}
-
-
-/* MOBILE */
 
 @media(max-width:700px){
 
-    .profile{
+    .top{
         flex-direction:column;
-        text-align:center;
+        align-items:stretch;
     }
 
-    .info-grid{
+    .form-grid{
         grid-template-columns:1fr;
     }
 
-    .actions{
-        flex-direction:column;
-    }
-
-    .btn{
-        width:100%;
+    .field.full{
+        grid-column:auto;
     }
 
 }
@@ -269,23 +315,340 @@ body{
 <body>
 
 
-<!-- HEADER -->
-
 <div class="header">
 
-    <h1>👤 ملف الموظف</h1>
+    <h1>👥 إدارة الموظفين</h1>
 
-    <a href="employees.html">
-        ← العودة للموظفين
+    <a href="index.html">
+        ← الرئيسية
     </a>
 
 </div>
 
 
-<div class="container" id="content">
+<div class="container">
 
-    <div class="loading">
-        جاري تحميل بيانات الموظف...
+
+    <div class="top">
+
+        <div class="title">
+
+            <h2>الموظفين</h2>
+
+            <p>إدارة بيانات موظفي المطعم</p>
+
+        </div>
+
+        <button
+            class="btn btn-primary"
+            onclick="openAddEmployee()"
+        >
+            ➕ إضافة موظف
+        </button>
+
+    </div>
+
+
+    <div id="message" class="message"></div>
+
+
+    <div class="search-box">
+
+        <input
+            type="text"
+            id="search"
+            placeholder="🔎 ابحث باسم الموظف أو رقم الموظف أو القسم..."
+            oninput="searchEmployees()"
+        >
+
+    </div>
+
+
+    <div class="table-box">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>رقم الموظف</th>
+                    <th>الاسم</th>
+                    <th>القسم</th>
+                    <th>الوظيفة</th>
+                    <th>الراتب</th>
+                    <th>تاريخ التعيين</th>
+                    <th>نوع العقد</th>
+                    <th>الحالة</th>
+                    <th>الإجراءات</th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody id="employeesTable">
+
+                <tr>
+
+                    <td colspan="9">
+
+                        <div class="loading">
+                            جاري تحميل الموظفين...
+                        </div>
+
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+
+</div>
+
+
+
+<!-- إضافة موظف -->
+
+<div class="modal" id="employeeModal">
+
+    <div class="modal-content">
+
+
+        <div class="modal-header">
+
+            <h2>➕ إضافة موظف جديد</h2>
+
+            <button
+                class="close"
+                onclick="closeModal()"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <form id="employeeForm">
+
+
+            <div class="form-grid">
+
+
+                <div class="field full">
+
+                    <label>اسم الموظف *</label>
+
+                    <input
+                        type="text"
+                        id="name"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>القسم</label>
+
+                    <input
+                        type="text"
+                        id="department"
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>الوظيفة</label>
+
+                    <input
+                        type="text"
+                        id="position"
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>الراتب</label>
+
+                    <input
+                        type="number"
+                        id="salary"
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>تاريخ التعيين</label>
+
+                    <input
+                        type="date"
+                        id="hireDate"
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>نوع العقد</label>
+
+                    <select id="contractType">
+
+                        <option value="">
+                            اختر نوع العقد
+                        </option>
+
+                        <option value="دائم">
+                            دائم
+                        </option>
+
+                        <option value="مؤقت">
+                            مؤقت
+                        </option>
+
+                        <option value="يومي">
+                            يومي
+                        </option>
+
+                        <option value="تجربة">
+                            فترة تجربة
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>الهاتف</label>
+
+                    <input
+                        type="tel"
+                        id="phone"
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>العنوان</label>
+
+                    <input
+                        type="text"
+                        id="address"
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>تاريخ الميلاد</label>
+
+                    <input
+                        type="date"
+                        id="birthDate"
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>جهة اتصال للطوارئ</label>
+
+                    <input
+                        type="text"
+                        id="emergencyContact"
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>رقم هاتف الطوارئ</label>
+
+                    <input
+                        type="tel"
+                        id="emergencyPhone"
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>رقم البطاقة الوطنية</label>
+
+                    <input
+                        type="text"
+                        id="nationalId"
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>تاريخ انتهاء العقد</label>
+
+                    <input
+                        type="date"
+                        id="contractEndDate"
+                    >
+
+                </div>
+
+
+                <div class="field full">
+
+                    <label>ملاحظات</label>
+
+                    <textarea id="notes"></textarea>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="form-footer">
+
+                <button
+                    type="submit"
+                    class="btn btn-primary"
+                >
+                    💾 حفظ الموظف
+                </button>
+
+                <button
+                    type="button"
+                    class="btn btn-secondary"
+                    onclick="closeModal()"
+                >
+                    إلغاء
+                </button>
+
+            </div>
+
+
+        </form>
+
     </div>
 
 </div>
@@ -299,38 +662,34 @@ const API =
 "https://script.google.com/macros/s/AKfycbw6pnqbRn3VyJvFjk0RGfEt8VXdBkOq2uqooSvxi0onjcUStpJ_hOGNZVPLimRA-ZNAGQ/exec";
 
 
-// ======================================
-// قراءة رقم الموظف من الرابط
-// ======================================
-
-const params =
-    new URLSearchParams(window.location.search);
-
-const employeeId =
-    params.get("id");
+let employees = [];
 
 
 // ======================================
 // تحميل الموظفين
 // ======================================
 
-async function loadEmployee(){
+async function loadEmployees(){
 
-    const content =
-        document.getElementById("content");
+    const table =
+        document.getElementById("employeesTable");
 
 
-    if(!employeeId){
+    table.innerHTML = `
 
-        content.innerHTML = `
-            <div class="error">
-                ❌ لم يتم تحديد رقم الموظف
-            </div>
-        `;
+        <tr>
 
-        return;
+            <td colspan="9">
 
-    }
+                <div class="loading">
+                    جاري تحميل الموظفين...
+                </div>
+
+            </td>
+
+        </tr>
+
+    `;
 
 
     try{
@@ -356,43 +715,42 @@ async function loadEmployee(){
         if(data.status !== "success"){
 
             throw new Error(
-                data.message || "حدث خطأ"
+                data.message ||
+                "حدث خطأ"
             );
 
         }
 
 
-        const employee =
-            data.employees.find(e =>
-                String(e["Employee ID"]) ===
-                String(employeeId)
-            );
+        employees =
+            data.employees || [];
 
 
-        if(!employee){
-
-            content.innerHTML = `
-                <div class="error">
-                    ❌ الموظف غير موجود
-                </div>
-            `;
-
-            return;
-
-        }
-
-
-        renderEmployee(employee);
+        renderEmployees(employees);
 
 
     }catch(error){
 
-        content.innerHTML = `
-            <div class="error">
-                ❌ تعذر تحميل بيانات الموظف
-                <br><br>
-                ${error.message}
-            </div>
+        table.innerHTML = `
+
+            <tr>
+
+                <td colspan="9">
+
+                    <div class="loading">
+
+                        ❌ تعذر تحميل الموظفين
+
+                        <br><br>
+
+                        ${safe(error.message)}
+
+                    </div>
+
+                </td>
+
+            </tr>
+
         `;
 
     }
@@ -402,290 +760,420 @@ async function loadEmployee(){
 
 
 // ======================================
-// عرض الملف
+// عرض الموظفين
 // ======================================
 
-function renderEmployee(e){
+function renderEmployees(list){
 
-    const content =
-        document.getElementById("content");
+    const table =
+        document.getElementById("employeesTable");
 
 
-    content.innerHTML = `
+    if(!list.length){
 
+        table.innerHTML = `
 
-        <!-- PROFILE -->
+            <tr>
 
-        <div class="profile">
+                <td colspan="9">
 
-            <div class="avatar">
-                👤
-            </div>
+                    <div class="loading">
+                        لا يوجد موظفين حالياً
+                    </div>
 
-            <div class="profile-info">
+                </td>
 
-                <h2>
-                    ${safe(e["الاسم"])}
-                </h2>
+            </tr>
 
-                <p>
-                    ${safe(e["الوظيفة"])}
-                    —
-                    ${safe(e["القسم"])}
-                </p>
+        `;
 
-                <p class="employee-id">
-                    ${safe(e["Employee ID"])}
-                </p>
+        return;
 
-                ${statusBadge(e["الحالة"])}
+    }
 
-            </div>
 
-        </div>
+    table.innerHTML = list.map(employee => `
 
+        <tr>
 
+            <td>
 
-        <!-- PERSONAL -->
+                <strong>
+                    ${safe(employee["Employee ID"])}
+                </strong>
 
-        <div class="section">
+            </td>
 
-            <h3>
-                👤 المعلومات الشخصية
-            </h3>
 
-            <div class="info-grid">
+            <td>
+                ${safe(employee["الاسم"])}
+            </td>
 
-                ${info(
-                    "الاسم",
-                    e["الاسم"]
-                )}
 
-                ${info(
-                    "تاريخ الميلاد",
-                    formatDate(e["تاريخ الميلاد"])
-                )}
+            <td>
+                ${safe(employee["القسم"])}
+            </td>
 
-                ${info(
-                    "رقم البطاقة الوطنية",
-                    e["رقم البطاقة الوطنية"]
-                )}
 
-                ${info(
-                    "العنوان",
-                    e["العنوان"]
-                )}
+            <td>
+                ${safe(employee["الوظيفة"])}
+            </td>
 
-            </div>
 
-        </div>
+            <td>
+                ${formatNumber(employee["الراتب"])}
+            </td>
 
 
+            <td>
+                ${formatDate(employee["تاريخ التعيين"])}
+            </td>
 
-        <!-- JOB -->
 
-        <div class="section">
+            <td>
+                ${safe(employee["نوع العقد"])}
+            </td>
 
-            <h3>
-                💼 المعلومات الوظيفية
-            </h3>
 
-            <div class="info-grid">
+            <td>
+                ${statusBadge(employee["الحالة"])}
+            </td>
 
-                ${info(
-                    "رقم الموظف",
-                    e["Employee ID"]
-                )}
 
-                ${info(
-                    "القسم",
-                    e["القسم"]
-                )}
+            <td>
 
-                ${info(
-                    "الوظيفة",
-                    e["الوظيفة"]
-                )}
+                <div class="actions">
 
-                ${info(
-                    "الراتب",
-                    formatNumber(e["الراتب"])
-                )}
 
-                ${info(
-                    "تاريخ التعيين",
-                    formatDate(e["تاريخ التعيين"])
-                )}
+                    <!-- عرض ملف الموظف -->
 
-                ${info(
-                    "الحالة",
-                    e["الحالة"]
-                )}
+                    <button
+                        class="action view"
+                        onclick='openEmployee("${safe(employee["Employee ID"])}")'
+                    >
+                        👁 عرض
+                    </button>
 
-            </div>
 
-        </div>
+                    <!-- تعديل -->
 
+                    <button
+                        class="action edit"
+                        onclick='editEmployee(${JSON.stringify(employee)})'
+                    >
+                        ✏️ تعديل
+                    </button>
 
 
-        <!-- CONTRACT -->
+                    <!-- إنهاء -->
 
-        <div class="section">
+                    <button
+                        class="action end"
+                        onclick='endEmployee("${safe(employee["Employee ID"])}")'
+                    >
+                        إنهاء
+                    </button>
 
-            <h3>
-                📄 معلومات العقد
-            </h3>
 
-            <div class="info-grid">
+                </div>
 
-                ${info(
-                    "نوع العقد",
-                    e["نوع العقد"]
-                )}
+            </td>
 
-                ${info(
-                    "تاريخ انتهاء العقد",
-                    formatDate(e["تاريخ انتهاء العقد"])
-                )}
+        </tr>
 
-            </div>
+    `).join("");
 
-        </div>
+}
 
 
 
-        <!-- CONTACT -->
+// ======================================
+// فتح ملف الموظف
+// ======================================
 
-        <div class="section">
+function openEmployee(id){
 
-            <h3>
-                📞 معلومات الاتصال
-            </h3>
+    window.location.href =
+        "employee.html?id=" +
+        encodeURIComponent(id);
 
-            <div class="info-grid">
+}
 
-                ${info(
-                    "الهاتف",
-                    e["الهاتف"]
-                )}
 
-                ${info(
-                    "العنوان",
-                    e["العنوان"]
-                )}
 
-            </div>
+// ======================================
+// البحث
+// ======================================
 
-        </div>
+function searchEmployees(){
 
+    const value =
+        document.getElementById("search")
+        .value
+        .trim()
+        .toLowerCase();
 
 
-        <!-- EMERGENCY -->
+    if(!value){
 
-        <div class="section">
+        renderEmployees(employees);
 
-            <h3>
-                🚨 معلومات الطوارئ
-            </h3>
+        return;
 
-            <div class="info-grid">
+    }
 
-                ${info(
-                    "جهة اتصال للطوارئ",
-                    e["جهة اتصال للطوارئ"]
-                )}
 
-                ${info(
-                    "رقم هاتف الطوارئ",
-                    e["رقم هاتف الطوارئ"]
-                )}
+    const result =
+        employees.filter(employee => {
 
-            </div>
+            return [
 
-        </div>
+                employee["Employee ID"],
+                employee["الاسم"],
+                employee["القسم"],
+                employee["الوظيفة"],
+                employee["الهاتف"]
 
+            ]
 
+            .join(" ")
+            .toLowerCase()
+            .includes(value);
 
-        <!-- NOTES -->
+        });
 
-        <div class="section">
 
-            <h3>
-                📝 الملاحظات
-            </h3>
+    renderEmployees(result);
 
-            <div class="notes">
+}
 
-                ${safe(e["ملاحظات"]) || "لا توجد ملاحظات"}
 
-            </div>
 
-        </div>
+// ======================================
+// إضافة موظف
+// ======================================
 
+function openAddEmployee(){
 
+    document
+        .getElementById("employeeForm")
+        .reset();
 
-        <!-- ACTIONS -->
 
-        <div class="section">
+    document
+        .getElementById("employeeModal")
+        .style.display =
+        "block";
 
-            <h3>
-                ⚡ إجراءات الموظف
-            </h3>
+}
 
-            <div class="actions">
 
-                <button
-                    class="btn primary"
-                    onclick="editEmployee()"
-                >
-                    ✏️ تعديل البيانات
-                </button>
+function closeModal(){
 
+    document
+        .getElementById("employeeModal")
+        .style.display =
+        "none";
 
-                <button
-                    class="btn green"
-                    onclick="directEmployee()"
-                >
-                    📄 كتاب مباشرة
-                </button>
+}
 
 
-                <button
-                    class="btn blue"
-                    onclick="leaveEmployee()"
-                >
-                    🏖️ إجازة
-                </button>
 
+// ======================================
+// حفظ الموظف
+// ======================================
 
-                <button
-                    class="btn dark"
-                    onclick="warningEmployee()"
-                >
-                    ⚠️ إنذار
-                </button>
+document
+.getElementById("employeeForm")
+.addEventListener(
+    "submit",
+    async function(e){
 
+        e.preventDefault();
 
-                <button
-                    class="btn red"
-                    onclick="endEmployee()"
-                >
-                    🔴 إنهاء خدمة
-                </button>
 
+        const button =
+            this.querySelector(
+                "button[type='submit']"
+            );
 
-                <button
-                    class="btn dark"
-                    onclick="window.print()"
-                >
-                    🖨️ طباعة
-                </button>
 
-            </div>
+        button.disabled = true;
 
-        </div>
+        button.innerText =
+            "⏳ جاري الحفظ...";
 
-    `;
+
+        const data = {
+
+            action:"addEmployee",
+
+            name:
+                document.getElementById("name").value,
+
+            department:
+                document.getElementById("department").value,
+
+            position:
+                document.getElementById("position").value,
+
+            salary:
+                document.getElementById("salary").value,
+
+            hireDate:
+                document.getElementById("hireDate").value,
+
+            contractType:
+                document.getElementById("contractType").value,
+
+            phone:
+                document.getElementById("phone").value,
+
+            address:
+                document.getElementById("address").value,
+
+            birthDate:
+                document.getElementById("birthDate").value,
+
+            emergencyContact:
+                document.getElementById("emergencyContact").value,
+
+            emergencyPhone:
+                document.getElementById("emergencyPhone").value,
+
+            nationalId:
+                document.getElementById("nationalId").value,
+
+            contractEndDate:
+                document.getElementById("contractEndDate").value,
+
+            notes:
+                document.getElementById("notes").value
+
+        };
+
+
+        try{
+
+            const response =
+                await fetch(API,{
+
+                    method:"POST",
+
+                    body:JSON.stringify(data)
+
+                });
+
+
+            const result =
+                await response.json();
+
+
+            if(result.status !== "success"){
+
+                throw new Error(
+                    result.message
+                );
+
+            }
+
+
+            closeModal();
+
+
+            showMessage(
+                "✅ تمت إضافة الموظف بنجاح — " +
+                result.employeeId,
+                "success"
+            );
+
+
+            await loadEmployees();
+
+
+        }catch(error){
+
+            showMessage(
+                "❌ حدث خطأ: " +
+                error.message,
+                "error"
+            );
+
+        }
+
+
+        button.disabled = false;
+
+        button.innerText =
+            "💾 حفظ الموظف";
+
+    }
+);
+
+
+
+// ======================================
+// تعديل مؤقت
+// ======================================
+
+function editEmployee(employee){
+
+    alert(
+        "✏️ تعديل الموظف\n\n" +
+        "الموظف: " +
+        employee["الاسم"] +
+        "\n\nراح نفعل التعديل بالمرحلة القادمة."
+    );
+
+}
+
+
+
+// ======================================
+// إنهاء الخدمة مؤقت
+// ======================================
+
+function endEmployee(id){
+
+    alert(
+        "🔴 إنهاء الخدمة\n\n" +
+        "الموظف: " +
+        id +
+        "\n\nراح نفعل إنهاء الخدمة بالمرحلة القادمة."
+    );
+
+}
+
+
+
+// ======================================
+// الرسائل
+// ======================================
+
+function showMessage(text,type){
+
+    const message =
+        document.getElementById("message");
+
+
+    message.className =
+        "message " + type;
+
+
+    message.innerText =
+        text;
+
+
+    message.style.display =
+        "block";
+
+
+    setTimeout(()=>{
+
+        message.style.display =
+            "none";
+
+    },4000);
 
 }
 
@@ -695,108 +1183,17 @@ function renderEmployee(e){
 // أدوات
 // ======================================
 
-function info(label,value){
-
-    return `
-
-        <div class="info">
-
-            <label>
-                ${label}
-            </label>
-
-            <span>
-                ${safe(value) || "-"}
-            </span>
-
-        </div>
-
-    `;
-
-}
-
-
-function statusBadge(status){
-
-    if(status === "مستمر"){
-
-        return `
-            <span class="status active">
-                🟢 مستمر
-            </span>
-        `;
-
-    }
-
-    if(status === "إجازة"){
-
-        return `
-            <span class="status leave">
-                🟠 إجازة
-            </span>
-        `;
-
-    }
-
-    if(status === "منتهي الخدمة"){
-
-        return `
-            <span class="status inactive">
-                🔴 منتهي الخدمة
-            </span>
-        `;
-
-    }
-
-    return `
-        <span class="status">
-            ${safe(status)}
-        </span>
-    `;
-
-}
-
-
-function formatNumber(value){
-
-    if(!value)
-        return "";
-
-    const number =
-        Number(
-            String(value)
-            .replace(/,/g,"")
-        );
-
-    if(isNaN(number))
-        return value;
-
-    return number.toLocaleString("en-US");
-
-}
-
-
-function formatDate(value){
-
-    if(!value)
-        return "";
-
-    const date =
-        new Date(value);
-
-    if(isNaN(date))
-        return value;
-
-    return date.toLocaleDateString("en-GB");
-
-}
-
-
 function safe(value){
 
-    if(value === null ||
-       value === undefined)
+    if(
+        value === null ||
+        value === undefined
+    ){
+
         return "";
+
+    }
+
 
     return String(value)
 
@@ -809,52 +1206,115 @@ function safe(value){
 }
 
 
+function formatNumber(value){
 
-// ======================================
-// الإجراءات مؤقتاً
-// ======================================
+    if(
+        value === null ||
+        value === undefined ||
+        value === ""
+    ){
 
-function editEmployee(){
+        return "";
 
-    alert(
-        "✏️ تعديل بيانات الموظف\n\nراح نفعلها بالمرحلة القادمة."
-    );
-
-}
-
-
-function directEmployee(){
-
-    alert(
-        "📄 كتاب مباشرة\n\nراح نسوي نموذج الكتاب ونخليه يطبع تلقائياً."
-    );
-
-}
+    }
 
 
-function leaveEmployee(){
-
-    alert(
-        "🏖️ الإجازة\n\nراح نربطها بسجل الإجازات."
-    );
-
-}
+    const number =
+        Number(
+            String(value)
+            .replace(/,/g,"")
+        );
 
 
-function warningEmployee(){
+    if(isNaN(number)){
 
-    alert(
-        "⚠️ الإنذار\n\nراح نخلي لكل موظف سجل إنذارات."
-    );
+        return safe(value);
+
+    }
+
+
+    return number.toLocaleString("en-US");
 
 }
 
 
-function endEmployee(){
+function formatDate(value){
 
-    alert(
-        "🔴 إنهاء الخدمة\n\nراح نسوي إجراء إنهاء الخدمة مع كتاب رسمي."
-    );
+    if(!value){
+
+        return "";
+
+    }
+
+
+    const date =
+        new Date(value);
+
+
+    if(isNaN(date)){
+
+        return safe(value);
+
+    }
+
+
+    return date.toLocaleDateString("en-GB");
+
+}
+
+
+function statusBadge(status){
+
+    status =
+        status || "";
+
+
+    if(status === "مستمر"){
+
+        return `
+
+            <span class="status active">
+                🟢 مستمر
+            </span>
+
+        `;
+
+    }
+
+
+    if(status === "إجازة"){
+
+        return `
+
+            <span class="status leave">
+                🟠 إجازة
+            </span>
+
+        `;
+
+    }
+
+
+    if(status === "منتهي الخدمة"){
+
+        return `
+
+            <span class="status inactive">
+                🔴 منتهي الخدمة
+            </span>
+
+        `;
+
+    }
+
+
+    return `
+
+        <span class="status">
+            ${safe(status)}
+        </span>
+
+    `;
 
 }
 
@@ -864,7 +1324,8 @@ function endEmployee(){
 // تشغيل
 // ======================================
 
-loadEmployee();
+loadEmployees();
+
 
 </script>
 
