@@ -1055,7 +1055,186 @@ function createPrint(){
 
 
 // ======================================
-// الطباعة
+function createPrint(){
+
+    if(!selectedEmployee)
+        return;
+
+    const endDate =
+        document.getElementById("endDate").value;
+
+    const reason =
+        document.getElementById("reason").value;
+
+    const bookNumber =
+        document.getElementById("bookNumber").value;
+
+    const notes =
+        document.getElementById("notes").value;
+
+    const employeeName =
+        selectedEmployee["الاسم"] || "";
+
+    const employeeId =
+        selectedEmployee["Employee ID"] || "";
+
+    const position =
+        selectedEmployee["الوظيفة"] || "";
+
+    const department =
+        selectedEmployee["القسم"] || "";
+
+    document.getElementById("printBody").innerHTML = `
+
+        <div style="text-align:center;margin-bottom:30px;">
+
+            <div style="font-size:20px;font-weight:bold;">
+                إدارة الموارد البشرية
+            </div>
+
+        </div>
+
+
+        <div style="text-align:left;margin-bottom:25px;">
+
+            العدد:
+            ${safe(bookNumber || "........")}
+
+            <br>
+
+            التاريخ:
+            ${formatDate(endDate)}
+
+        </div>
+
+
+        <div style="text-align:center;margin:35px 0;">
+
+            <strong style="font-size:24px;">
+                كتاب إنهاء خدمة
+            </strong>
+
+        </div>
+
+
+        <p>
+            إلى / إدارة الشركة المحترمة
+        </p>
+
+
+        <p>
+            م / إنهاء خدمة موظف
+        </p>
+
+
+        <p>
+
+            تحية طيبة...
+
+        </p>
+
+
+        <p>
+
+            نود إعلامكم بأنه قد تقرر إنهاء خدمة الموظف
+
+            <strong>
+                ${safe(employeeName)}
+            </strong>
+
+            صاحب الرقم الوظيفي
+
+            <strong>
+                ${safe(employeeId)}
+            </strong>
+
+            والذي يشغل وظيفة
+
+            <strong>
+                ${safe(position)}
+            </strong>
+
+            في قسم
+
+            <strong>
+                ${safe(department)}
+            </strong>
+
+            وذلك اعتباراً من تاريخ
+
+            <strong>
+                ${formatDate(endDate)}
+            </strong>.
+
+        </p>
+
+
+        <p>
+
+            ويأتي ذلك بسبب:
+
+            <strong>
+                ${safe(reason)}
+            </strong>
+
+        </p>
+
+
+        ${
+            notes
+            ?
+            `
+            <p>
+                الملاحظات:
+                ${safe(notes)}
+            </p>
+            `
+            :
+            ""
+        }
+
+
+        <p>
+
+            يرجى اتخاذ ما يلزم من إجراءات أصولية
+            وإنهاء كافة المتعلقات الخاصة بالموظف
+            حسب الأنظمة والتعليمات المعتمدة.
+
+        </p>
+
+
+        <p>
+
+            مع التقدير...
+
+        </p>
+
+
+        <div style="
+            margin-top:80px;
+            text-align:left;
+            line-height:2.2;
+        ">
+
+            مسؤول الموارد البشرية
+
+            <br><br>
+
+            الاسم: __________________
+
+            <br>
+
+            التوقيع: ________________
+
+            <br>
+
+            الختم: __________________
+
+        </div>
+
+    `;
+
+}
 // ======================================
 
 function printEnd(){
