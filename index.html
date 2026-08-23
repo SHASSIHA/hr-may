@@ -1,15 +1,25 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>نظام الموارد البشرية</title>
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
 
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+<title>نظام الموارد البشرية HR</title>
+
+<link
+href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap"
+rel="stylesheet">
+
 
 <style>
+
+/* =========================
+   GENERAL
+========================= */
 
 *{
     margin:0;
@@ -20,96 +30,249 @@
 
 body{
     background:#f4f6f9;
-}
-
-.header{
-    background:#ff7a00;
-    color:white;
-    padding:20px;
-    text-align:center;
-    font-size:24px;
-    font-weight:bold;
-}
-
-.container{
-    padding:20px;
-}
-
-.cards{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:15px;
-}
-
-.card{
-    background:white;
-    padding:25px;
-    border-radius:15px;
-    box-shadow:0 2px 10px rgba(0,0,0,0.1);
-    text-align:center;
-    cursor:pointer;
-    transition:0.3s;
-    text-decoration:none;
     color:#222;
 }
 
-.card:hover{
-    transform:translateY(-5px);
+
+/* =========================
+   HEADER
+========================= */
+
+.header{
+
+    background:#ff7a00;
+
+    color:white;
+
+    padding:20px;
+
+    text-align:center;
+
+    font-size:24px;
+
+    font-weight:bold;
+
+    box-shadow:
+        0 3px 10px rgba(0,0,0,.12);
+
 }
+
+
+/* =========================
+   CONTAINER
+========================= */
+
+.container{
+
+    padding:25px;
+
+    max-width:1200px;
+
+    margin:auto;
+
+}
+
+
+/* =========================
+   CARDS
+========================= */
+
+.cards{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(220px,1fr)
+        );
+
+    gap:18px;
+
+}
+
+
+/* =========================
+   CARD
+========================= */
+
+.card{
+
+    background:white;
+
+    padding:28px 20px;
+
+    border-radius:16px;
+
+    box-shadow:
+        0 2px 10px rgba(0,0,0,.08);
+
+    text-align:center;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+    text-decoration:none;
+
+    color:#222;
+
+    display:block;
+
+}
+
+
+.card:hover{
+
+    transform:translateY(-5px);
+
+    box-shadow:
+        0 6px 18px rgba(0,0,0,.12);
+
+}
+
+
+/* =========================
+   ICON
+========================= */
 
 .icon{
-    font-size:40px;
+
+    font-size:42px;
+
     margin-bottom:10px;
+
 }
+
+
+/* =========================
+   TITLE
+========================= */
 
 .title{
+
     font-size:18px;
+
     font-weight:bold;
+
 }
 
+
+/* =========================
+   COUNT
+========================= */
+
 .count{
+
     font-size:28px;
+
     color:#ff7a00;
-    margin-top:10px;
+
+    margin-top:8px;
+
+    font-weight:bold;
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:600px){
+
+    .header{
+
+        font-size:20px;
+
+        padding:17px;
+
+    }
+
+
+    .container{
+
+        padding:15px;
+
+    }
+
+
+    .cards{
+
+        grid-template-columns:1fr;
+
+    }
+
 }
 
 </style>
 
 </head>
 
+
 <body>
 
+
+<!-- =========================
+     HEADER
+========================= -->
+
 <div class="header">
+
     نظام الموارد البشرية HR
+
 </div>
+
+
+
+<!-- =========================
+     MAIN
+========================= -->
 
 <div class="container">
 
 <div class="cards">
 
 
-<!-- الموظفين -->
+<!-- =========================
+     EMPLOYEES
+========================= -->
 
-<a class="card" href="./employees.html">
+<a
+    class="card"
+    href="./employees.html">
 
-    <div class="icon">👥</div>
+    <div class="icon">
+        👥
+    </div>
 
     <div class="title">
         الموظفين
     </div>
 
-    <div class="count" id="employeesCount">
+    <div
+        class="count"
+        id="employeesCount">
+
         0
+
     </div>
 
 </a>
 
 
-<!-- إضافة موظف -->
 
-<a class="card" href="./employees.html">
+<!-- =========================
+     ADD EMPLOYEE
+========================= -->
 
-    <div class="icon">➕</div>
+<a
+    class="card"
+    href="./employees.html">
+
+    <div class="icon">
+        ➕
+    </div>
 
     <div class="title">
         إضافة موظف
@@ -118,11 +281,18 @@ body{
 </a>
 
 
-<!-- الحضور والغياب -->
 
-<a class="card" href="./attendance.html">
+<!-- =========================
+     ATTENDANCE
+========================= -->
 
-    <div class="icon">🕐</div>
+<a
+    class="card"
+    href="./attendance.html">
+
+    <div class="icon">
+        🕐
+    </div>
 
     <div class="title">
         الحضور والغياب
@@ -130,12 +300,19 @@ body{
 
 </a>
 
-<!-- المعاملات -->
 
-<div class="card"
-     onclick="comingSoon('المعاملات')">
 
-    <div class="icon">📄</div>
+<!-- =========================
+     TRANSACTIONS
+========================= -->
+
+<div
+    class="card"
+    onclick="comingSoon('المعاملات')">
+
+    <div class="icon">
+        📄
+    </div>
 
     <div class="title">
         المعاملات
@@ -144,26 +321,18 @@ body{
 </div>
 
 
-<!-- الحضور والغياب -->
 
-<div class="card"
-     onclick="window.location.href='attendance.html'">
+<!-- =========================
+     REPORTS
+========================= -->
 
-    <div class="icon">🕐</div>
+<div
+    class="card"
+    onclick="comingSoon('التقارير')">
 
-    <div class="title">
-        الحضور والغياب
+    <div class="icon">
+        📊
     </div>
-
-</div>
-
-
-<!-- التقارير -->
-
-<div class="card"
-     onclick="comingSoon('التقارير')">
-
-    <div class="icon">📊</div>
 
     <div class="title">
         التقارير
@@ -172,12 +341,18 @@ body{
 </div>
 
 
-<!-- الإعدادات -->
 
-<div class="card"
-     onclick="comingSoon('الإعدادات')">
+<!-- =========================
+     SETTINGS
+========================= -->
 
-    <div class="icon">⚙️</div>
+<div
+    class="card"
+    onclick="comingSoon('الإعدادات')">
+
+    <div class="icon">
+        ⚙️
+    </div>
 
     <div class="title">
         الإعدادات
@@ -191,38 +366,57 @@ body{
 </div>
 
 
+
 <script>
+
+
+// =====================================================
+// API
+// =====================================================
 
 const API =
 "https://script.google.com/macros/s/AKfycbw6pnqbRn3VyJvFjk0RGfEt8VXdBkOq2uqooSvxi0onjcUStpJ_hOGNZVPLimRA-ZNAGQ/exec";
 
 
-// ================================
-// عدد الموظفين
-// ================================
+
+// =====================================================
+// LOAD EMPLOYEES COUNT
+// =====================================================
 
 async function loadEmployees(){
 
     try{
 
-        const response = await fetch(API,{
+        const response =
+            await fetch(
 
-            method:"POST",
+                API,
 
-            body:JSON.stringify({
+                {
 
-                action:"getEmployees"
+                    method:"POST",
 
-            })
+                    body:
+                        JSON.stringify({
 
-        });
+                            action:
+                                "getEmployees"
+
+                        })
+
+                }
+
+            );
 
 
         const data =
             await response.json();
 
 
-        if(data.status === "success"){
+        if(
+            data.status ===
+            "success"
+        ){
 
             document.getElementById(
                 "employeesCount"
@@ -231,32 +425,50 @@ async function loadEmployees(){
 
         }
 
-    }catch(error){
 
-        console.log(error);
+    }
+
+    catch(error){
+
+        console.log(
+            "Employees API Error:",
+            error
+        );
 
     }
 
 }
 
 
-loadEmployees();
 
-
-// ================================
-// الميزات القادمة
-// ================================
+// =====================================================
+// COMING SOON
+// =====================================================
 
 function comingSoon(name){
 
     alert(
-        "قسم " + name +
+
+        "قسم " +
+        name +
         " راح يتم تفعيله بالمرحلة القادمة 🔥"
+
     );
 
 }
 
+
+
+// =====================================================
+// START
+// =====================================================
+
+loadEmployees();
+
+
 </script>
 
+
 </body>
+
 </html>
