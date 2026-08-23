@@ -1,0 +1,1914 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>الحضور والغياب - Shassiha HR</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap"
+      rel="stylesheet">
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    background:#f4f6f9;
+    font-family:'Cairo',sans-serif;
+    color:#222;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.header{
+
+    background:#ff7a00;
+
+    color:white;
+
+    padding:18px 25px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    box-shadow:
+        0 3px 12px rgba(0,0,0,.12);
+
+}
+
+.header h1{
+
+    margin:0;
+
+    font-size:22px;
+
+}
+
+.header a{
+
+    color:white;
+
+    text-decoration:none;
+
+    font-size:14px;
+
+}
+
+
+/* =========================
+   CONTAINER
+========================= */
+
+.container{
+
+    max-width:1250px;
+
+    margin:25px auto;
+
+    padding:0 15px;
+
+}
+
+
+/* =========================
+   DATE BAR
+========================= */
+
+.date-bar{
+
+    background:white;
+
+    border-radius:16px;
+
+    padding:18px;
+
+    margin-bottom:20px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:15px;
+
+    box-shadow:
+        0 2px 8px rgba(0,0,0,.06);
+
+}
+
+.date-title{
+
+    font-size:18px;
+
+    font-weight:bold;
+
+}
+
+.today{
+
+    color:#ff7a00;
+
+}
+
+
+/* =========================
+   STATS
+========================= */
+
+.stats{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(auto-fit,minmax(170px,1fr));
+
+    gap:15px;
+
+    margin-bottom:20px;
+
+}
+
+.stat{
+
+    background:white;
+
+    padding:20px;
+
+    border-radius:15px;
+
+    box-shadow:
+        0 2px 8px rgba(0,0,0,.06);
+
+    text-align:center;
+
+}
+
+.stat-icon{
+
+    font-size:30px;
+
+}
+
+.stat-title{
+
+    color:#777;
+
+    margin-top:5px;
+
+    font-size:13px;
+
+}
+
+.stat-number{
+
+    font-size:27px;
+
+    font-weight:bold;
+
+    margin-top:5px;
+
+}
+
+.total{
+    color:#333;
+}
+
+.present{
+    color:#16833b;
+}
+
+.absent{
+    color:#c62828;
+}
+
+.late{
+    color:#a56a00;
+}
+
+.leave{
+    color:#2878d0;
+}
+
+
+/* =========================
+   TOOLBAR
+========================= */
+
+.toolbar{
+
+    background:white;
+
+    padding:15px;
+
+    border-radius:15px;
+
+    margin-bottom:18px;
+
+    display:flex;
+
+    gap:10px;
+
+    flex-wrap:wrap;
+
+    box-shadow:
+        0 2px 8px rgba(0,0,0,.06);
+
+}
+
+.search{
+
+    flex:1;
+
+    min-width:220px;
+
+    border:1px solid #ddd;
+
+    border-radius:10px;
+
+    padding:11px 14px;
+
+    font-family:inherit;
+
+    outline:none;
+
+}
+
+.search:focus{
+
+    border-color:#ff7a00;
+
+}
+
+.refresh{
+
+    border:none;
+
+    background:#333;
+
+    color:white;
+
+    padding:11px 18px;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    font-family:inherit;
+
+}
+
+
+/* =========================
+   TABLE
+========================= */
+
+.table-card{
+
+    background:white;
+
+    border-radius:16px;
+
+    overflow:hidden;
+
+    box-shadow:
+        0 2px 8px rgba(0,0,0,.06);
+
+}
+
+.table-wrapper{
+
+    overflow-x:auto;
+
+}
+
+table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+    min-width:1000px;
+
+}
+
+thead{
+
+    background:#fff3e9;
+
+}
+
+th{
+
+    padding:14px;
+
+    text-align:center;
+
+    font-size:13px;
+
+    color:#555;
+
+    white-space:nowrap;
+
+}
+
+td{
+
+    padding:13px;
+
+    border-top:1px solid #eee;
+
+    text-align:center;
+
+    font-size:13px;
+
+}
+
+tr:hover td{
+
+    background:#fafafa;
+
+}
+
+
+/* =========================
+   EMPLOYEE
+========================= */
+
+.employee-name{
+
+    font-weight:bold;
+
+}
+
+.department{
+
+    color:#777;
+
+    font-size:12px;
+
+}
+
+
+/* =========================
+   STATUS
+========================= */
+
+.status{
+
+    display:inline-block;
+
+    padding:6px 12px;
+
+    border-radius:20px;
+
+    font-size:12px;
+
+    font-weight:600;
+
+}
+
+.status-present{
+
+    background:#e7f7ed;
+
+    color:#16833b;
+
+}
+
+.status-absent{
+
+    background:#ffe5e5;
+
+    color:#c62828;
+
+}
+
+.status-late{
+
+    background:#fff4dc;
+
+    color:#a56a00;
+
+}
+
+.status-leave{
+
+    background:#e6f0ff;
+
+    color:#2878d0;
+
+}
+
+.status-none{
+
+    background:#f1f1f1;
+
+    color:#777;
+
+}
+
+
+/* =========================
+   BUTTONS
+========================= */
+
+.actions{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:6px;
+
+    flex-wrap:wrap;
+
+}
+
+.btn{
+
+    border:none;
+
+    padding:7px 10px;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    font-family:inherit;
+
+    font-size:11px;
+
+    transition:.2s;
+
+}
+
+.btn:hover{
+
+    transform:translateY(-1px);
+
+}
+
+.btn-present{
+
+    background:#16833b;
+
+    color:white;
+
+}
+
+.btn-out{
+
+    background:#2878d0;
+
+    color:white;
+
+}
+
+.btn-absent{
+
+    background:#c62828;
+
+    color:white;
+
+}
+
+.btn-late{
+
+    background:#d18b00;
+
+    color:white;
+
+}
+
+.btn-leave{
+
+    background:#555;
+
+    color:white;
+
+}
+
+
+/* =========================
+   EMPTY
+========================= */
+
+.empty{
+
+    padding:50px;
+
+    text-align:center;
+
+    color:#777;
+
+}
+
+
+/* =========================
+   LOADING
+========================= */
+
+.loading{
+
+    padding:50px;
+
+    text-align:center;
+
+    color:#777;
+
+}
+
+
+/* =========================
+   MESSAGE
+========================= */
+
+.message{
+
+    position:fixed;
+
+    bottom:20px;
+
+    left:20px;
+
+    right:20px;
+
+    max-width:500px;
+
+    margin:auto;
+
+    padding:14px 18px;
+
+    border-radius:12px;
+
+    color:white;
+
+    text-align:center;
+
+    font-size:14px;
+
+    display:none;
+
+    z-index:9999;
+
+    box-shadow:
+        0 5px 20px rgba(0,0,0,.2);
+
+}
+
+.message.success{
+
+    background:#16833b;
+
+}
+
+.message.error{
+
+    background:#c62828;
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:700px){
+
+    .header{
+
+        padding:15px;
+
+    }
+
+    .header h1{
+
+        font-size:18px;
+
+    }
+
+    .date-bar{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+    }
+
+    .stats{
+
+        grid-template-columns:
+            repeat(2,1fr);
+
+    }
+
+    .stat{
+
+        padding:15px;
+
+    }
+
+    .stat-number{
+
+        font-size:23px;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- HEADER -->
+
+<div class="header">
+
+    <h1>
+        🕐 الحضور والغياب
+    </h1>
+
+    <a href="index.html">
+        ← الرئيسية
+    </a>
+
+</div>
+
+
+
+<div class="container">
+
+
+    <!-- DATE -->
+
+    <div class="date-bar">
+
+        <div class="date-title">
+
+            📅 حضور اليوم
+
+            <span
+                class="today"
+                id="todayDate">
+            </span>
+
+        </div>
+
+        <div>
+            نظام الموارد البشرية HR
+        </div>
+
+    </div>
+
+
+
+    <!-- STATS -->
+
+    <div class="stats">
+
+
+        <div class="stat">
+
+            <div class="stat-icon">
+                👥
+            </div>
+
+            <div class="stat-title">
+                إجمالي الموظفين
+            </div>
+
+            <div
+                class="stat-number total"
+                id="totalCount">
+                0
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-icon">
+                🟢
+            </div>
+
+            <div class="stat-title">
+                حاضر
+            </div>
+
+            <div
+                class="stat-number present"
+                id="presentCount">
+                0
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-icon">
+                🔴
+            </div>
+
+            <div class="stat-title">
+                غائب
+            </div>
+
+            <div
+                class="stat-number absent"
+                id="absentCount">
+                0
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-icon">
+                🟡
+            </div>
+
+            <div class="stat-title">
+                متأخر
+            </div>
+
+            <div
+                class="stat-number late"
+                id="lateCount">
+                0
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-icon">
+                🏖️
+            </div>
+
+            <div class="stat-title">
+                إجازة
+            </div>
+
+            <div
+                class="stat-number leave"
+                id="leaveCount">
+                0
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- TOOLBAR -->
+
+    <div class="toolbar">
+
+        <input
+            type="text"
+            id="search"
+            class="search"
+            placeholder="🔎 ابحث عن اسم الموظف أو القسم..."
+            oninput="filterEmployees()"
+        >
+
+        <button
+            class="refresh"
+            onclick="loadData()"
+        >
+            🔄 تحديث
+        </button>
+
+    </div>
+
+
+
+    <!-- TABLE -->
+
+    <div class="table-card">
+
+        <div
+            class="loading"
+            id="loading">
+            جاري تحميل الموظفين...
+        </div>
+
+
+        <div
+            class="table-wrapper"
+            id="tableWrapper"
+            style="display:none;">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            #
+                        </th>
+
+                        <th>
+                            الموظف
+                        </th>
+
+                        <th>
+                            القسم
+                        </th>
+
+                        <th>
+                            وقت الدخول
+                        </th>
+
+                        <th>
+                            وقت الخروج
+                        </th>
+
+                        <th>
+                            ساعات العمل
+                        </th>
+
+                        <th>
+                            الحالة
+                        </th>
+
+                        <th>
+                            الإجراءات
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody
+                    id="employeesTable">
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+
+<!-- MESSAGE -->
+
+<div
+    id="message"
+    class="message">
+</div>
+
+
+
+<script>
+
+
+// =====================================================
+// API
+// =====================================================
+
+const API =
+"https://script.google.com/macros/s/AKfycbw6pnqbRn3VyJvFjk0RGfEt8VXdBkOq2uqooSvxi0onjcUStpJ_hOGNZVPLimRA-ZNAGQ/exec";
+
+
+// =====================================================
+// DATA
+// =====================================================
+
+let employees = [];
+
+let attendance = [];
+
+
+
+// =====================================================
+// DATE
+// =====================================================
+
+function getToday(){
+
+    const now =
+        new Date();
+
+    const year =
+        now.getFullYear();
+
+    const month =
+        String(
+            now.getMonth()+1
+        ).padStart(2,"0");
+
+    const day =
+        String(
+            now.getDate()
+        ).padStart(2,"0");
+
+    return (
+        year +
+        "-" +
+        month +
+        "-" +
+        day
+    );
+
+}
+
+
+function displayDate(){
+
+    const now =
+        new Date();
+
+    document.getElementById(
+        "todayDate"
+    ).innerText =
+        now.toLocaleDateString(
+            "ar-IQ",
+            {
+                weekday:"long",
+                year:"numeric",
+                month:"long",
+                day:"numeric"
+            }
+        );
+
+}
+
+
+
+// =====================================================
+// API REQUEST
+// =====================================================
+
+async function apiRequest(data){
+
+    const response =
+        await fetch(
+            API,
+            {
+                method:"POST",
+
+                body:
+                    JSON.stringify(data)
+            }
+        );
+
+    return await response.json();
+
+}
+
+
+
+// =====================================================
+// LOAD DATA
+// =====================================================
+
+async function loadData(){
+
+    const loading =
+        document.getElementById(
+            "loading"
+        );
+
+    const wrapper =
+        document.getElementById(
+            "tableWrapper"
+        );
+
+
+    loading.style.display =
+        "block";
+
+    wrapper.style.display =
+        "none";
+
+
+    try{
+
+
+        // الموظفين
+
+        const employeesData =
+            await apiRequest({
+
+                action:
+                    "getEmployees"
+
+            });
+
+
+        if(
+            employeesData.status !==
+            "success"
+        ){
+
+            throw new Error(
+                employeesData.message
+            );
+
+        }
+
+
+        employees =
+            employeesData.employees ||
+            [];
+
+
+        // الحضور
+
+        const attendanceData =
+            await apiRequest({
+
+                action:
+                    "getAttendance",
+
+                date:
+                    getToday()
+
+            });
+
+
+        if(
+            attendanceData.status !==
+            "success"
+        ){
+
+            throw new Error(
+                attendanceData.message
+            );
+
+        }
+
+
+        attendance =
+            attendanceData.attendance ||
+            [];
+
+
+        renderTable();
+
+
+        loading.style.display =
+            "none";
+
+        wrapper.style.display =
+            "block";
+
+
+    }catch(error){
+
+        loading.innerHTML = `
+
+            ❌ تعذر تحميل البيانات
+
+            <br><br>
+
+            ${safe(error.message)}
+
+            <br><br>
+
+            <button
+                class="refresh"
+                onclick="loadData()"
+            >
+                🔄 إعادة المحاولة
+            </button>
+
+        `;
+
+    }
+
+}
+
+
+
+// =====================================================
+// FIND ATTENDANCE
+// =====================================================
+
+function getAttendanceForEmployee(
+    employee
+){
+
+    const name =
+        employee["الاسم"];
+
+
+    return attendance.find(
+        record => {
+
+            return String(
+                record["اسم الموضف"]
+            ).trim() ===
+            String(name).trim();
+
+        }
+    );
+
+}
+
+
+
+// =====================================================
+// RENDER
+// =====================================================
+
+function renderTable(){
+
+    const tbody =
+        document.getElementById(
+            "employeesTable"
+        );
+
+
+    tbody.innerHTML = "";
+
+
+    if(!employees.length){
+
+        tbody.innerHTML = `
+
+            <tr>
+
+                <td
+                    colspan="8"
+                    class="empty"
+                >
+                    لا يوجد موظفين
+                </td>
+
+            </tr>
+
+        `;
+
+        updateStats();
+
+        return;
+
+    }
+
+
+    employees.forEach(
+        (employee,index) => {
+
+            const record =
+                getAttendanceForEmployee(
+                    employee
+                );
+
+
+            const status =
+                record
+                    ? record["الحالة"]
+                    : "";
+
+
+            const checkIn =
+                record
+                    ? record["وقت الدخول"]
+                    : "";
+
+
+            const checkOut =
+                record
+                    ? record["وقت الخروج"]
+                    : "";
+
+
+            const hours =
+                record
+                    ? record["ساعات العمل"]
+                    : "";
+
+
+            const row =
+                document.createElement(
+                    "tr"
+                );
+
+
+            row.dataset.name =
+                employee["الاسم"] || "";
+
+
+            row.dataset.department =
+                employee["القسم"] || "";
+
+
+            row.innerHTML = `
+
+                <td>
+                    ${index + 1}
+                </td>
+
+
+                <td>
+
+                    <div
+                        class="employee-name"
+                    >
+                        ${safe(
+                            employee["الاسم"]
+                        )}
+                    </div>
+
+                </td>
+
+
+                <td>
+
+                    <div
+                        class="department"
+                    >
+                        ${safe(
+                            employee["القسم"]
+                        ) || "-"}
+                    </div>
+
+                </td>
+
+
+                <td>
+                    ${safe(checkIn) || "-"}
+                </td>
+
+
+                <td>
+                    ${safe(checkOut) || "-"}
+                </td>
+
+
+                <td>
+                    ${safe(hours) || "-"}
+                </td>
+
+
+                <td>
+
+                    ${statusHTML(status)}
+
+                </td>
+
+
+                <td>
+
+                    <div
+                        class="actions"
+                    >
+
+
+                        <button
+                            class="btn btn-present"
+                            onclick='checkIn("${safeJS(employee["الاسم"])}","${safeJS(employee["القسم"])}")'
+                        >
+                            🟢 حضور
+                        </button>
+
+
+                        <button
+                            class="btn btn-out"
+                            onclick='checkOut("${safeJS(employee["الاسم"])}")'
+                        >
+                            🕐 خروج
+                        </button>
+
+
+                        <button
+                            class="btn btn-absent"
+                            onclick='setStatus("${safeJS(employee["الاسم"])}","${safeJS(employee["القسم"])}","غياب")'
+                        >
+                            🔴 غياب
+                        </button>
+
+
+                        <button
+                            class="btn btn-late"
+                            onclick='setStatus("${safeJS(employee["الاسم"])}","${safeJS(employee["القسم"])}","متأخر")'
+                        >
+                            🟡 تأخير
+                        </button>
+
+
+                        <button
+                            class="btn btn-leave"
+                            onclick='setStatus("${safeJS(employee["الاسم"])}","${safeJS(employee["القسم"])}","إجازة")'
+                        >
+                            🏖️ إجازة
+                        </button>
+
+
+                    </div>
+
+                </td>
+
+            `;
+
+
+            tbody.appendChild(row);
+
+        }
+    );
+
+
+    updateStats();
+
+}
+
+
+
+// =====================================================
+// STATUS HTML
+// =====================================================
+
+function statusHTML(status){
+
+    if(status === "حاضر"){
+
+        return `
+            <span
+                class="status status-present">
+                🟢 حاضر
+            </span>
+        `;
+
+    }
+
+
+    if(status === "غياب"){
+
+        return `
+            <span
+                class="status status-absent">
+                🔴 غائب
+            </span>
+        `;
+
+    }
+
+
+    if(status === "متأخر"){
+
+        return `
+            <span
+                class="status status-late">
+                🟡 متأخر
+            </span>
+        `;
+
+    }
+
+
+    if(status === "إجازة"){
+
+        return `
+            <span
+                class="status status-leave">
+                🏖️ إجازة
+            </span>
+        `;
+
+    }
+
+
+    return `
+        <span
+            class="status status-none">
+            لم يسجل
+        </span>
+    `;
+
+}
+
+
+
+// =====================================================
+// STATS
+// =====================================================
+
+function updateStats(){
+
+    let present = 0;
+
+    let absent = 0;
+
+    let late = 0;
+
+    let leave = 0;
+
+
+    attendance.forEach(
+        record => {
+
+            const status =
+                String(
+                    record["الحالة"] ||
+                    ""
+                ).trim();
+
+
+            if(status === "حاضر")
+                present++;
+
+
+            if(status === "غياب")
+                absent++;
+
+
+            if(status === "متأخر")
+                late++;
+
+
+            if(status === "إجازة")
+                leave++;
+
+        }
+    );
+
+
+    document.getElementById(
+        "totalCount"
+    ).innerText =
+        employees.length;
+
+
+    document.getElementById(
+        "presentCount"
+    ).innerText =
+        present;
+
+
+    document.getElementById(
+        "absentCount"
+    ).innerText =
+        absent;
+
+
+    document.getElementById(
+        "lateCount"
+    ).innerText =
+        late;
+
+
+    document.getElementById(
+        "leaveCount"
+    ).innerText =
+        leave;
+
+}
+
+
+
+// =====================================================
+// CHECK IN
+// =====================================================
+
+async function checkIn(
+    name,
+    department
+){
+
+    if(!confirm(
+        "تسجيل حضور الموظف:\n\n" +
+        name +
+        "\n\nهل أنت متأكد؟"
+    )){
+
+        return;
+
+    }
+
+
+    try{
+
+        showMessage(
+            "جاري تسجيل الحضور...",
+            "success"
+        );
+
+
+        const result =
+            await apiRequest({
+
+                action:
+                    "checkIn",
+
+                name:
+                    name,
+
+                department:
+                    department,
+
+                status:
+                    "حاضر"
+
+            });
+
+
+        if(
+            result.status !==
+            "success"
+        ){
+
+            throw new Error(
+                result.message
+            );
+
+        }
+
+
+        showMessage(
+            "✅ تم تسجيل الحضور بنجاح",
+            "success"
+        );
+
+
+        await loadData();
+
+
+    }catch(error){
+
+        showMessage(
+            "❌ " + error.message,
+            "error"
+        );
+
+    }
+
+}
+
+
+
+// =====================================================
+// CHECK OUT
+// =====================================================
+
+async function checkOut(
+    name
+){
+
+    if(!confirm(
+        "تسجيل خروج الموظف:\n\n" +
+        name +
+        "\n\nهل أنت متأكد؟"
+    )){
+
+        return;
+
+    }
+
+
+    try{
+
+        const result =
+            await apiRequest({
+
+                action:
+                    "checkOut",
+
+                name:
+                    name
+
+            });
+
+
+        if(
+            result.status !==
+            "success"
+        ){
+
+            throw new Error(
+                result.message
+            );
+
+        }
+
+
+        showMessage(
+            "✅ تم تسجيل الخروج\nساعات العمل: " +
+            result.hours,
+            "success"
+        );
+
+
+        await loadData();
+
+
+    }catch(error){
+
+        showMessage(
+            "❌ " + error.message,
+            "error"
+        );
+
+    }
+
+}
+
+
+
+// =====================================================
+// STATUS
+// =====================================================
+
+async function setStatus(
+    name,
+    department,
+    status
+){
+
+    if(!confirm(
+        "الموظف:\n" +
+        name +
+        "\n\nالحالة: " +
+        status +
+        "\n\nهل أنت متأكد؟"
+    )){
+
+        return;
+
+    }
+
+
+    try{
+
+        const result =
+            await apiRequest({
+
+                action:
+                    "setAttendanceStatus",
+
+                name:
+                    name,
+
+                department:
+                    department,
+
+                status:
+                    status
+
+            });
+
+
+        if(
+            result.status !==
+            "success"
+        ){
+
+            throw new Error(
+                result.message
+            );
+
+        }
+
+
+        showMessage(
+            "✅ تم تسجيل " +
+            status +
+            " بنجاح",
+            "success"
+        );
+
+
+        await loadData();
+
+
+    }catch(error){
+
+        showMessage(
+            "❌ " +
+            error.message,
+            "error"
+        );
+
+    }
+
+}
+
+
+
+// =====================================================
+// SEARCH
+// =====================================================
+
+function filterEmployees(){
+
+    const search =
+        document.getElementById(
+            "search"
+        ).value
+        .trim()
+        .toLowerCase();
+
+
+    const rows =
+        document.querySelectorAll(
+            "#employeesTable tr"
+        );
+
+
+    rows.forEach(row => {
+
+        const text =
+            row.innerText
+                .toLowerCase();
+
+
+        row.style.display =
+            text.includes(search)
+                ? ""
+                : "none";
+
+    });
+
+}
+
+
+
+// =====================================================
+// MESSAGE
+// =====================================================
+
+let messageTimer;
+
+
+function showMessage(
+    text,
+    type
+){
+
+    const message =
+        document.getElementById(
+            "message"
+        );
+
+
+    message.innerText =
+        text;
+
+
+    message.className =
+        "message " + type;
+
+
+    message.style.display =
+        "block";
+
+
+    clearTimeout(
+        messageTimer
+    );
+
+
+    messageTimer =
+        setTimeout(
+            () => {
+
+                message.style.display =
+                    "none";
+
+            },
+            3500
+        );
+
+}
+
+
+
+// =====================================================
+// SAFE HTML
+// =====================================================
+
+function safe(value){
+
+    if(
+        value === null ||
+        value === undefined
+    ){
+
+        return "";
+
+    }
+
+
+    return String(value)
+
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+
+        .replace(
+            /</g,
+            "&lt;"
+        )
+
+        .replace(
+            />/g,
+            "&gt;"
+        )
+
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+
+// =====================================================
+// SAFE JAVASCRIPT
+// =====================================================
+
+function safeJS(value){
+
+    if(
+        value === null ||
+        value === undefined
+    ){
+
+        return "";
+
+    }
+
+
+    return String(value)
+
+        .replace(
+            /\\/g,
+            "\\\\"
+        )
+
+        .replace(
+            /"/g,
+            '\\"'
+        )
+
+        .replace(
+            /'/g,
+            "\\'"
+        )
+
+        .replace(
+            /\n/g,
+            "\\n"
+        )
+
+        .replace(
+            /\r/g,
+            "\\r"
+        );
+
+}
+
+
+
+// =====================================================
+// START
+// =====================================================
+
+displayDate();
+
+loadData();
+
+
+</script>
+
+</body>
+
+</html>
