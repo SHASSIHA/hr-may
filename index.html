@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -48,6 +49,8 @@ body{
     text-align:center;
     cursor:pointer;
     transition:0.3s;
+    text-decoration:none;
+    color:#222;
 }
 
 .card:hover{
@@ -71,83 +74,175 @@ body{
 }
 
 </style>
+
 </head>
 
 <body>
 
+
 <div class="header">
-نظام الموارد البشرية HR
+    نظام الموارد البشرية HR
 </div>
+
 
 <div class="container">
 
 <div class="cards">
 
-<div class="card">
-<div class="icon">👥</div>
-<div class="title">الموظفين</div>
-<div class="count" id="employeesCount">0</div>
+
+<!-- الموظفين -->
+
+<a class="card" href="employees.html">
+
+    <div class="icon">👥</div>
+
+    <div class="title">
+        الموظفين
+    </div>
+
+    <div class="count" id="employeesCount">
+        0
+    </div>
+
+</a>
+
+
+<!-- إضافة موظف -->
+
+<a class="card" href="employees.html">
+
+    <div class="icon">➕</div>
+
+    <div class="title">
+        إضافة موظف
+    </div>
+
+</a>
+
+
+<!-- المعاملات -->
+
+<div class="card" onclick="comingSoon('المعاملات')">
+
+    <div class="icon">📄</div>
+
+    <div class="title">
+        المعاملات
+    </div>
+
 </div>
 
-<div class="card">
-<div class="icon">➕</div>
-<div class="title">إضافة موظف</div>
-</div>
 
-<div class="card">
-<div class="icon">📄</div>
-<div class="title">المعاملات</div>
-</div>
+<!-- الحضور -->
 
-<div class="card">
-<div class="icon">🕐</div>
-<div class="title">الحضور</div>
-</div>
+<div class="card" onclick="comingSoon('الحضور والإجازات')">
 
-<div class="card">
-<div class="icon">📊</div>
-<div class="title">التقارير</div>
-</div>
+    <div class="icon">🕐</div>
 
-<div class="card">
-<div class="icon">⚙️</div>
-<div class="title">الإعدادات</div>
-</div>
+    <div class="title">
+        الحضور والإجازات
+    </div>
 
 </div>
 
+
+<!-- التقارير -->
+
+<div class="card" onclick="comingSoon('التقارير')">
+
+    <div class="icon">📊</div>
+
+    <div class="title">
+        التقارير
+    </div>
+
 </div>
+
+
+<!-- الإعدادات -->
+
+<div class="card" onclick="comingSoon('الإعدادات')">
+
+    <div class="icon">⚙️</div>
+
+    <div class="title">
+        الإعدادات
+    </div>
+
+</div>
+
+
+</div>
+
+</div>
+
 
 <script>
 
+
 const API =
 "https://script.google.com/macros/s/AKfycbw6pnqbRn3VyJvFjk0RGfEt8VXdBkOq2uqooSvxi0onjcUStpJ_hOGNZVPLimRA-ZNAGQ/exec";
+
+
+// ================================
+// عدد الموظفين
+// ================================
 
 async function loadEmployees(){
 
     try{
 
         const response = await fetch(API,{
+
             method:"POST",
+
             body:JSON.stringify({
+
                 action:"getEmployees"
+
             })
+
         });
 
-        const data = await response.json();
 
-        if(data.status=="success"){
-            document.getElementById("employeesCount").innerText =
-            data.employees.length;
+        const data =
+            await response.json();
+
+
+        if(data.status === "success"){
+
+            document.getElementById(
+                "employeesCount"
+            ).innerText =
+                data.employees.length;
+
         }
 
+
     }catch(error){
+
         console.log(error);
+
     }
 
 }
 
+
 loadEmployees();
+
+
+// ================================
+// الميزات القادمة
+// ================================
+
+function comingSoon(name){
+
+    alert(
+        "قسم " + name + " راح يتم تفعيله بالمرحلة القادمة 🔥"
+    );
+
+}
+
 
 </script>
 
