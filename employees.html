@@ -23,6 +23,8 @@ body{
     color:#222;
 }
 
+/* HEADER */
+
 .header{
     background:#ff6b00;
     color:white;
@@ -38,17 +40,19 @@ body{
     font-size:22px;
 }
 
-.header a{
-    color:white;
-    text-decoration:none;
+.header span{
     font-size:14px;
 }
+
+/* CONTAINER */
 
 .container{
     max-width:1200px;
     margin:25px auto;
     padding:0 15px;
 }
+
+/* TOP */
 
 .top{
     display:flex;
@@ -66,6 +70,8 @@ body{
     margin:5px 0 0;
     color:#777;
 }
+
+/* BUTTON */
 
 .btn{
     border:none;
@@ -86,6 +92,8 @@ body{
     color:white;
 }
 
+/* SEARCH */
+
 .search-box{
     background:white;
     padding:15px;
@@ -103,6 +111,8 @@ body{
     font-size:14px;
 }
 
+/* TABLE */
+
 .table-box{
     background:white;
     border-radius:15px;
@@ -113,7 +123,7 @@ body{
 table{
     width:100%;
     border-collapse:collapse;
-    min-width:900px;
+    min-width:850px;
 }
 
 thead{
@@ -121,8 +131,7 @@ thead{
     color:white;
 }
 
-th,
-td{
+th,td{
     padding:13px 10px;
     text-align:center;
     border-bottom:1px solid #eee;
@@ -132,6 +141,8 @@ td{
 tbody tr:hover{
     background:#fafafa;
 }
+
+/* STATUS */
 
 .status{
     display:inline-block;
@@ -154,6 +165,8 @@ tbody tr:hover{
     background:#fff4dc;
     color:#a56a00;
 }
+
+/* ACTIONS */
 
 .actions{
     display:flex;
@@ -184,29 +197,15 @@ tbody tr:hover{
     color:#c62828;
 }
 
+/* LOADING */
+
 .loading{
     padding:35px;
     text-align:center;
     color:#777;
 }
 
-.message{
-    display:none;
-    padding:12px;
-    border-radius:10px;
-    margin-bottom:15px;
-    text-align:center;
-}
-
-.success{
-    background:#e7f7ed;
-    color:#16833b;
-}
-
-.error{
-    background:#ffe9e9;
-    color:#c62828;
-}
+/* MODAL */
 
 .modal{
     display:none;
@@ -290,7 +289,33 @@ tbody tr:hover{
     gap:10px;
 }
 
+/* MESSAGE */
+
+.message{
+    display:none;
+    padding:12px;
+    border-radius:10px;
+    margin-bottom:15px;
+    text-align:center;
+}
+
+.success{
+    background:#e7f7ed;
+    color:#16833b;
+}
+
+.error{
+    background:#ffe9e9;
+    color:#c62828;
+}
+
+/* MOBILE */
+
 @media(max-width:700px){
+
+    .header{
+        padding:15px;
+    }
 
     .top{
         flex-direction:column;
@@ -311,23 +336,24 @@ tbody tr:hover{
 
 </head>
 
-
 <body>
 
+
+<!-- HEADER -->
 
 <div class="header">
 
     <h1>👥 إدارة الموظفين</h1>
 
-    <a href="index.html">
-        ← الرئيسية
-    </a>
+    <span>Shassiha HR</span>
 
 </div>
 
 
 <div class="container">
 
+
+    <!-- TOP -->
 
     <div class="top">
 
@@ -339,18 +365,19 @@ tbody tr:hover{
 
         </div>
 
-        <button
-            class="btn btn-primary"
-            onclick="openAddEmployee()"
-        >
+        <button class="btn btn-primary" onclick="openAddEmployee()">
             ➕ إضافة موظف
         </button>
 
     </div>
 
 
+    <!-- MESSAGE -->
+
     <div id="message" class="message"></div>
 
+
+    <!-- SEARCH -->
 
     <div class="search-box">
 
@@ -364,6 +391,8 @@ tbody tr:hover{
     </div>
 
 
+    <!-- TABLE -->
+
     <div class="table-box">
 
         <table>
@@ -373,19 +402,26 @@ tbody tr:hover{
                 <tr>
 
                     <th>رقم الموظف</th>
+
                     <th>الاسم</th>
+
                     <th>القسم</th>
+
                     <th>الوظيفة</th>
+
                     <th>الراتب</th>
+
                     <th>تاريخ التعيين</th>
+
                     <th>نوع العقد</th>
+
                     <th>الحالة</th>
+
                     <th>الإجراءات</th>
 
                 </tr>
 
             </thead>
-
 
             <tbody id="employeesTable">
 
@@ -412,7 +448,7 @@ tbody tr:hover{
 
 
 
-<!-- إضافة موظف -->
+<!-- ADD EMPLOYEE MODAL -->
 
 <div class="modal" id="employeeModal">
 
@@ -423,12 +459,7 @@ tbody tr:hover{
 
             <h2>➕ إضافة موظف جديد</h2>
 
-            <button
-                class="close"
-                onclick="closeModal()"
-            >
-                ×
-            </button>
+            <button class="close" onclick="closeModal()">×</button>
 
         </div>
 
@@ -506,25 +537,15 @@ tbody tr:hover{
 
                     <select id="contractType">
 
-                        <option value="">
-                            اختر نوع العقد
-                        </option>
+                        <option value="">اختر نوع العقد</option>
 
-                        <option value="دائم">
-                            دائم
-                        </option>
+                        <option value="دائم">دائم</option>
 
-                        <option value="مؤقت">
-                            مؤقت
-                        </option>
+                        <option value="مؤقت">مؤقت</option>
 
-                        <option value="يومي">
-                            يومي
-                        </option>
+                        <option value="يومي">يومي</option>
 
-                        <option value="تجربة">
-                            فترة تجربة
-                        </option>
+                        <option value="تجربة">فترة تجربة</option>
 
                     </select>
 
@@ -665,66 +686,48 @@ const API =
 let employees = [];
 
 
-// ======================================
+// ================================
 // تحميل الموظفين
-// ======================================
+// ================================
 
 async function loadEmployees(){
 
     const table =
         document.getElementById("employeesTable");
 
-
     table.innerHTML = `
-
         <tr>
-
             <td colspan="9">
-
                 <div class="loading">
                     جاري تحميل الموظفين...
                 </div>
-
             </td>
-
         </tr>
-
     `;
 
 
     try{
 
-        const response =
-            await fetch(API,{
+        const response = await fetch(API,{
+            method:"POST",
 
-                method:"POST",
-
-                body:JSON.stringify({
-
-                    action:"getEmployees"
-
-                })
-
-            });
+            body:JSON.stringify({
+                action:"getEmployees"
+            })
+        });
 
 
-        const data =
-            await response.json();
+        const data = await response.json();
 
 
         if(data.status !== "success"){
 
-            throw new Error(
-                data.message ||
-                "حدث خطأ"
-            );
+            throw new Error(data.message || "حدث خطأ");
 
         }
 
 
-        employees =
-            data.employees || [];
-
+        employees = data.employees || [];
 
         renderEmployees(employees);
 
@@ -732,9 +735,7 @@ async function loadEmployees(){
     }catch(error){
 
         table.innerHTML = `
-
             <tr>
-
                 <td colspan="9">
 
                     <div class="loading">
@@ -743,14 +744,12 @@ async function loadEmployees(){
 
                         <br><br>
 
-                        ${safe(error.message)}
+                        ${error.message}
 
                     </div>
 
                 </td>
-
             </tr>
-
         `;
 
     }
@@ -759,9 +758,9 @@ async function loadEmployees(){
 
 
 
-// ======================================
+// ================================
 // عرض الموظفين
-// ======================================
+// ================================
 
 function renderEmployees(list){
 
@@ -772,19 +771,17 @@ function renderEmployees(list){
     if(!list.length){
 
         table.innerHTML = `
-
             <tr>
-
                 <td colspan="9">
 
                     <div class="loading">
+
                         لا يوجد موظفين حالياً
+
                     </div>
 
                 </td>
-
             </tr>
-
         `;
 
         return;
@@ -797,11 +794,9 @@ function renderEmployees(list){
         <tr>
 
             <td>
-
                 <strong>
                     ${safe(employee["Employee ID"])}
                 </strong>
-
             </td>
 
 
@@ -844,18 +839,12 @@ function renderEmployees(list){
 
                 <div class="actions">
 
-
-                    <!-- عرض ملف الموظف -->
-
                     <button
                         class="action view"
-                        onclick='openEmployee("${safe(employee["Employee ID"])}")'
+                        onclick='viewEmployee(${JSON.stringify(employee)})'
                     >
                         👁 عرض
                     </button>
-
-
-                    <!-- تعديل -->
 
                     <button
                         class="action edit"
@@ -864,16 +853,12 @@ function renderEmployees(list){
                         ✏️ تعديل
                     </button>
 
-
-                    <!-- إنهاء -->
-
                     <button
                         class="action end"
                         onclick='endEmployee("${safe(employee["Employee ID"])}")'
                     >
                         إنهاء
                     </button>
-
 
                 </div>
 
@@ -887,23 +872,9 @@ function renderEmployees(list){
 
 
 
-// ======================================
-// فتح ملف الموظف
-// ======================================
-
-function openEmployee(id){
-
-    window.location.href =
-        "employee.html?id=" +
-        encodeURIComponent(id);
-
-}
-
-
-
-// ======================================
+// ================================
 // البحث
-// ======================================
+// ================================
 
 function searchEmployees(){
 
@@ -923,24 +894,27 @@ function searchEmployees(){
     }
 
 
-    const result =
-        employees.filter(employee => {
+    const result = employees.filter(employee => {
 
-            return [
+        return [
 
-                employee["Employee ID"],
-                employee["الاسم"],
-                employee["القسم"],
-                employee["الوظيفة"],
-                employee["الهاتف"]
+            employee["Employee ID"],
 
-            ]
+            employee["الاسم"],
 
-            .join(" ")
-            .toLowerCase()
-            .includes(value);
+            employee["القسم"],
 
-        });
+            employee["الوظيفة"],
+
+            employee["الهاتف"]
+
+        ]
+
+        .join(" ")
+        .toLowerCase()
+        .includes(value);
+
+    });
 
 
     renderEmployees(result);
@@ -949,220 +923,229 @@ function searchEmployees(){
 
 
 
-// ======================================
-// إضافة موظف
-// ======================================
+// ================================
+// فتح الإضافة
+// ================================
 
 function openAddEmployee(){
 
-    document
-        .getElementById("employeeForm")
-        .reset();
+    document.getElementById("employeeForm").reset();
 
-
-    document
-        .getElementById("employeeModal")
-        .style.display =
+    document.getElementById("employeeModal").style.display =
         "block";
 
 }
 
 
+
+// ================================
+// إغلاق
+// ================================
+
 function closeModal(){
 
-    document
-        .getElementById("employeeModal")
-        .style.display =
+    document.getElementById("employeeModal").style.display =
         "none";
 
 }
 
 
 
-// ======================================
+// ================================
 // حفظ الموظف
-// ======================================
+// ================================
 
 document
 .getElementById("employeeForm")
-.addEventListener(
-    "submit",
-    async function(e){
+.addEventListener("submit", async function(e){
 
-        e.preventDefault();
+    e.preventDefault();
 
 
-        const button =
-            this.querySelector(
-                "button[type='submit']"
-            );
+    const button =
+        this.querySelector("button[type='submit']");
 
 
-        button.disabled = true;
+    button.disabled = true;
 
-        button.innerText =
-            "⏳ جاري الحفظ...";
-
-
-        const data = {
-
-            action:"addEmployee",
-
-            name:
-                document.getElementById("name").value,
-
-            department:
-                document.getElementById("department").value,
-
-            position:
-                document.getElementById("position").value,
-
-            salary:
-                document.getElementById("salary").value,
-
-            hireDate:
-                document.getElementById("hireDate").value,
-
-            contractType:
-                document.getElementById("contractType").value,
-
-            phone:
-                document.getElementById("phone").value,
-
-            address:
-                document.getElementById("address").value,
-
-            birthDate:
-                document.getElementById("birthDate").value,
-
-            emergencyContact:
-                document.getElementById("emergencyContact").value,
-
-            emergencyPhone:
-                document.getElementById("emergencyPhone").value,
-
-            nationalId:
-                document.getElementById("nationalId").value,
-
-            contractEndDate:
-                document.getElementById("contractEndDate").value,
-
-            notes:
-                document.getElementById("notes").value
-
-        };
+    button.innerText = "⏳ جاري الحفظ...";
 
 
-        try{
+    const data = {
 
-            const response =
-                await fetch(API,{
+        action:"addEmployee",
 
-                    method:"POST",
+        name:
+            document.getElementById("name").value,
 
-                    body:JSON.stringify(data)
+        department:
+            document.getElementById("department").value,
 
-                });
+        position:
+            document.getElementById("position").value,
+
+        salary:
+            document.getElementById("salary").value,
+
+        hireDate:
+            document.getElementById("hireDate").value,
+
+        contractType:
+            document.getElementById("contractType").value,
+
+        phone:
+            document.getElementById("phone").value,
+
+        address:
+            document.getElementById("address").value,
+
+        birthDate:
+            document.getElementById("birthDate").value,
+
+        emergencyContact:
+            document.getElementById("emergencyContact").value,
+
+        emergencyPhone:
+            document.getElementById("emergencyPhone").value,
+
+        nationalId:
+            document.getElementById("nationalId").value,
+
+        contractEndDate:
+            document.getElementById("contractEndDate").value,
+
+        notes:
+            document.getElementById("notes").value
+
+    };
 
 
-            const result =
-                await response.json();
+    try{
+
+        const response = await fetch(API,{
+
+            method:"POST",
+
+            body:JSON.stringify(data)
+
+        });
 
 
-            if(result.status !== "success"){
-
-                throw new Error(
-                    result.message
-                );
-
-            }
+        const result =
+            await response.json();
 
 
-            closeModal();
+        if(result.status !== "success"){
 
-
-            showMessage(
-                "✅ تمت إضافة الموظف بنجاح — " +
-                result.employeeId,
-                "success"
-            );
-
-
-            await loadEmployees();
-
-
-        }catch(error){
-
-            showMessage(
-                "❌ حدث خطأ: " +
-                error.message,
-                "error"
-            );
+            throw new Error(result.message);
 
         }
 
 
-        button.disabled = false;
+        closeModal();
 
-        button.innerText =
-            "💾 حفظ الموظف";
+
+        showMessage(
+            `✅ تمت إضافة الموظف بنجاح — ${result.employeeId}`,
+            "success"
+        );
+
+
+        await loadEmployees();
+
+
+    }catch(error){
+
+        showMessage(
+            "❌ حدث خطأ: " + error.message,
+            "error"
+        );
 
     }
-);
+
+
+    button.disabled = false;
+
+    button.innerText = "💾 حفظ الموظف";
+
+});
 
 
 
-// ======================================
-// تعديل مؤقت
-// ======================================
+// ================================
+// عرض الموظف
+// ================================
+
+function viewEmployee(employee){
+
+    alert(
+
+        "رقم الموظف: " +
+        employee["Employee ID"] +
+
+        "\n\nالاسم: " +
+        employee["الاسم"] +
+
+        "\nالقسم: " +
+        employee["القسم"] +
+
+        "\nالوظيفة: " +
+        employee["الوظيفة"] +
+
+        "\nالهاتف: " +
+        employee["الهاتف"] +
+
+        "\nالحالة: " +
+        employee["الحالة"]
+
+    );
+
+}
+
+
+
+// ================================
+// تعديل
+// ================================
 
 function editEmployee(employee){
 
     alert(
-        "✏️ تعديل الموظف\n\n" +
-        "الموظف: " +
-        employee["الاسم"] +
-        "\n\nراح نفعل التعديل بالمرحلة القادمة."
+        "ميزة تعديل الموظف راح نضيفها بالمرحلة القادمة."
     );
 
 }
 
 
 
-// ======================================
-// إنهاء الخدمة مؤقت
-// ======================================
+// ================================
+// إنهاء الخدمة
+// ================================
 
 function endEmployee(id){
 
     alert(
-        "🔴 إنهاء الخدمة\n\n" +
-        "الموظف: " +
-        id +
-        "\n\nراح نفعل إنهاء الخدمة بالمرحلة القادمة."
+        "ميزة إنهاء الخدمة راح نضيفها بالمرحلة القادمة.\n\nالموظف: " + id
     );
 
 }
 
 
 
-// ======================================
-// الرسائل
-// ======================================
+// ================================
+// رسالة
+// ================================
 
 function showMessage(text,type){
 
     const message =
         document.getElementById("message");
 
-
     message.className =
         "message " + type;
 
-
     message.innerText =
         text;
-
 
     message.style.display =
         "block";
@@ -1179,24 +1162,16 @@ function showMessage(text,type){
 
 
 
-// ======================================
+// ================================
 // أدوات
-// ======================================
+// ================================
 
 function safe(value){
 
-    if(
-        value === null ||
-        value === undefined
-    ){
-
+    if(value === null || value === undefined)
         return "";
 
-    }
-
-
     return String(value)
-
         .replace(/&/g,"&amp;")
         .replace(/</g,"&lt;")
         .replace(/>/g,"&gt;")
@@ -1208,30 +1183,14 @@ function safe(value){
 
 function formatNumber(value){
 
-    if(
-        value === null ||
-        value === undefined ||
-        value === ""
-    ){
-
+    if(value === null || value === undefined || value === "")
         return "";
 
-    }
-
-
     const number =
-        Number(
-            String(value)
-            .replace(/,/g,"")
-        );
+        Number(String(value).replace(/,/g,""));
 
-
-    if(isNaN(number)){
-
+    if(isNaN(number))
         return safe(value);
-
-    }
-
 
     return number.toLocaleString("en-US");
 
@@ -1240,23 +1199,14 @@ function formatNumber(value){
 
 function formatDate(value){
 
-    if(!value){
-
+    if(!value)
         return "";
-
-    }
-
 
     const date =
         new Date(value);
 
-
-    if(isNaN(date)){
-
+    if(isNaN(date))
         return safe(value);
-
-    }
-
 
     return date.toLocaleDateString("en-GB");
 
@@ -1265,64 +1215,43 @@ function formatDate(value){
 
 function statusBadge(status){
 
-    status =
-        status || "";
-
+    status = status || "";
 
     if(status === "مستمر"){
 
-        return `
-
-            <span class="status active">
-                🟢 مستمر
-            </span>
-
-        `;
+        return `<span class="status active">
+                    🟢 مستمر
+                </span>`;
 
     }
-
 
     if(status === "إجازة"){
 
-        return `
-
-            <span class="status leave">
-                🟠 إجازة
-            </span>
-
-        `;
+        return `<span class="status leave">
+                    🟠 إجازة
+                </span>`;
 
     }
-
 
     if(status === "منتهي الخدمة"){
 
-        return `
-
-            <span class="status inactive">
-                🔴 منتهي الخدمة
-            </span>
-
-        `;
+        return `<span class="status inactive">
+                    🔴 منتهي الخدمة
+                </span>`;
 
     }
 
-
-    return `
-
-        <span class="status">
-            ${safe(status)}
-        </span>
-
-    `;
+    return `<span class="status">
+                ${safe(status)}
+            </span>`;
 
 }
 
 
 
-// ======================================
+// ================================
 // تشغيل
-// ======================================
+// ================================
 
 loadEmployees();
 
