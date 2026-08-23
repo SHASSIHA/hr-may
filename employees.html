@@ -1,335 +1,76 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-
 <head>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>الموظفين - Shassiha HR</title>
+<title>نظام الموارد البشرية</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
 
 *{
+    margin:0;
+    padding:0;
     box-sizing:border-box;
+    font-family:'Cairo',sans-serif;
 }
 
 body{
-    margin:0;
-    font-family:'Cairo',sans-serif;
-    background:#f5f6f8;
+    background:#f4f6f9;
+}
+
+.header{
+    background:#ff7a00;
+    color:white;
+    padding:20px;
+    text-align:center;
+    font-size:24px;
+    font-weight:bold;
+}
+
+.container{
+    padding:20px;
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:15px;
+}
+
+.card{
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 2px 10px rgba(0,0,0,0.1);
+    text-align:center;
+    cursor:pointer;
+    transition:0.3s;
+    text-decoration:none;
     color:#222;
 }
 
-/* HEADER */
-
-.header{
-    background:#ff6b00;
-    color:white;
-    padding:18px 25px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    box-shadow:0 3px 10px rgba(0,0,0,.12);
+.card:hover{
+    transform:translateY(-5px);
 }
 
-.header h1{
-    margin:0;
-    font-size:22px;
+.icon{
+    font-size:40px;
+    margin-bottom:10px;
 }
 
-.header span{
-    font-size:14px;
-}
-
-/* CONTAINER */
-
-.container{
-    max-width:1200px;
-    margin:25px auto;
-    padding:0 15px;
-}
-
-/* TOP */
-
-.top{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:20px;
-    gap:15px;
-}
-
-.title h2{
-    margin:0;
-}
-
-.title p{
-    margin:5px 0 0;
-    color:#777;
-}
-
-/* BUTTON */
-
-.btn{
-    border:none;
-    border-radius:10px;
-    padding:12px 18px;
-    font-family:inherit;
-    cursor:pointer;
-    font-size:14px;
-}
-
-.btn-primary{
-    background:#ff6b00;
-    color:white;
-}
-
-.btn-secondary{
-    background:#333;
-    color:white;
-}
-
-/* SEARCH */
-
-.search-box{
-    background:white;
-    padding:15px;
-    border-radius:14px;
-    box-shadow:0 2px 8px rgba(0,0,0,.06);
-    margin-bottom:20px;
-}
-
-.search-box input{
-    width:100%;
-    padding:12px;
-    border:1px solid #ddd;
-    border-radius:9px;
-    font-family:inherit;
-    font-size:14px;
-}
-
-/* TABLE */
-
-.table-box{
-    background:white;
-    border-radius:15px;
-    overflow:auto;
-    box-shadow:0 2px 10px rgba(0,0,0,.07);
-}
-
-table{
-    width:100%;
-    border-collapse:collapse;
-    min-width:850px;
-}
-
-thead{
-    background:#333;
-    color:white;
-}
-
-th,td{
-    padding:13px 10px;
-    text-align:center;
-    border-bottom:1px solid #eee;
-    white-space:nowrap;
-}
-
-tbody tr:hover{
-    background:#fafafa;
-}
-
-/* STATUS */
-
-.status{
-    display:inline-block;
-    padding:5px 12px;
-    border-radius:20px;
-    font-size:12px;
-}
-
-.active{
-    background:#e7f7ed;
-    color:#16833b;
-}
-
-.inactive{
-    background:#ffe9e9;
-    color:#c62828;
-}
-
-.leave{
-    background:#fff4dc;
-    color:#a56a00;
-}
-
-/* ACTIONS */
-
-.actions{
-    display:flex;
-    justify-content:center;
-    gap:5px;
-}
-
-.action{
-    border:none;
-    padding:7px 10px;
-    border-radius:7px;
-    cursor:pointer;
-    font-family:inherit;
-    font-size:12px;
-}
-
-.view{
-    background:#eee;
-}
-
-.edit{
-    background:#fff0e5;
-    color:#d95d00;
-}
-
-.end{
-    background:#ffe5e5;
-    color:#c62828;
-}
-
-/* LOADING */
-
-.loading{
-    padding:35px;
-    text-align:center;
-    color:#777;
-}
-
-/* MODAL */
-
-.modal{
-    display:none;
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.55);
-    z-index:1000;
-    padding:20px;
-    overflow:auto;
-}
-
-.modal-content{
-    background:white;
-    max-width:800px;
-    margin:30px auto;
-    border-radius:18px;
-    padding:25px;
-}
-
-.modal-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:20px;
-}
-
-.modal-header h2{
-    margin:0;
-}
-
-.close{
-    border:none;
-    background:#eee;
-    width:35px;
-    height:35px;
-    border-radius:50%;
-    cursor:pointer;
+.title{
     font-size:18px;
+    font-weight:bold;
 }
 
-.form-grid{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:15px;
-}
-
-.field{
-    display:flex;
-    flex-direction:column;
-}
-
-.field.full{
-    grid-column:1/-1;
-}
-
-.field label{
-    margin-bottom:6px;
-    font-size:13px;
-    font-weight:600;
-}
-
-.field input,
-.field select,
-.field textarea{
-    padding:11px;
-    border:1px solid #ddd;
-    border-radius:9px;
-    font-family:inherit;
-    font-size:14px;
-}
-
-.field textarea{
-    min-height:90px;
-    resize:vertical;
-}
-
-.form-footer{
-    margin-top:20px;
-    display:flex;
-    justify-content:flex-start;
-    gap:10px;
-}
-
-/* MESSAGE */
-
-.message{
-    display:none;
-    padding:12px;
-    border-radius:10px;
-    margin-bottom:15px;
-    text-align:center;
-}
-
-.success{
-    background:#e7f7ed;
-    color:#16833b;
-}
-
-.error{
-    background:#ffe9e9;
-    color:#c62828;
-}
-
-/* MOBILE */
-
-@media(max-width:700px){
-
-    .header{
-        padding:15px;
-    }
-
-    .top{
-        flex-direction:column;
-        align-items:stretch;
-    }
-
-    .form-grid{
-        grid-template-columns:1fr;
-    }
-
-    .field.full{
-        grid-column:auto;
-    }
-
+.count{
+    font-size:28px;
+    color:#ff7a00;
+    margin-top:10px;
 }
 
 </style>
@@ -339,341 +80,101 @@ tbody tr:hover{
 <body>
 
 
-<!-- HEADER -->
-
 <div class="header">
-
-    <h1>👥 إدارة الموظفين</h1>
-
-    <span>Shassiha HR</span>
-
+    نظام الموارد البشرية HR
 </div>
 
 
 <div class="container">
 
+<div class="cards">
 
-    <!-- TOP -->
 
-    <div class="top">
+<!-- الموظفين -->
 
-        <div class="title">
+<a class="card" href="employees.html">
 
-            <h2>الموظفين</h2>
+    <div class="icon">👥</div>
 
-            <p>إدارة بيانات موظفي المطعم</p>
-
-        </div>
-
-        <button class="btn btn-primary" onclick="openAddEmployee()">
-            ➕ إضافة موظف
-        </button>
-
+    <div class="title">
+        الموظفين
     </div>
 
-
-    <!-- MESSAGE -->
-
-    <div id="message" class="message"></div>
-
-
-    <!-- SEARCH -->
-
-    <div class="search-box">
-
-        <input
-            type="text"
-            id="search"
-            placeholder="🔎 ابحث باسم الموظف أو رقم الموظف أو القسم..."
-            oninput="searchEmployees()"
-        >
-
+    <div class="count" id="employeesCount">
+        0
     </div>
 
+</a>
 
-    <!-- TABLE -->
 
-    <div class="table-box">
+<!-- إضافة موظف -->
 
-        <table>
+<a class="card" href="employees.html">
 
-            <thead>
+    <div class="icon">➕</div>
 
-                <tr>
-
-                    <th>رقم الموظف</th>
-
-                    <th>الاسم</th>
-
-                    <th>القسم</th>
-
-                    <th>الوظيفة</th>
-
-                    <th>الراتب</th>
-
-                    <th>تاريخ التعيين</th>
-
-                    <th>نوع العقد</th>
-
-                    <th>الحالة</th>
-
-                    <th>الإجراءات</th>
-
-                </tr>
-
-            </thead>
-
-            <tbody id="employeesTable">
-
-                <tr>
-
-                    <td colspan="9">
-
-                        <div class="loading">
-                            جاري تحميل الموظفين...
-                        </div>
-
-                    </td>
-
-                </tr>
-
-            </tbody>
-
-        </table>
-
+    <div class="title">
+        إضافة موظف
     </div>
 
+</a>
 
-</div>
 
+<!-- المعاملات -->
 
+<div class="card" onclick="comingSoon('المعاملات')">
 
-<!-- ADD EMPLOYEE MODAL -->
+    <div class="icon">📄</div>
 
-<div class="modal" id="employeeModal">
-
-    <div class="modal-content">
-
-
-        <div class="modal-header">
-
-            <h2>➕ إضافة موظف جديد</h2>
-
-            <button class="close" onclick="closeModal()">×</button>
-
-        </div>
-
-
-        <form id="employeeForm">
-
-
-            <div class="form-grid">
-
-
-                <div class="field full">
-
-                    <label>اسم الموظف *</label>
-
-                    <input
-                        type="text"
-                        id="name"
-                        required
-                    >
-
-                </div>
-
-
-                <div class="field">
-
-                    <label>القسم</label>
-
-                    <input
-                        type="text"
-                        id="department"
-                    >
-
-                </div>
-
-
-                <div class="field">
-
-                    <label>الوظيفة</label>
-
-                    <input
-                        type="text"
-                        id="position"
-                    >
-
-                </div>
-
-
-                <div class="field">
-
-                    <label>الراتب</label>
-
-                    <input
-                        type="number"
-                        id="salary"
-                    >
-
-                </div>
-
-
-                <div class="field">
-
-                    <label>تاريخ التعيين</label>
-
-                    <input
-                        type="date"
-                        id="hireDate"
-                    >
-
-                </div>
-
-
-                <div class="field">
-
-                    <label>نوع العقد</label>
-
-                    <select id="contractType">
-
-                        <option value="">اختر نوع العقد</option>
-
-                        <option value="دائم">دائم</option>
-
-                        <option value="مؤقت">مؤقت</option>
-
-                        <option value="يومي">يومي</option>
-
-                        <option value="تجربة">فترة تجربة</option>
-
-                    </select>
-
-                </div>
-
-
-                <div class="field">
-
-                    <label>الهاتف</label>
-
-                    <input
-                        type="tel"
-                        id="phone"
-                    >
-
-                </div>
-
-
-                <div class="field">
-
-                    <label>العنوان</label>
-
-                    <input
-                        type="text"
-                        id="address"
-                    >
-
-                </div>
-
-
-                <div class="field">
-
-                    <label>تاريخ الميلاد</label>
-
-                    <input
-                        type="date"
-                        id="birthDate"
-                    >
-
-                </div>
-
-
-                <div class="field">
-
-                    <label>جهة اتصال للطوارئ</label>
-
-                    <input
-                        type="text"
-                        id="emergencyContact"
-                    >
-
-                </div>
-
-
-                <div class="field">
-
-                    <label>رقم هاتف الطوارئ</label>
-
-                    <input
-                        type="tel"
-                        id="emergencyPhone"
-                    >
-
-                </div>
-
-
-                <div class="field">
-
-                    <label>رقم البطاقة الوطنية</label>
-
-                    <input
-                        type="text"
-                        id="nationalId"
-                    >
-
-                </div>
-
-
-                <div class="field">
-
-                    <label>تاريخ انتهاء العقد</label>
-
-                    <input
-                        type="date"
-                        id="contractEndDate"
-                    >
-
-                </div>
-
-
-                <div class="field full">
-
-                    <label>ملاحظات</label>
-
-                    <textarea id="notes"></textarea>
-
-                </div>
-
-
-            </div>
-
-
-            <div class="form-footer">
-
-                <button
-                    type="submit"
-                    class="btn btn-primary"
-                >
-                    💾 حفظ الموظف
-                </button>
-
-                <button
-                    type="button"
-                    class="btn btn-secondary"
-                    onclick="closeModal()"
-                >
-                    إلغاء
-                </button>
-
-            </div>
-
-
-        </form>
-
+    <div class="title">
+        المعاملات
     </div>
 
 </div>
 
+
+<!-- الحضور -->
+
+<div class="card" onclick="comingSoon('الحضور والإجازات')">
+
+    <div class="icon">🕐</div>
+
+    <div class="title">
+        الحضور والإجازات
+    </div>
+
+</div>
+
+
+<!-- التقارير -->
+
+<div class="card" onclick="comingSoon('التقارير')">
+
+    <div class="icon">📊</div>
+
+    <div class="title">
+        التقارير
+    </div>
+
+</div>
+
+
+<!-- الإعدادات -->
+
+<div class="card" onclick="comingSoon('الإعدادات')">
+
+    <div class="icon">⚙️</div>
+
+    <div class="title">
+        الإعدادات
+    </div>
+
+</div>
+
+
+</div>
+
+</div>
 
 
 <script>
@@ -683,581 +184,67 @@ const API =
 "https://script.google.com/macros/s/AKfycbw6pnqbRn3VyJvFjk0RGfEt8VXdBkOq2uqooSvxi0onjcUStpJ_hOGNZVPLimRA-ZNAGQ/exec";
 
 
-let employees = [];
-
-
 // ================================
-// تحميل الموظفين
+// عدد الموظفين
 // ================================
 
 async function loadEmployees(){
 
-    const table =
-        document.getElementById("employeesTable");
-
-    table.innerHTML = `
-        <tr>
-            <td colspan="9">
-                <div class="loading">
-                    جاري تحميل الموظفين...
-                </div>
-            </td>
-        </tr>
-    `;
-
-
     try{
 
         const response = await fetch(API,{
+
             method:"POST",
 
             body:JSON.stringify({
+
                 action:"getEmployees"
+
             })
-        });
-
-
-        const data = await response.json();
-
-
-        if(data.status !== "success"){
-
-            throw new Error(data.message || "حدث خطأ");
-
-        }
-
-
-        employees = data.employees || [];
-
-        renderEmployees(employees);
-
-
-    }catch(error){
-
-        table.innerHTML = `
-            <tr>
-                <td colspan="9">
-
-                    <div class="loading">
-
-                        ❌ تعذر تحميل الموظفين
-
-                        <br><br>
-
-                        ${error.message}
-
-                    </div>
-
-                </td>
-            </tr>
-        `;
-
-    }
-
-}
-
-
-
-// ================================
-// عرض الموظفين
-// ================================
-
-function renderEmployees(list){
-
-    const table =
-        document.getElementById("employeesTable");
-
-
-    if(!list.length){
-
-        table.innerHTML = `
-            <tr>
-                <td colspan="9">
-
-                    <div class="loading">
-
-                        لا يوجد موظفين حالياً
-
-                    </div>
-
-                </td>
-            </tr>
-        `;
-
-        return;
-
-    }
-
-
-    table.innerHTML = list.map(employee => `
-
-        <tr>
-
-            <td>
-                <strong>
-                    ${safe(employee["Employee ID"])}
-                </strong>
-            </td>
-
-
-            <td>
-                ${safe(employee["الاسم"])}
-            </td>
-
-
-            <td>
-                ${safe(employee["القسم"])}
-            </td>
-
-
-            <td>
-                ${safe(employee["الوظيفة"])}
-            </td>
-
-
-            <td>
-                ${formatNumber(employee["الراتب"])}
-            </td>
-
-
-            <td>
-                ${formatDate(employee["تاريخ التعيين"])}
-            </td>
-
-
-            <td>
-                ${safe(employee["نوع العقد"])}
-            </td>
-
-
-            <td>
-                ${statusBadge(employee["الحالة"])}
-            </td>
-
-
-            <td>
-
-                <div class="actions">
-
-                    <button
-                        class="action view"
-                        onclick='viewEmployee(${JSON.stringify(employee)})'
-                    >
-                        👁 عرض
-                    </button>
-
-                    <button
-                        class="action edit"
-                        onclick='editEmployee(${JSON.stringify(employee)})'
-                    >
-                        ✏️ تعديل
-                    </button>
-
-                    <button
-                        class="action end"
-                        onclick='endEmployee("${safe(employee["Employee ID"])}")'
-                    >
-                        إنهاء
-                    </button>
-
-                </div>
-
-            </td>
-
-        </tr>
-
-    `).join("");
-
-}
-
-
-
-// ================================
-// البحث
-// ================================
-
-function searchEmployees(){
-
-    const value =
-        document.getElementById("search")
-        .value
-        .trim()
-        .toLowerCase();
-
-
-    if(!value){
-
-        renderEmployees(employees);
-
-        return;
-
-    }
-
-
-    const result = employees.filter(employee => {
-
-        return [
-
-            employee["Employee ID"],
-
-            employee["الاسم"],
-
-            employee["القسم"],
-
-            employee["الوظيفة"],
-
-            employee["الهاتف"]
-
-        ]
-
-        .join(" ")
-        .toLowerCase()
-        .includes(value);
-
-    });
-
-
-    renderEmployees(result);
-
-}
-
-
-
-// ================================
-// فتح الإضافة
-// ================================
-
-function openAddEmployee(){
-
-    document.getElementById("employeeForm").reset();
-
-    document.getElementById("employeeModal").style.display =
-        "block";
-
-}
-
-
-
-// ================================
-// إغلاق
-// ================================
-
-function closeModal(){
-
-    document.getElementById("employeeModal").style.display =
-        "none";
-
-}
-
-
-
-// ================================
-// حفظ الموظف
-// ================================
-
-document
-.getElementById("employeeForm")
-.addEventListener("submit", async function(e){
-
-    e.preventDefault();
-
-
-    const button =
-        this.querySelector("button[type='submit']");
-
-
-    button.disabled = true;
-
-    button.innerText = "⏳ جاري الحفظ...";
-
-
-    const data = {
-
-        action:"addEmployee",
-
-        name:
-            document.getElementById("name").value,
-
-        department:
-            document.getElementById("department").value,
-
-        position:
-            document.getElementById("position").value,
-
-        salary:
-            document.getElementById("salary").value,
-
-        hireDate:
-            document.getElementById("hireDate").value,
-
-        contractType:
-            document.getElementById("contractType").value,
-
-        phone:
-            document.getElementById("phone").value,
-
-        address:
-            document.getElementById("address").value,
-
-        birthDate:
-            document.getElementById("birthDate").value,
-
-        emergencyContact:
-            document.getElementById("emergencyContact").value,
-
-        emergencyPhone:
-            document.getElementById("emergencyPhone").value,
-
-        nationalId:
-            document.getElementById("nationalId").value,
-
-        contractEndDate:
-            document.getElementById("contractEndDate").value,
-
-        notes:
-            document.getElementById("notes").value
-
-    };
-
-
-    try{
-
-        const response = await fetch(API,{
-
-            method:"POST",
-
-            body:JSON.stringify(data)
 
         });
 
 
-        const result =
+        const data =
             await response.json();
 
 
-        if(result.status !== "success"){
+        if(data.status === "success"){
 
-            throw new Error(result.message);
+            document.getElementById(
+                "employeesCount"
+            ).innerText =
+                data.employees.length;
 
         }
 
 
-        closeModal();
-
-
-        showMessage(
-            `✅ تمت إضافة الموظف بنجاح — ${result.employeeId}`,
-            "success"
-        );
-
-
-        await loadEmployees();
-
-
     }catch(error){
 
-        showMessage(
-            "❌ حدث خطأ: " + error.message,
-            "error"
-        );
+        console.log(error);
 
     }
 
-
-    button.disabled = false;
-
-    button.innerText = "💾 حفظ الموظف";
-
-});
-
-
-
-// ================================
-// عرض الموظف
-// ================================
-
-function viewEmployee(employee){
-
-    alert(
-
-        "رقم الموظف: " +
-        employee["Employee ID"] +
-
-        "\n\nالاسم: " +
-        employee["الاسم"] +
-
-        "\nالقسم: " +
-        employee["القسم"] +
-
-        "\nالوظيفة: " +
-        employee["الوظيفة"] +
-
-        "\nالهاتف: " +
-        employee["الهاتف"] +
-
-        "\nالحالة: " +
-        employee["الحالة"]
-
-    );
-
 }
 
-
-
-// ================================
-// تعديل
-// ================================
-
-function editEmployee(employee){
-
-    alert(
-        "ميزة تعديل الموظف راح نضيفها بالمرحلة القادمة."
-    );
-
-}
-
-
-
-// ================================
-// إنهاء الخدمة
-// ================================
-
-function endEmployee(id){
-
-    alert(
-        "ميزة إنهاء الخدمة راح نضيفها بالمرحلة القادمة.\n\nالموظف: " + id
-    );
-
-}
-
-
-
-// ================================
-// رسالة
-// ================================
-
-function showMessage(text,type){
-
-    const message =
-        document.getElementById("message");
-
-    message.className =
-        "message " + type;
-
-    message.innerText =
-        text;
-
-    message.style.display =
-        "block";
-
-
-    setTimeout(()=>{
-
-        message.style.display =
-            "none";
-
-    },4000);
-
-}
-
-
-
-// ================================
-// أدوات
-// ================================
-
-function safe(value){
-
-    if(value === null || value === undefined)
-        return "";
-
-    return String(value)
-        .replace(/&/g,"&amp;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;")
-        .replace(/"/g,"&quot;")
-        .replace(/'/g,"&#039;");
-
-}
-
-
-function formatNumber(value){
-
-    if(value === null || value === undefined || value === "")
-        return "";
-
-    const number =
-        Number(String(value).replace(/,/g,""));
-
-    if(isNaN(number))
-        return safe(value);
-
-    return number.toLocaleString("en-US");
-
-}
-
-
-function formatDate(value){
-
-    if(!value)
-        return "";
-
-    const date =
-        new Date(value);
-
-    if(isNaN(date))
-        return safe(value);
-
-    return date.toLocaleDateString("en-GB");
-
-}
-
-
-function statusBadge(status){
-
-    status = status || "";
-
-    if(status === "مستمر"){
-
-        return `<span class="status active">
-                    🟢 مستمر
-                </span>`;
-
-    }
-
-    if(status === "إجازة"){
-
-        return `<span class="status leave">
-                    🟠 إجازة
-                </span>`;
-
-    }
-
-    if(status === "منتهي الخدمة"){
-
-        return `<span class="status inactive">
-                    🔴 منتهي الخدمة
-                </span>`;
-
-    }
-
-    return `<span class="status">
-                ${safe(status)}
-            </span>`;
-
-}
-
-
-
-// ================================
-// تشغيل
-// ================================
 
 loadEmployees();
+
+
+// ================================
+// الميزات القادمة
+// ================================
+
+function comingSoon(name){
+
+    alert(
+        "قسم " + name + " راح يتم تفعيله بالمرحلة القادمة 🔥"
+    );
+
+}
 
 
 </script>
 
 </body>
-
 </html>
