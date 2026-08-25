@@ -1,1 +1,1595 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
 
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>إجازة موظف - Shassiha HR</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Cairo,sans-serif;
+}
+
+body{
+    background:#f4f6f9;
+    color:#222;
+}
+
+.header{
+    background:#2878d0;
+    color:white;
+    padding:18px 25px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 3px 10px rgba(0,0,0,.12);
+}
+
+.header h1{
+    font-size:22px;
+}
+
+.header a{
+    color:white;
+    text-decoration:none;
+    font-size:14px;
+}
+
+.container{
+    max-width:900px;
+    margin:25px auto;
+    padding:0 15px;
+}
+
+.info{
+    background:#eaf3ff;
+    border:1px solid #cfe3fb;
+    color:#1c5aa0;
+    padding:15px;
+    border-radius:12px;
+    margin-bottom:20px;
+}
+
+.message{
+    display:none;
+    padding:13px;
+    border-radius:10px;
+    margin-bottom:20px;
+    text-align:center;
+    font-weight:bold;
+}
+
+.success{
+    display:block;
+    background:#e7f7ed;
+    color:#16833b;
+}
+
+.error{
+    display:block;
+    background:#ffe5e5;
+    color:#c62828;
+}
+
+.card{
+    background:white;
+    border-radius:18px;
+    padding:25px;
+    box-shadow:0 2px 10px rgba(0,0,0,.07);
+}
+
+.title{
+    font-size:20px;
+    font-weight:bold;
+    margin-bottom:20px;
+    padding-bottom:12px;
+    border-bottom:1px solid #eee;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+}
+
+.full{
+    grid-column:1/-1;
+}
+
+label{
+    display:block;
+    font-size:13px;
+    color:#555;
+    margin-bottom:7px;
+    font-weight:bold;
+}
+
+input,
+select,
+textarea{
+    width:100%;
+    padding:12px;
+    border:1px solid #ddd;
+    border-radius:10px;
+    outline:none;
+    font-size:14px;
+    background:white;
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+    border-color:#2878d0;
+}
+
+input:disabled{
+    background:#f4f6f9;
+    color:#555;
+}
+
+textarea{
+    min-height:100px;
+    resize:vertical;
+}
+
+.employee-info{
+    display:none;
+    margin-top:20px;
+    padding:15px;
+    border-radius:12px;
+    background:#f0f6ff;
+    border:1px solid #cfe3fb;
+    line-height:2;
+}
+
+.employee-info strong{
+    color:#2878d0;
+}
+
+.buttons{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-top:25px;
+}
+
+button{
+    border:0;
+    border-radius:10px;
+    padding:12px 22px;
+    cursor:pointer;
+    font-family:Cairo;
+    font-size:14px;
+}
+
+.save{
+    background:#2878d0;
+    color:white;
+}
+
+.print{
+    background:#2878d0;
+    color:white;
+    display:none;
+}
+
+.back{
+    background:#333;
+    color:white;
+}
+
+button:disabled{
+    opacity:.6;
+    cursor:not-allowed;
+}
+
+
+/* =====================================
+   PRINT
+===================================== */
+
+.print-area{
+    display:none;
+}
+
+@media print{
+
+    @page{
+        size:A4;
+        margin:20mm;
+    }
+
+    body{
+        background:white;
+    }
+
+    .header,
+    .container{
+        display:none !important;
+    }
+
+    .print-area{
+        display:block !important;
+    }
+
+    .print-header{
+        text-align:center;
+        margin-bottom:35px;
+    }
+
+    .company{
+        font-size:25px;
+        font-weight:bold;
+    }
+
+    .department{
+        font-size:17px;
+        margin-top:5px;
+    }
+
+    .book-info{
+        display:flex;
+        justify-content:space-between;
+        font-size:16px;
+        margin-bottom:35px;
+    }
+
+    .book-title{
+        text-align:center;
+        font-size:25px;
+        font-weight:bold;
+        text-decoration:underline;
+        margin:35px 0;
+    }
+
+    .book-body{
+        font-size:17px;
+        line-height:2.5;
+        text-align:justify;
+    }
+
+    .book-body p{
+        margin-bottom:20px;
+    }
+
+    .signature{
+        margin-top:80px;
+        text-align:left;
+        line-height:2.3;
+        font-size:16px;
+    }
+
+}
+
+@media(max-width:700px){
+
+    .grid{
+        grid-template-columns:1fr;
+    }
+
+    .full{
+        grid-column:auto;
+    }
+
+    .header{
+        flex-direction:column;
+        gap:8px;
+        text-align:center;
+    }
+
+    .buttons button{
+        width:100%;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- ================= HEADER ================= -->
+
+<div class="header">
+
+    <h1>
+        🏖️ إجازة موظف
+    </h1>
+
+    <a href="transactions.html">
+        ← العودة للمعاملات
+    </a>
+
+</div>
+
+
+<div class="container">
+
+
+    <div class="info">
+
+        🏖️
+        <strong>تسجيل إجازة:</strong>
+
+        اختر الموظف وحدد نوع الإجازة وتاريخ البداية والنهاية،
+        وبعد الحفظ يمكنك طباعة كتاب الإجازة الرسمي.
+
+    </div>
+
+
+    <div id="message" class="message"></div>
+
+
+    <div class="card">
+
+
+        <div class="title">
+
+            🏖️ تسجيل إجازة موظف
+
+        </div>
+
+
+        <div class="grid">
+
+
+            <!-- الموظف -->
+
+            <div class="full">
+
+                <label>
+                    الموظف *
+                </label>
+
+                <select id="employee">
+
+                    <option value="">
+                        ⏳ جاري تحميل الموظفين...
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- نوع الإجازة -->
+
+            <div>
+
+                <label>
+                    نوع الإجازة *
+                </label>
+
+                <select id="leaveType">
+
+                    <option value="">
+                        اختر نوع الإجازة
+                    </option>
+
+                    <option value="سنوية">
+                        سنوية
+                    </option>
+
+                    <option value="مرضية">
+                        مرضية
+                    </option>
+
+                    <option value="بدون راتب">
+                        بدون راتب
+                    </option>
+
+                    <option value="طارئة">
+                        طارئة
+                    </option>
+
+                    <option value="أخرى">
+                        أخرى
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- رقم الكتاب -->
+
+            <div>
+
+                <label>
+                    رقم كتاب الإجازة
+                </label>
+
+                <input
+                    type="text"
+                    id="bookNumber"
+                    placeholder="مثلاً: 25">
+
+            </div>
+
+
+            <!-- من تاريخ -->
+
+            <div>
+
+                <label>
+                    من تاريخ *
+                </label>
+
+                <input
+                    type="date"
+                    id="fromDate">
+
+            </div>
+
+
+            <!-- الى تاريخ -->
+
+            <div>
+
+                <label>
+                    إلى تاريخ *
+                </label>
+
+                <input
+                    type="date"
+                    id="toDate">
+
+            </div>
+
+
+            <!-- عدد الأيام -->
+
+            <div>
+
+                <label>
+                    عدد الأيام
+                </label>
+
+                <input
+                    type="text"
+                    id="daysCount"
+                    disabled
+                    placeholder="يُحسب تلقائياً">
+
+            </div>
+
+
+            <!-- الملاحظات -->
+
+            <div class="full">
+
+                <label>
+                    الملاحظات
+                </label>
+
+                <textarea
+                    id="notes"
+                    placeholder="اكتب الملاحظات إن وجدت">
+                </textarea>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- معلومات الموظف -->
+
+        <div
+            id="employeeInfo"
+            class="employee-info">
+        </div>
+
+
+        <!-- الأزرار -->
+
+        <div class="buttons">
+
+
+            <button
+                id="saveBtn"
+                class="save"
+                onclick="saveLeave()">
+
+                🏖️ تسجيل الإجازة
+
+            </button>
+
+
+            <button
+                id="printBtn"
+                class="print"
+                onclick="printBook()">
+
+                🖨️ طباعة كتاب الإجازة
+
+            </button>
+
+
+            <button
+                class="back"
+                onclick="location.href='transactions.html'">
+
+                ← رجوع
+
+            </button>
+
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+<!-- ================= PRINT AREA ================= -->
+
+<div
+    id="printArea"
+    class="print-area">
+
+
+    <div class="print-header">
+
+        <div class="company">
+           مطعم وحدائق ماي
+        </div>
+
+        <div class="department">
+            إدارة الموارد البشرية
+        </div>
+
+    </div>
+
+
+    <div class="book-info">
+
+        <div>
+
+            العدد:
+
+            <span id="printBookNumber">
+                ........
+            </span>
+
+        </div>
+
+
+        <div>
+
+            التاريخ:
+
+            <span id="printDate">
+                ........
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <div class="book-title">
+
+        كتاب إجازة
+
+    </div>
+
+
+    <div
+        id="printBody"
+        class="book-body">
+    </div>
+
+
+    <div class="signature">
+
+        مسؤول الموارد البشرية
+
+        <br>
+
+        الاسم: __________________
+
+        <br>
+
+        التوقيع: ________________
+
+        <br>
+
+        الختم: __________________
+
+    </div>
+
+
+</div>
+
+
+<script>
+
+
+/* =========================================
+   API
+========================================= */
+
+const API =
+"https://script.google.com/macros/s/AKfycbw6pnqbRn3VyJvFjk0RGfEt8VXdBkOq2uqooSvxi0onjcUStpJ_hOGNZVPLimRA-ZNAGQ/exec";
+
+
+let employees = [];
+
+let selectedEmployee = null;
+
+let saved = false;
+
+
+/* =========================================
+   تحميل الموظفين
+========================================= */
+
+async function loadEmployees(){
+
+    const select =
+        document.getElementById("employee");
+
+
+    try{
+
+        const response =
+            await fetch(API,{
+
+                method:"POST",
+
+                body:JSON.stringify({
+
+                    action:"getEmployees"
+
+                })
+
+            });
+
+
+        const data =
+            await response.json();
+
+
+        if(data.status !== "success"){
+
+            throw new Error(
+                data.message ||
+                "فشل تحميل الموظفين"
+            );
+
+        }
+
+
+        employees =
+            data.employees || [];
+
+
+        select.innerHTML = `
+
+            <option value="">
+                اختر الموظف
+            </option>
+
+        `;
+
+
+        employees.forEach(employee => {
+
+
+            if(
+                String(
+                    employee["الحالة"] || ""
+                ).trim()
+                ===
+                "منتهي الخدمة"
+            ){
+
+                return;
+
+            }
+
+
+            const option =
+                document.createElement("option");
+
+
+            option.value =
+                employee["Employee ID"];
+
+
+            option.textContent =
+
+                (employee["الاسم"] || "بدون اسم")
+
+                +
+
+                " — "
+
+                +
+
+                (employee["Employee ID"] || "");
+
+
+            select.appendChild(option);
+
+
+        });
+
+
+        if(select.options.length === 1){
+
+            select.innerHTML = `
+
+                <option value="">
+                    لا يوجد موظفون مستمرون
+                </option>
+
+            `;
+
+        }
+
+
+    }
+    catch(error){
+
+        console.error(error);
+
+
+        select.innerHTML = `
+
+            <option value="">
+                ❌ فشل تحميل الموظفين
+            </option>
+
+        `;
+
+
+        showMessage(
+
+            "❌ فشل تحميل الموظفين: " +
+            error.message,
+
+            "error"
+
+        );
+
+    }
+
+}
+
+
+/* =========================================
+   اختيار الموظف
+========================================= */
+
+document
+.getElementById("employee")
+.addEventListener(
+    "change",
+    function(){
+
+        const id =
+            this.value;
+
+
+        selectedEmployee =
+            employees.find(
+
+                employee =>
+
+                    String(
+                        employee["Employee ID"]
+                    )
+
+                    ===
+
+                    String(id)
+
+            );
+
+
+        const box =
+            document.getElementById(
+                "employeeInfo"
+            );
+
+
+        if(!selectedEmployee){
+
+            box.style.display =
+                "none";
+
+            return;
+
+        }
+
+
+        box.style.display =
+            "block";
+
+
+        box.innerHTML = `
+
+            <strong>
+
+                ${safe(
+                    selectedEmployee["الاسم"]
+                )}
+
+            </strong>
+
+            <br>
+
+            الرقم الوظيفي:
+
+            ${safe(
+                selectedEmployee["Employee ID"]
+            )}
+
+            <br>
+
+            الوظيفة:
+
+            ${safe(
+                selectedEmployee["الوظيفة"]
+            )}
+
+            <br>
+
+            القسم:
+
+            ${safe(
+                selectedEmployee["القسم"]
+            )}
+
+            <br>
+
+            رقم الهاتف:
+
+            ${safe(
+                selectedEmployee["رقم الهاتف"]
+            )}
+
+        `;
+
+    }
+);
+
+
+/* =========================================
+   حساب عدد الأيام تلقائياً
+========================================= */
+
+function updateDaysCount(){
+
+    const from =
+        document.getElementById(
+            "fromDate"
+        ).value;
+
+
+    const to =
+        document.getElementById(
+            "toDate"
+        ).value;
+
+
+    const daysField =
+        document.getElementById(
+            "daysCount"
+        );
+
+
+    if(!from || !to){
+
+        daysField.value =
+            "";
+
+        return;
+
+    }
+
+
+    const fromDate =
+        new Date(from);
+
+
+    const toDate =
+        new Date(to);
+
+
+    const diff =
+
+        Math.round(
+
+            (toDate - fromDate)
+
+            /
+
+            (1000 * 60 * 60 * 24)
+
+        )
+
+        + 1;
+
+
+    daysField.value =
+
+        diff > 0
+
+        ?
+
+        diff + " يوم"
+
+        :
+
+        "تواريخ غير صحيحة";
+
+}
+
+
+document
+.getElementById("fromDate")
+.addEventListener(
+    "change",
+    updateDaysCount
+);
+
+
+document
+.getElementById("toDate")
+.addEventListener(
+    "change",
+    updateDaysCount
+);
+
+
+/* =========================================
+   حفظ الإجازة
+========================================= */
+
+async function saveLeave(){
+
+
+    if(!selectedEmployee){
+
+        showMessage(
+
+            "❌ يرجى اختيار الموظف",
+
+            "error"
+
+        );
+
+        return;
+
+    }
+
+
+    const leaveType =
+        document.getElementById(
+            "leaveType"
+        ).value;
+
+
+    if(!leaveType){
+
+        showMessage(
+
+            "❌ يرجى اختيار نوع الإجازة",
+
+            "error"
+
+        );
+
+        return;
+
+    }
+
+
+    const fromDate =
+        document.getElementById(
+            "fromDate"
+        ).value;
+
+
+    const toDate =
+        document.getElementById(
+            "toDate"
+        ).value;
+
+
+    if(!fromDate || !toDate){
+
+        showMessage(
+
+            "❌ يرجى تحديد تاريخ بداية ونهاية الإجازة",
+
+            "error"
+
+        );
+
+        return;
+
+    }
+
+
+    if(
+        new Date(toDate) <
+        new Date(fromDate)
+    ){
+
+        showMessage(
+
+            "❌ تاريخ النهاية يجب أن يكون بعد تاريخ البداية",
+
+            "error"
+
+        );
+
+        return;
+
+    }
+
+
+    const bookNumber =
+        document.getElementById(
+            "bookNumber"
+        ).value.trim();
+
+
+    const notes =
+        document.getElementById(
+            "notes"
+        ).value.trim();
+
+
+    const confirmed =
+        confirm(
+
+            "هل تريد تسجيل إجازة الموظف؟\n\n"
+
+            +
+
+            selectedEmployee["الاسم"]
+
+            +
+
+            "\n\n"
+
+            +
+
+            "من: "
+            + fromDate
+            + "  إلى: "
+            + toDate
+
+        );
+
+
+    if(!confirmed){
+
+        return;
+
+    }
+
+
+    const btn =
+        document.getElementById(
+            "saveBtn"
+        );
+
+
+    btn.disabled =
+        true;
+
+
+    btn.innerText =
+        "⏳ جاري تسجيل الإجازة...";
+
+
+    try{
+
+
+        const response =
+            await fetch(API,{
+
+                method:"POST",
+
+                body:JSON.stringify({
+
+                    action:
+                        "addTransaction",
+
+                    employeeId:
+                        selectedEmployee[
+                            "Employee ID"
+                        ],
+
+                    employeeName:
+                        selectedEmployee[
+                            "الاسم"
+                        ],
+
+                    type:
+                        "إجازة",
+
+                    date:
+                        fromDate,
+
+                    bookNumber:
+                        bookNumber,
+
+                    fromDate:
+                        fromDate,
+
+                    toDate:
+                        toDate,
+
+                    reason:
+                        leaveType,
+
+                    notes:
+                        notes
+
+                })
+
+            });
+
+
+        const data =
+            await response.json();
+
+
+        if(
+            data.status !==
+            "success"
+        ){
+
+            throw new Error(
+
+                data.message ||
+
+                "فشل تسجيل الإجازة"
+
+            );
+
+        }
+
+
+        saved =
+            true;
+
+
+        createBook();
+
+
+        document.getElementById(
+            "printBtn"
+        ).style.display =
+            "inline-block";
+
+
+        btn.innerText =
+            "✅ تم تسجيل الإجازة";
+
+
+        showMessage(
+
+            "✅ تم تسجيل إجازة الموظف بنجاح",
+
+            "success"
+
+        );
+
+
+    }
+    catch(error){
+
+
+        console.error(error);
+
+
+        showMessage(
+
+            "❌ " +
+            error.message,
+
+            "error"
+
+        );
+
+
+        btn.disabled =
+            false;
+
+
+        btn.innerText =
+            "🏖️ تسجيل الإجازة";
+
+    }
+
+}
+
+
+/* =========================================
+   إنشاء الكتاب
+========================================= */
+
+function createBook(){
+
+
+    if(!selectedEmployee){
+
+        return;
+
+    }
+
+
+    const leaveType =
+        document.getElementById(
+            "leaveType"
+        ).value;
+
+
+    const fromDate =
+        document.getElementById(
+            "fromDate"
+        ).value;
+
+
+    const toDate =
+        document.getElementById(
+            "toDate"
+        ).value;
+
+
+    const bookNumber =
+        document.getElementById(
+            "bookNumber"
+        ).value.trim();
+
+
+    const daysCount =
+        document.getElementById(
+            "daysCount"
+        ).value;
+
+
+    const notes =
+        document.getElementById(
+            "notes"
+        ).value.trim();
+
+
+    document.getElementById(
+        "printBookNumber"
+    ).innerText =
+        bookNumber || "........";
+
+
+    document.getElementById(
+        "printDate"
+    ).innerText =
+        formatDate(fromDate);
+
+
+    document.getElementById(
+        "printBody"
+    ).innerHTML = `
+
+
+        <p>
+
+            إلى / إدارة الشركة المحترمة
+
+        </p>
+
+
+        <p>
+
+            م / إجازة موظف
+
+        </p>
+
+
+        <p>
+
+            تحية طيبة...
+
+        </p>
+
+
+        <p>
+
+            نود إعلامكم بأنه تمت الموافقة على منح الموظف
+
+            <strong>
+
+                ${safe(
+                    selectedEmployee["الاسم"]
+                )}
+
+            </strong>
+
+
+            صاحب الرقم الوظيفي
+
+            <strong>
+
+                ${safe(
+                    selectedEmployee["Employee ID"]
+                )}
+
+            </strong>
+
+
+            والذي يشغل وظيفة
+
+            <strong>
+
+                ${safe(
+                    selectedEmployee["الوظيفة"]
+                )}
+
+            </strong>
+
+
+            في قسم
+
+            <strong>
+
+                ${safe(
+                    selectedEmployee["القسم"]
+                )}
+
+            </strong>
+
+
+            إجازة
+
+            <strong>
+
+                ${safe(leaveType)}
+
+            </strong>
+
+
+            وذلك اعتباراً من تاريخ
+
+            <strong>
+
+                ${formatDate(fromDate)}
+
+            </strong>
+
+            ولغاية
+
+            <strong>
+
+                ${formatDate(toDate)}
+
+            </strong>
+
+            ( ${safe(daysCount)} ).
+
+        </p>
+
+
+        ${
+            notes
+
+            ?
+
+            `
+
+            <p>
+
+                الملاحظات:
+
+                ${safe(notes)}
+
+            </p>
+
+            `
+
+            :
+
+            ""
+
+        }
+
+
+        <p>
+
+            يرجى اعتماد الإجازة أصولياً
+            واتخاذ ما يلزم من إجراءات.
+
+        </p>
+
+
+        <p>
+
+            مع التقدير...
+
+        </p>
+
+
+    `;
+
+}
+
+
+/* =========================================
+   الطباعة
+========================================= */
+
+function printBook(){
+
+
+    if(!saved){
+
+        showMessage(
+
+            "❌ يجب تسجيل الإجازة أولاً",
+
+            "error"
+
+        );
+
+        return;
+
+    }
+
+
+    createBook();
+
+
+    setTimeout(
+
+        function(){
+
+            window.print();
+
+        },
+
+        300
+
+    );
+
+}
+
+
+/* =========================================
+   الرسائل
+========================================= */
+
+function showMessage(
+    text,
+    type
+){
+
+    const box =
+        document.getElementById(
+            "message"
+        );
+
+
+    box.innerHTML =
+        safe(text);
+
+
+    box.className =
+        "message " +
+        type;
+
+
+    window.scrollTo({
+
+        top:0,
+
+        behavior:"smooth"
+
+    });
+
+}
+
+
+/* =========================================
+   التاريخ
+========================================= */
+
+function formatDate(value){
+
+    if(!value){
+
+        return "-";
+
+    }
+
+
+    const date =
+        new Date(value);
+
+
+    if(
+        isNaN(
+            date.getTime()
+        )
+    ){
+
+        return value;
+
+    }
+
+
+    return date.toLocaleDateString(
+        "en-GB"
+    );
+
+}
+
+
+/* =========================================
+   حماية النص
+========================================= */
+
+function safe(value){
+
+    if(
+        value === null ||
+        value === undefined
+    ){
+
+        return "";
+
+    }
+
+
+    return String(value)
+
+        .replace(/&/g,"&amp;")
+
+        .replace(/</g,"&lt;")
+
+        .replace(/>/g,"&gt;")
+
+        .replace(/"/g,"&quot;")
+
+        .replace(/'/g,"&#039;");
+
+}
+
+
+/* =========================================
+   تشغيل الصفحة
+========================================= */
+
+document.getElementById(
+    "fromDate"
+).value =
+
+    new Date()
+    .toISOString()
+    .split("T")[0];
+
+
+loadEmployees();
+
+</script>
+
+</body>
+</html>
