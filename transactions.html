@@ -364,23 +364,32 @@ const API =
 
 function openTransaction(type){
 
-    if(type === "مباشرة"){
+    const pages = {
+
+        "مباشرة":
+            "direct.html",
+
+        "إنهاء خدمة":
+            "end.html",
+
+        "إجازة":
+            "leave.html",
+
+        "إنذار":
+            "warning.html"
+
+    };
+
+
+    if(pages[type]){
 
         window.location.href =
-            "direct.html";
+            pages[type];
 
         return;
 
     }
 
-    if(type === "إنهاء خدمة"){
-
-        window.location.href =
-            "end.html";
-
-        return;
-
-    }
 
     alert(
         "📄 " +
@@ -504,22 +513,22 @@ async function loadTransactions(){
                 <tr>
 
                     <td>
-                        ${formatDate(t["التاريخ"])}
+                        ${formatDate(getField(t,["التاريخ","تاريخ"]))}
                     </td>
 
                     <td>
-                        ${safe(t["اسم الموظف"])}
+                        ${safe(getField(t,["اسم الموظف","الاسم"]))}
                     </td>
 
                     <td>
                         ${transactionBadge(
-                            t["نوع المعاملة"]
+                            getField(t,["نوع المعاملة","النوع"])
                         )}
                     </td>
 
                     <td>
                         ${safe(
-                            t["الملاحظات"]
+                            getField(t,["الملاحظات","ملاحظات"])
                         ) || "-"}
                     </td>
 
@@ -556,6 +565,30 @@ async function loadTransactions(){
         `;
 
     }
+
+}
+
+
+// ======================================
+// جلب أول قيمة موجودة من عدة أسماء أعمدة محتملة
+// ======================================
+
+function getField(obj, keys){
+
+    for(const key of keys){
+
+        if(
+            obj[key] !== undefined &&
+            obj[key] !== ""
+        ){
+
+            return obj[key];
+
+        }
+
+    }
+
+    return "";
 
 }
 
