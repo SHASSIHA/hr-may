@@ -1,1 +1,1426 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
 
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>إنذار موظف - Shassiha HR</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Cairo,sans-serif;
+}
+
+body{
+    background:#f4f6f9;
+    color:#222;
+}
+
+.header{
+    background:#a56a00;
+    color:white;
+    padding:18px 25px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 3px 10px rgba(0,0,0,.12);
+}
+
+.header h1{
+    font-size:22px;
+}
+
+.header a{
+    color:white;
+    text-decoration:none;
+    font-size:14px;
+}
+
+.container{
+    max-width:900px;
+    margin:25px auto;
+    padding:0 15px;
+}
+
+.info{
+    background:#fff8ea;
+    border:1px solid #f5deae;
+    color:#8a5900;
+    padding:15px;
+    border-radius:12px;
+    margin-bottom:20px;
+}
+
+.message{
+    display:none;
+    padding:13px;
+    border-radius:10px;
+    margin-bottom:20px;
+    text-align:center;
+    font-weight:bold;
+}
+
+.success{
+    display:block;
+    background:#e7f7ed;
+    color:#16833b;
+}
+
+.error{
+    display:block;
+    background:#ffe5e5;
+    color:#c62828;
+}
+
+.card{
+    background:white;
+    border-radius:18px;
+    padding:25px;
+    box-shadow:0 2px 10px rgba(0,0,0,.07);
+}
+
+.title{
+    font-size:20px;
+    font-weight:bold;
+    margin-bottom:20px;
+    padding-bottom:12px;
+    border-bottom:1px solid #eee;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+}
+
+.full{
+    grid-column:1/-1;
+}
+
+label{
+    display:block;
+    font-size:13px;
+    color:#555;
+    margin-bottom:7px;
+    font-weight:bold;
+}
+
+input,
+select,
+textarea{
+    width:100%;
+    padding:12px;
+    border:1px solid #ddd;
+    border-radius:10px;
+    outline:none;
+    font-size:14px;
+    background:white;
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+    border-color:#a56a00;
+}
+
+textarea{
+    min-height:100px;
+    resize:vertical;
+}
+
+.employee-info{
+    display:none;
+    margin-top:20px;
+    padding:15px;
+    border-radius:12px;
+    background:#fff8ea;
+    border:1px solid #f5deae;
+    line-height:2;
+}
+
+.employee-info strong{
+    color:#a56a00;
+}
+
+.buttons{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-top:25px;
+}
+
+button{
+    border:0;
+    border-radius:10px;
+    padding:12px 22px;
+    cursor:pointer;
+    font-family:Cairo;
+    font-size:14px;
+}
+
+.save{
+    background:#a56a00;
+    color:white;
+}
+
+.print{
+    background:#2878d0;
+    color:white;
+    display:none;
+}
+
+.back{
+    background:#333;
+    color:white;
+}
+
+button:disabled{
+    opacity:.6;
+    cursor:not-allowed;
+}
+
+
+/* =====================================
+   PRINT
+===================================== */
+
+.print-area{
+    display:none;
+}
+
+@media print{
+
+    @page{
+        size:A4;
+        margin:20mm;
+    }
+
+    body{
+        background:white;
+    }
+
+    .header,
+    .container{
+        display:none !important;
+    }
+
+    .print-area{
+        display:block !important;
+    }
+
+    .print-header{
+        text-align:center;
+        margin-bottom:35px;
+    }
+
+    .company{
+        font-size:25px;
+        font-weight:bold;
+    }
+
+    .department{
+        font-size:17px;
+        margin-top:5px;
+    }
+
+    .book-info{
+        display:flex;
+        justify-content:space-between;
+        font-size:16px;
+        margin-bottom:35px;
+    }
+
+    .book-title{
+        text-align:center;
+        font-size:25px;
+        font-weight:bold;
+        text-decoration:underline;
+        margin:35px 0;
+    }
+
+    .book-body{
+        font-size:17px;
+        line-height:2.5;
+        text-align:justify;
+    }
+
+    .book-body p{
+        margin-bottom:20px;
+    }
+
+    .signature{
+        margin-top:80px;
+        text-align:left;
+        line-height:2.3;
+        font-size:16px;
+    }
+
+}
+
+@media(max-width:700px){
+
+    .grid{
+        grid-template-columns:1fr;
+    }
+
+    .full{
+        grid-column:auto;
+    }
+
+    .header{
+        flex-direction:column;
+        gap:8px;
+        text-align:center;
+    }
+
+    .buttons button{
+        width:100%;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- ================= HEADER ================= -->
+
+<div class="header">
+
+    <h1>
+        ⚠️ إنذار موظف
+    </h1>
+
+    <a href="transactions.html">
+        ← العودة للمعاملات
+    </a>
+
+</div>
+
+
+<div class="container">
+
+
+    <div class="info">
+
+        ⚠️
+        <strong>تسجيل إنذار:</strong>
+
+        اختر الموظف وحدد درجة الإنذار وسببه،
+        وبعد الحفظ يمكنك طباعة كتاب الإنذار الرسمي.
+
+    </div>
+
+
+    <div id="message" class="message"></div>
+
+
+    <div class="card">
+
+
+        <div class="title">
+
+            ⚠️ تسجيل إنذار موظف
+
+        </div>
+
+
+        <div class="grid">
+
+
+            <!-- الموظف -->
+
+            <div class="full">
+
+                <label>
+                    الموظف *
+                </label>
+
+                <select id="employee">
+
+                    <option value="">
+                        ⏳ جاري تحميل الموظفين...
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- درجة الإنذار -->
+
+            <div>
+
+                <label>
+                    درجة الإنذار *
+                </label>
+
+                <select id="warningLevel">
+
+                    <option value="">
+                        اختر الدرجة
+                    </option>
+
+                    <option value="إنذار أول">
+                        إنذار أول
+                    </option>
+
+                    <option value="إنذار ثاني">
+                        إنذار ثاني
+                    </option>
+
+                    <option value="إنذار ثالث">
+                        إنذار ثالث
+                    </option>
+
+                    <option value="إنذار نهائي">
+                        إنذار نهائي
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- تاريخ الإنذار -->
+
+            <div>
+
+                <label>
+                    تاريخ الإنذار *
+                </label>
+
+                <input
+                    type="date"
+                    id="warningDate">
+
+            </div>
+
+
+            <!-- رقم الكتاب -->
+
+            <div>
+
+                <label>
+                    رقم كتاب الإنذار
+                </label>
+
+                <input
+                    type="text"
+                    id="bookNumber"
+                    placeholder="مثلاً: 25">
+
+            </div>
+
+
+            <!-- سبب الإنذار -->
+
+            <div class="full">
+
+                <label>
+                    سبب / تفاصيل المخالفة *
+                </label>
+
+                <textarea
+                    id="reason"
+                    placeholder="اشرح سبب الإنذار والمخالفة بالتفصيل">
+                </textarea>
+
+            </div>
+
+
+            <!-- الملاحظات -->
+
+            <div class="full">
+
+                <label>
+                    الملاحظات
+                </label>
+
+                <textarea
+                    id="notes"
+                    placeholder="اكتب الملاحظات إن وجدت">
+                </textarea>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- معلومات الموظف -->
+
+        <div
+            id="employeeInfo"
+            class="employee-info">
+        </div>
+
+
+        <!-- الأزرار -->
+
+        <div class="buttons">
+
+
+            <button
+                id="saveBtn"
+                class="save"
+                onclick="saveWarning()">
+
+                ⚠️ تسجيل الإنذار
+
+            </button>
+
+
+            <button
+                id="printBtn"
+                class="print"
+                onclick="printBook()">
+
+                🖨️ طباعة كتاب الإنذار
+
+            </button>
+
+
+            <button
+                class="back"
+                onclick="location.href='transactions.html'">
+
+                ← رجوع
+
+            </button>
+
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+<!-- ================= PRINT AREA ================= -->
+
+<div
+    id="printArea"
+    class="print-area">
+
+
+    <div class="print-header">
+
+        <div class="company">
+           مطعم وحدائق ماي
+        </div>
+
+        <div class="department">
+            إدارة الموارد البشرية
+        </div>
+
+    </div>
+
+
+    <div class="book-info">
+
+        <div>
+
+            العدد:
+
+            <span id="printBookNumber">
+                ........
+            </span>
+
+        </div>
+
+
+        <div>
+
+            التاريخ:
+
+            <span id="printDate">
+                ........
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <div class="book-title">
+
+        كتاب إنذار
+
+    </div>
+
+
+    <div
+        id="printBody"
+        class="book-body">
+    </div>
+
+
+    <div class="signature">
+
+        مسؤول الموارد البشرية
+
+        <br>
+
+        الاسم: __________________
+
+        <br>
+
+        التوقيع: ________________
+
+        <br>
+
+        الختم: __________________
+
+    </div>
+
+
+</div>
+
+
+<script>
+
+
+/* =========================================
+   API
+========================================= */
+
+const API =
+"https://script.google.com/macros/s/AKfycbw6pnqbRn3VyJvFjk0RGfEt8VXdBkOq2uqooSvxi0onjcUStpJ_hOGNZVPLimRA-ZNAGQ/exec";
+
+
+let employees = [];
+
+let selectedEmployee = null;
+
+let saved = false;
+
+
+/* =========================================
+   تحميل الموظفين
+========================================= */
+
+async function loadEmployees(){
+
+    const select =
+        document.getElementById("employee");
+
+
+    try{
+
+        const response =
+            await fetch(API,{
+
+                method:"POST",
+
+                body:JSON.stringify({
+
+                    action:"getEmployees"
+
+                })
+
+            });
+
+
+        const data =
+            await response.json();
+
+
+        if(data.status !== "success"){
+
+            throw new Error(
+                data.message ||
+                "فشل تحميل الموظفين"
+            );
+
+        }
+
+
+        employees =
+            data.employees || [];
+
+
+        select.innerHTML = `
+
+            <option value="">
+                اختر الموظف
+            </option>
+
+        `;
+
+
+        employees.forEach(employee => {
+
+
+            if(
+                String(
+                    employee["الحالة"] || ""
+                ).trim()
+                ===
+                "منتهي الخدمة"
+            ){
+
+                return;
+
+            }
+
+
+            const option =
+                document.createElement("option");
+
+
+            option.value =
+                employee["Employee ID"];
+
+
+            option.textContent =
+
+                (employee["الاسم"] || "بدون اسم")
+
+                +
+
+                " — "
+
+                +
+
+                (employee["Employee ID"] || "");
+
+
+            select.appendChild(option);
+
+
+        });
+
+
+        if(select.options.length === 1){
+
+            select.innerHTML = `
+
+                <option value="">
+                    لا يوجد موظفون مستمرون
+                </option>
+
+            `;
+
+        }
+
+
+    }
+    catch(error){
+
+        console.error(error);
+
+
+        select.innerHTML = `
+
+            <option value="">
+                ❌ فشل تحميل الموظفين
+            </option>
+
+        `;
+
+
+        showMessage(
+
+            "❌ فشل تحميل الموظفين: " +
+            error.message,
+
+            "error"
+
+        );
+
+    }
+
+}
+
+
+/* =========================================
+   اختيار الموظف
+========================================= */
+
+document
+.getElementById("employee")
+.addEventListener(
+    "change",
+    function(){
+
+        const id =
+            this.value;
+
+
+        selectedEmployee =
+            employees.find(
+
+                employee =>
+
+                    String(
+                        employee["Employee ID"]
+                    )
+
+                    ===
+
+                    String(id)
+
+            );
+
+
+        const box =
+            document.getElementById(
+                "employeeInfo"
+            );
+
+
+        if(!selectedEmployee){
+
+            box.style.display =
+                "none";
+
+            return;
+
+        }
+
+
+        box.style.display =
+            "block";
+
+
+        box.innerHTML = `
+
+            <strong>
+
+                ${safe(
+                    selectedEmployee["الاسم"]
+                )}
+
+            </strong>
+
+            <br>
+
+            الرقم الوظيفي:
+
+            ${safe(
+                selectedEmployee["Employee ID"]
+            )}
+
+            <br>
+
+            الوظيفة:
+
+            ${safe(
+                selectedEmployee["الوظيفة"]
+            )}
+
+            <br>
+
+            القسم:
+
+            ${safe(
+                selectedEmployee["القسم"]
+            )}
+
+            <br>
+
+            رقم الهاتف:
+
+            ${safe(
+                selectedEmployee["رقم الهاتف"]
+            )}
+
+        `;
+
+    }
+);
+
+
+/* =========================================
+   حفظ الإنذار
+========================================= */
+
+async function saveWarning(){
+
+
+    if(!selectedEmployee){
+
+        showMessage(
+
+            "❌ يرجى اختيار الموظف",
+
+            "error"
+
+        );
+
+        return;
+
+    }
+
+
+    const warningLevel =
+        document.getElementById(
+            "warningLevel"
+        ).value;
+
+
+    if(!warningLevel){
+
+        showMessage(
+
+            "❌ يرجى اختيار درجة الإنذار",
+
+            "error"
+
+        );
+
+        return;
+
+    }
+
+
+    const warningDate =
+        document.getElementById(
+            "warningDate"
+        ).value;
+
+
+    if(!warningDate){
+
+        showMessage(
+
+            "❌ يرجى اختيار تاريخ الإنذار",
+
+            "error"
+
+        );
+
+        return;
+
+    }
+
+
+    const reason =
+        document.getElementById(
+            "reason"
+        ).value.trim();
+
+
+    if(!reason){
+
+        showMessage(
+
+            "❌ يرجى كتابة سبب الإنذار",
+
+            "error"
+
+        );
+
+        return;
+
+    }
+
+
+    const bookNumber =
+        document.getElementById(
+            "bookNumber"
+        ).value.trim();
+
+
+    const notes =
+        document.getElementById(
+            "notes"
+        ).value.trim();
+
+
+    const confirmed =
+        confirm(
+
+            "هل تريد تسجيل إنذار للموظف؟\n\n"
+
+            +
+
+            selectedEmployee["الاسم"]
+
+            +
+
+            "\n\n"
+
+            +
+
+            "الدرجة: "
+            + warningLevel
+
+        );
+
+
+    if(!confirmed){
+
+        return;
+
+    }
+
+
+    const btn =
+        document.getElementById(
+            "saveBtn"
+        );
+
+
+    btn.disabled =
+        true;
+
+
+    btn.innerText =
+        "⏳ جاري تسجيل الإنذار...";
+
+
+    try{
+
+
+        const response =
+            await fetch(API,{
+
+                method:"POST",
+
+                body:JSON.stringify({
+
+                    action:
+                        "addTransaction",
+
+                    employeeId:
+                        selectedEmployee[
+                            "Employee ID"
+                        ],
+
+                    employeeName:
+                        selectedEmployee[
+                            "الاسم"
+                        ],
+
+                    type:
+                        "إنذار",
+
+                    date:
+                        warningDate,
+
+                    bookNumber:
+                        bookNumber,
+
+                    reason:
+                        warningLevel
+                        + " — "
+                        + reason,
+
+                    notes:
+                        notes
+
+                })
+
+            });
+
+
+        const data =
+            await response.json();
+
+
+        if(
+            data.status !==
+            "success"
+        ){
+
+            throw new Error(
+
+                data.message ||
+
+                "فشل تسجيل الإنذار"
+
+            );
+
+        }
+
+
+        saved =
+            true;
+
+
+        createBook();
+
+
+        document.getElementById(
+            "printBtn"
+        ).style.display =
+            "inline-block";
+
+
+        btn.innerText =
+            "✅ تم تسجيل الإنذار";
+
+
+        showMessage(
+
+            "✅ تم تسجيل إنذار الموظف بنجاح",
+
+            "success"
+
+        );
+
+
+    }
+    catch(error){
+
+
+        console.error(error);
+
+
+        showMessage(
+
+            "❌ " +
+            error.message,
+
+            "error"
+
+        );
+
+
+        btn.disabled =
+            false;
+
+
+        btn.innerText =
+            "⚠️ تسجيل الإنذار";
+
+    }
+
+}
+
+
+/* =========================================
+   إنشاء الكتاب
+========================================= */
+
+function createBook(){
+
+
+    if(!selectedEmployee){
+
+        return;
+
+    }
+
+
+    const warningLevel =
+        document.getElementById(
+            "warningLevel"
+        ).value;
+
+
+    const warningDate =
+        document.getElementById(
+            "warningDate"
+        ).value;
+
+
+    const bookNumber =
+        document.getElementById(
+            "bookNumber"
+        ).value.trim();
+
+
+    const reason =
+        document.getElementById(
+            "reason"
+        ).value.trim();
+
+
+    const notes =
+        document.getElementById(
+            "notes"
+        ).value.trim();
+
+
+    document.getElementById(
+        "printBookNumber"
+    ).innerText =
+        bookNumber || "........";
+
+
+    document.getElementById(
+        "printDate"
+    ).innerText =
+        formatDate(warningDate);
+
+
+    document.getElementById(
+        "printBody"
+    ).innerHTML = `
+
+
+        <p>
+
+            إلى / الموظف
+
+            <strong>
+
+                ${safe(
+                    selectedEmployee["الاسم"]
+                )}
+
+            </strong>
+
+        </p>
+
+
+        <p>
+
+            م / ${safe(warningLevel)}
+
+        </p>
+
+
+        <p>
+
+            تحية طيبة...
+
+        </p>
+
+
+        <p>
+
+            بناءً على المخالفة المرصودة بتاريخ
+
+            <strong>
+
+                ${formatDate(warningDate)}
+
+            </strong>
+
+            ، يُوجه لكم هذا الإنذار
+
+            (<strong>${safe(warningLevel)}</strong>)
+
+            من إدارة الموارد البشرية، وذلك للسبب التالي:
+
+        </p>
+
+
+        <p>
+
+            ${safe(reason)}
+
+        </p>
+
+
+        ${
+            notes
+
+            ?
+
+            `
+
+            <p>
+
+                الملاحظات:
+
+                ${safe(notes)}
+
+            </p>
+
+            `
+
+            :
+
+            ""
+
+        }
+
+
+        <p>
+
+            نأمل الالتزام التام بالأنظمة والتعليمات المعتمدة،
+            علماً أن تكرار المخالفة قد يعرضكم لإجراءات تأديبية
+            أشد حسب الأنظمة المعتمدة.
+
+        </p>
+
+
+        <p>
+
+            مع التقدير...
+
+        </p>
+
+
+    `;
+
+}
+
+
+/* =========================================
+   الطباعة
+========================================= */
+
+function printBook(){
+
+
+    if(!saved){
+
+        showMessage(
+
+            "❌ يجب تسجيل الإنذار أولاً",
+
+            "error"
+
+        );
+
+        return;
+
+    }
+
+
+    createBook();
+
+
+    setTimeout(
+
+        function(){
+
+            window.print();
+
+        },
+
+        300
+
+    );
+
+}
+
+
+/* =========================================
+   الرسائل
+========================================= */
+
+function showMessage(
+    text,
+    type
+){
+
+    const box =
+        document.getElementById(
+            "message"
+        );
+
+
+    box.innerHTML =
+        safe(text);
+
+
+    box.className =
+        "message " +
+        type;
+
+
+    window.scrollTo({
+
+        top:0,
+
+        behavior:"smooth"
+
+    });
+
+}
+
+
+/* =========================================
+   التاريخ
+========================================= */
+
+function formatDate(value){
+
+    if(!value){
+
+        return "-";
+
+    }
+
+
+    const date =
+        new Date(value);
+
+
+    if(
+        isNaN(
+            date.getTime()
+        )
+    ){
+
+        return value;
+
+    }
+
+
+    return date.toLocaleDateString(
+        "en-GB"
+    );
+
+}
+
+
+/* =========================================
+   حماية النص
+========================================= */
+
+function safe(value){
+
+    if(
+        value === null ||
+        value === undefined
+    ){
+
+        return "";
+
+    }
+
+
+    return String(value)
+
+        .replace(/&/g,"&amp;")
+
+        .replace(/</g,"&lt;")
+
+        .replace(/>/g,"&gt;")
+
+        .replace(/"/g,"&quot;")
+
+        .replace(/'/g,"&#039;");
+
+}
+
+
+/* =========================================
+   تشغيل الصفحة
+========================================= */
+
+document.getElementById(
+    "warningDate"
+).value =
+
+    new Date()
+    .toISOString()
+    .split("T")[0];
+
+
+loadEmployees();
+
+</script>
+
+</body>
+</html>
