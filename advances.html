@@ -1,7 +1,9 @@
+```html
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -44,7 +46,7 @@ body{
 }
 
 .container{
-    max-width:1000px;
+    max-width:1050px;
     margin:25px auto;
     padding:0 15px;
 }
@@ -56,7 +58,7 @@ body{
     padding:15px;
     border-radius:12px;
     margin-bottom:20px;
-    line-height:1.9;
+    line-height:2;
 }
 
 .card{
@@ -85,12 +87,16 @@ body{
     grid-column:1/-1;
 }
 
+.field{
+    display:flex;
+    flex-direction:column;
+}
+
 label{
-    display:block;
     font-size:13px;
-    color:#555;
+    color:#666;
     margin-bottom:7px;
-    font-weight:bold;
+    font-weight:600;
 }
 
 input,
@@ -100,8 +106,9 @@ textarea{
     padding:12px;
     border:1px solid #ddd;
     border-radius:10px;
-    outline:none;
+    font-family:inherit;
     font-size:14px;
+    outline:none;
     background:white;
 }
 
@@ -115,54 +122,59 @@ input[readonly]{
     background:#f7f7f7;
 }
 
-.stats{
+textarea{
+    min-height:90px;
+    resize:vertical;
+}
+
+.summary{
     display:grid;
     grid-template-columns:repeat(4,1fr);
     gap:12px;
     margin-top:20px;
 }
 
-.stat{
+.summary-box{
     background:#f8f9fa;
+    border:1px solid #eee;
     border-radius:12px;
     padding:15px;
     text-align:center;
-    border:1px solid #eee;
 }
 
-.stat-label{
+.summary-label{
     font-size:12px;
     color:#777;
-    margin-bottom:5px;
+    margin-bottom:6px;
 }
 
-.stat-value{
-    font-size:20px;
+.summary-value{
+    font-size:19px;
     font-weight:bold;
 }
 
-.allowed{
+.green{
     color:#16833b;
 }
 
-.warning{
+.red{
     color:#c62828;
 }
 
 .buttons{
     display:flex;
     gap:10px;
-    flex-wrap:wrap;
     margin-top:25px;
+    flex-wrap:wrap;
 }
 
-button{
+.btn{
     border:0;
     border-radius:10px;
     padding:12px 22px;
-    cursor:pointer;
-    font-family:'Cairo',sans-serif;
+    font-family:inherit;
     font-size:14px;
+    cursor:pointer;
 }
 
 .save{
@@ -175,7 +187,7 @@ button{
     color:white;
 }
 
-button:disabled{
+.btn:disabled{
     opacity:.6;
     cursor:not-allowed;
 }
@@ -208,12 +220,12 @@ button:disabled{
 table{
     width:100%;
     border-collapse:collapse;
-    min-width:800px;
+    min-width:850px;
 }
 
 th,
 td{
-    padding:12px;
+    padding:12px 8px;
     border-bottom:1px solid #eee;
     text-align:center;
     font-size:13px;
@@ -222,11 +234,12 @@ td{
 th{
     background:#fff3e6;
     color:#8a5200;
+    font-weight:bold;
 }
 
 .badge{
     display:inline-block;
-    padding:5px 10px;
+    padding:5px 12px;
     border-radius:20px;
     font-size:12px;
     font-weight:bold;
@@ -237,116 +250,21 @@ th{
     color:#16833b;
 }
 
-.badge-warning{
-    background:#fff3cd;
-    color:#856404;
-}
-
 .empty{
     text-align:center;
     padding:30px;
     color:#888;
 }
 
-.print{
-    background:#2878d0;
-    color:white;
-    display:none;
-}
-
-/* =====================================
-   PRINT
-===================================== */
-
-.print-area{
-    display:none;
-}
-
-@media print{
-
-    @page{
-        size:A4;
-        margin:20mm;
-    }
-
-    body{
-        background:white;
-    }
-
-    .header,
-    .container{
-        display:none !important;
-    }
-
-    .print-area{
-        display:block !important;
-    }
-
-    .print-header{
-        text-align:center;
-        margin-bottom:35px;
-    }
-
-    .company{
-        font-size:25px;
-        font-weight:bold;
-    }
-
-    .department{
-        font-size:17px;
-        margin-top:5px;
-    }
-
-    .receipt-info{
-        display:flex;
-        justify-content:space-between;
-        font-size:16px;
-        margin-bottom:35px;
-    }
-
-    .receipt-title{
-        text-align:center;
-        font-size:25px;
-        font-weight:bold;
-        text-decoration:underline;
-        margin:35px 0;
-    }
-
-    .receipt-body{
-        font-size:17px;
-        line-height:2.5;
-    }
-
-    .receipt-table{
-        width:100%;
-        border-collapse:collapse;
-        margin:25px 0;
-    }
-
-    .receipt-table td{
-        border:1px solid #999;
-        padding:12px;
-        font-size:16px;
-    }
-
-    .receipt-table td:first-child{
-        font-weight:bold;
-        background:#f5f5f5;
-        width:40%;
-    }
-
-    .signature{
-        margin-top:80px;
-        text-align:left;
-        line-height:2.3;
-        font-size:16px;
-    }
-
+.loading{
+    color:#888;
+    text-align:center;
+    padding:20px;
 }
 
 @media(max-width:800px){
 
-    .stats{
+    .summary{
         grid-template-columns:1fr 1fr;
     }
 
@@ -362,13 +280,17 @@ th{
         grid-column:auto;
     }
 
+    .summary{
+        grid-template-columns:1fr 1fr;
+    }
+
     .header{
         flex-direction:column;
         gap:8px;
         text-align:center;
     }
 
-    .buttons button{
+    .buttons .btn{
         width:100%;
     }
 
@@ -377,6 +299,7 @@ th{
 </style>
 
 </head>
+
 
 <body>
 
@@ -399,11 +322,12 @@ th{
 
     <div class="info">
 
-        💡 <strong>نظام السلفة على الراتب</strong><br>
+        💡 <strong>نظام السلف على الراتب</strong>
 
-        يسمح للموظف بأخذ سلفة بسيطة قبل موعد الراتب،
-        وبحد أقصى <strong>35%</strong> من المستحق المتاح له
-        (الراتب بعد خصم أي سلف سابقة أخذها بنفس الشهر).
+        <br>
+
+        يمكن للموظف طلب سلفة قبل موعد الراتب،
+        وبحد أقصى <strong>35%</strong> من المستحق المتاح.
 
     </div>
 
@@ -411,17 +335,21 @@ th{
     <div id="message" class="message"></div>
 
 
+    <!-- =========================
+         إضافة سلفة
+    ========================== -->
+
     <div class="card">
 
         <div class="title">
-            💵 إضافة سلفة جديدة
+            💵 تسجيل سلفة جديدة
         </div>
 
 
         <div class="grid">
 
 
-            <div class="full">
+            <div class="field full">
 
                 <label>
                     الموظف *
@@ -438,10 +366,10 @@ th{
             </div>
 
 
-            <div>
+            <div class="field">
 
                 <label>
-                    الشهر *
+                    شهر الراتب *
                 </label>
 
                 <input
@@ -451,7 +379,7 @@ th{
             </div>
 
 
-            <div>
+            <div class="field">
 
                 <label>
                     الراتب
@@ -460,13 +388,13 @@ th{
                 <input
                     type="text"
                     id="salary"
-                    readonly
-                    value="0">
+                    value="0"
+                    readonly>
 
             </div>
 
 
-            <div>
+            <div class="field">
 
                 <label>
                     المستحق قبل السلفة
@@ -475,28 +403,28 @@ th{
                 <input
                     type="text"
                     id="beforeAdvance"
-                    readonly
-                    value="0">
+                    value="0"
+                    readonly>
 
             </div>
 
 
-            <div>
+            <div class="field">
 
                 <label>
-                    الحد الأعلى للسلفة 35%
+                    الحد الأعلى 35%
                 </label>
 
                 <input
                     type="text"
                     id="maxAdvance"
-                    readonly
-                    value="0">
+                    value="0"
+                    readonly>
 
             </div>
 
 
-            <div>
+            <div class="field">
 
                 <label>
                     مبلغ السلفة *
@@ -507,12 +435,12 @@ th{
                     id="advanceAmount"
                     min="0"
                     step="1000"
-                    placeholder="أدخل مبلغ السلفة">
+                    placeholder="مثلاً: 100000">
 
             </div>
 
 
-            <div class="full">
+            <div class="field full">
 
                 <label>
                     ملاحظات
@@ -520,8 +448,7 @@ th{
 
                 <textarea
                     id="notes"
-                    placeholder="اكتب ملاحظات السلفة إن وجدت">
-                </textarea>
+                    placeholder="ملاحظات السلفة إن وجدت"></textarea>
 
             </div>
 
@@ -529,17 +456,17 @@ th{
         </div>
 
 
-        <div class="stats">
+        <div class="summary">
 
 
-            <div class="stat">
+            <div class="summary-box">
 
-                <div class="stat-label">
+                <div class="summary-label">
                     الراتب
                 </div>
 
                 <div
-                    class="stat-value"
+                    class="summary-value"
                     id="salaryView">
 
                     0
@@ -549,14 +476,14 @@ th{
             </div>
 
 
-            <div class="stat">
+            <div class="summary-box">
 
-                <div class="stat-label">
-                    المستحق (بعد خصم سلف الشهر)
+                <div class="summary-label">
+                    المستحق
                 </div>
 
                 <div
-                    class="stat-value"
+                    class="summary-value"
                     id="beforeView">
 
                     0
@@ -566,14 +493,14 @@ th{
             </div>
 
 
-            <div class="stat">
+            <div class="summary-box">
 
-                <div class="stat-label">
-                    الحد 35%
+                <div class="summary-label">
+                    الحد الأعلى
                 </div>
 
                 <div
-                    class="stat-value allowed"
+                    class="summary-value green"
                     id="maxView">
 
                     0
@@ -583,14 +510,14 @@ th{
             </div>
 
 
-            <div class="stat">
+            <div class="summary-box">
 
-                <div class="stat-label">
-                    بعد هذه السلفة
+                <div class="summary-label">
+                    المتبقي بعد السلفة
                 </div>
 
                 <div
-                    class="stat-value"
+                    class="summary-value"
                     id="afterView">
 
                     0
@@ -606,7 +533,7 @@ th{
         <div class="buttons">
 
             <button
-                class="save"
+                class="btn save"
                 id="saveBtn"
                 onclick="saveAdvance()">
 
@@ -616,17 +543,7 @@ th{
 
 
             <button
-                id="printBtn"
-                class="print"
-                onclick="printReceipt()">
-
-                🖨️ طباعة وصل الاستلام
-
-            </button>
-
-
-            <button
-                class="back"
+                class="btn back"
                 onclick="location.href='index.html'">
 
                 ← رجوع
@@ -638,119 +555,16 @@ th{
     </div>
 
 
-    <!-- ================= وصل الاستلام (للطباعة) ================= -->
-
-    <div
-        id="printArea"
-        class="print-area">
-
-        <div class="print-header">
-
-            <div class="company">
-                مطعم وحدائق ماي
-            </div>
-
-            <div class="department">
-                إدارة الموارد البشرية
-            </div>
-
-        </div>
-
-
-        <div class="receipt-info">
-
-            <div>
-                رقم السلفة:
-                <span id="rNumber">........</span>
-            </div>
-
-            <div>
-                التاريخ:
-                <span id="rDate">........</span>
-            </div>
-
-        </div>
-
-
-        <div class="receipt-title">
-            وصل استلام سلفة
-        </div>
-
-
-        <div class="receipt-body">
-
-            أقر أنا الموقع أدناه بأنني استلمت من إدارة
-            الموارد البشرية سلفة على الراتب بالتفاصيل التالية:
-
-        </div>
-
-
-        <table class="receipt-table">
-
-            <tr>
-                <td>اسم الموظف</td>
-                <td id="rName"></td>
-            </tr>
-
-            <tr>
-                <td>الرقم الوظيفي</td>
-                <td id="rId"></td>
-            </tr>
-
-            <tr>
-                <td>شهر السلفة</td>
-                <td id="rMonth"></td>
-            </tr>
-
-            <tr>
-                <td>الراتب</td>
-                <td id="rSalary"></td>
-            </tr>
-
-            <tr>
-                <td>مبلغ السلفة المستلم</td>
-                <td id="rAmount"></td>
-            </tr>
-
-            <tr>
-                <td>المتبقي من المستحق</td>
-                <td id="rRemaining"></td>
-            </tr>
-
-        </table>
-
-
-        <div class="receipt-body">
-            وأتعهد بخصم هذا المبلغ من مستحقاتي حسب الأنظمة المعتمدة.
-        </div>
-
-
-        <div class="signature">
-
-            توقيع الموظف المستلم
-
-            <br>
-
-            الاسم: __________________
-
-            <br>
-
-            التوقيع: ________________
-
-            <br><br>
-
-            مسؤول الموارد البشرية: __________________
-
-        </div>
-
-    </div>
-
+    <!-- =========================
+         سجل السلف
+    ========================== -->
 
     <div class="card">
 
         <div class="title">
             📋 سجل السلف
         </div>
+
 
         <div class="table-wrap">
 
@@ -760,28 +574,56 @@ th{
 
                     <tr>
 
-                        <th>رقم السلفة</th>
-                        <th>الموظف</th>
-                        <th>الشهر</th>
-                        <th>المبلغ</th>
-                        <th>الحد 35%</th>
-                        <th>المتبقي</th>
-                        <th>التاريخ</th>
-                        <th>الحالة</th>
+                        <th>
+                            رقم السلفة
+                        </th>
+
+                        <th>
+                            الموظف
+                        </th>
+
+                        <th>
+                            الشهر
+                        </th>
+
+                        <th>
+                            الراتب
+                        </th>
+
+                        <th>
+                            مبلغ السلفة
+                        </th>
+
+                        <th>
+                            الحد 35%
+                        </th>
+
+                        <th>
+                            المتبقي
+                        </th>
+
+                        <th>
+                            التاريخ
+                        </th>
+
+                        <th>
+                            الحالة
+                        </th>
 
                     </tr>
 
                 </thead>
 
-                <tbody id="loansTable">
+
+                <tbody id="advancesTable">
 
                     <tr>
 
                         <td
-                            colspan="8"
-                            class="empty">
+                            colspan="9"
+                            class="loading">
 
-                            جاري تحميل السجل...
+                            جاري تحميل السلف...
 
                         </td>
 
@@ -802,6 +644,10 @@ th{
 <script>
 
 
+/* ==========================================
+   رابط الـ API
+========================================== */
+
 const API =
 "https://script.google.com/macros/s/AKfycbw6pnqbRn3VyJvFjk0RGfEt8VXdBkOq2uqooSvxi0onjcUStpJ_hOGNZVPLimRA-ZNAGQ/exec";
 
@@ -813,41 +659,46 @@ let selectedEmployee = null;
 let advances = [];
 
 
-// القيم المحسوبة حالياً بناءً على الموظف/الشهر المختار
-let cachedSalary = 0;
-
-let cachedBefore = 0;
-
-let cachedMax = 0;
-
-
-// بيانات آخر سلفة ناجحة (لأجل الطباعة)
-let lastAdvance = null;
-
-
-/* =========================================
+/* ==========================================
    تحميل الموظفين
-========================================= */
+========================================== */
 
 async function loadEmployees(){
 
     const select =
         document.getElementById("employee");
 
+
     try{
 
         const response =
             await fetch(API,{
+
                 method:"POST",
+
+                headers:{
+                    "Content-Type":
+                    "text/plain;charset=utf-8"
+                },
+
                 body:JSON.stringify({
-                    action:"getEmployees"
+
+                    action:
+                    "getEmployees"
+
                 })
+
             });
+
 
         const data =
             await response.json();
 
-        if(data.status !== "success"){
+
+        if(
+            data.status !==
+            "success"
+        ){
 
             throw new Error(
                 data.message ||
@@ -856,54 +707,77 @@ async function loadEmployees(){
 
         }
 
+
         employees =
             data.employees || [];
 
+
         select.innerHTML = `
+
             <option value="">
                 اختر الموظف
             </option>
+
         `;
 
-        employees.forEach(employee => {
 
-            if(
-                String(
-                    employee["الحالة"] || ""
-                ).trim()
-                ===
-                "منتهي الخدمة"
-            ){
-                return;
+        employees.forEach(
+            employee => {
+
+                const status =
+                    String(
+                        employee["الحالة"] || ""
+                    ).trim();
+
+
+                if(
+                    status ===
+                    "منتهي الخدمة"
+                ){
+
+                    return;
+
+                }
+
+
+                const option =
+                    document.createElement(
+                        "option"
+                    );
+
+
+                option.value =
+                    employee["Employee ID"];
+
+
+                option.textContent =
+
+                    (employee["الاسم"] || "")
+                    +
+                    " — "
+                    +
+                    (employee["Employee ID"] || "");
+
+
+                select.appendChild(
+                    option
+                );
+
             }
+        );
 
-            const option =
-                document.createElement("option");
-
-            option.value =
-                employee["Employee ID"];
-
-            option.textContent =
-                (employee["الاسم"] || "بدون اسم")
-                +
-                " — "
-                +
-                (employee["Employee ID"] || "");
-
-            select.appendChild(option);
-
-        });
 
     }
     catch(error){
 
-        document.getElementById(
-            "employee"
-        ).innerHTML = `
+        select.innerHTML = `
+
             <option value="">
                 ❌ فشل تحميل الموظفين
             </option>
+
         `;
+
 
         showMessage(
             "❌ " + error.message,
@@ -915,9 +789,9 @@ async function loadEmployees(){
 }
 
 
-/* =========================================
-   اختيار الموظف / تغيير الشهر
-========================================= */
+/* ==========================================
+   اختيار الموظف
+========================================== */
 
 document
 .getElementById("employee")
@@ -928,196 +802,112 @@ document
         selectedEmployee =
             employees.find(
                 employee =>
+
                     String(
                         employee["Employee ID"]
                     )
+
                     ===
-                    String(this.value)
+
+                    String(
+                        this.value
+                    )
             );
 
-        refreshLimits();
+
+        calculate();
 
     }
 );
 
 
-document
-.getElementById("month")
-.addEventListener(
-    "change",
-    refreshLimits
-);
-
+/* ==========================================
+   تغيير مبلغ السلفة
+========================================== */
 
 document
 .getElementById("advanceAmount")
 .addEventListener(
     "input",
-    updateAfter
+    calculate
 );
 
 
-/* =========================================
-   حساب المستحق والحد بناءً على السلف
-   السابقة لنفس الموظف ونفس الشهر
-========================================= */
+/* ==========================================
+   الحساب
+========================================== */
 
-async function refreshLimits(){
+function calculate(){
 
-    const month =
-        document.getElementById(
-            "month"
-        ).value;
+    let salary = 0;
 
 
-    if(!selectedEmployee || !month){
+    if(selectedEmployee){
 
-        cachedSalary = 0;
-        cachedBefore = 0;
-        cachedMax = 0;
-
-        updateAfter();
-
-        return;
+        salary =
+            parseNumber(
+                selectedEmployee["الراتب"]
+            );
 
     }
 
 
-    cachedSalary =
-        Number(
-            selectedEmployee["الراتب"] || 0
+    const before =
+        salary;
+
+
+    const max =
+        Math.floor(
+            before * 0.35
         );
 
-
-    try{
-
-        const response =
-            await fetch(API,{
-
-                method:"POST",
-
-                body:JSON.stringify({
-
-                    action:
-                        "getAdvances",
-
-                    employeeId:
-                        selectedEmployee[
-                            "Employee ID"
-                        ],
-
-                    month:
-                        month
-
-                })
-
-            });
-
-
-        const data =
-            await response.json();
-
-
-        let previousTotal = 0;
-
-
-        if(data.status === "success"){
-
-            (data.advances || [])
-            .forEach(item => {
-
-                previousTotal +=
-                    Number(
-                        item["مبلغ السلفة"] || 0
-                    );
-
-            });
-
-        }
-
-
-        cachedBefore =
-            cachedSalary - previousTotal;
-
-
-        cachedMax =
-            Math.floor(
-                cachedBefore * 0.35
-            );
-
-
-    }
-    catch(error){
-
-        // لو فشل الجلب، نعتبر ما في سلف سابقة
-        // (السيرفر رح يتحقق مرة ثانية عند الحفظ)
-
-        cachedBefore =
-            cachedSalary;
-
-
-        cachedMax =
-            Math.floor(
-                cachedBefore * 0.35
-            );
-
-    }
-
-
-    updateAfter();
-
-}
-
-
-/* =========================================
-   تحديث عرض "بعد السلفة" فقط
-   (بدون إعادة جلب من السيرفر)
-========================================= */
-
-function updateAfter(){
 
     const amount =
-        Number(
+        parseNumber(
             document.getElementById(
                 "advanceAmount"
-            ).value || 0
+            ).value
         );
+
+
+    const after =
+        before - amount;
 
 
     document.getElementById(
         "salary"
     ).value =
-        formatMoney(cachedSalary);
+        formatMoney(salary);
 
 
     document.getElementById(
         "beforeAdvance"
     ).value =
-        formatMoney(cachedBefore);
+        formatMoney(before);
 
 
     document.getElementById(
         "maxAdvance"
     ).value =
-        formatMoney(cachedMax);
+        formatMoney(max);
 
 
     document.getElementById(
         "salaryView"
     ).innerText =
-        formatMoney(cachedSalary);
+        formatMoney(salary);
 
 
     document.getElementById(
         "beforeView"
     ).innerText =
-        formatMoney(cachedBefore);
+        formatMoney(before);
 
 
     document.getElementById(
         "maxView"
     ).innerText =
-        formatMoney(cachedMax);
+        formatMoney(max);
 
 
     const afterView =
@@ -1126,33 +916,38 @@ function updateAfter(){
         );
 
 
-    if(amount > cachedMax){
+    if(amount > max){
 
         afterView.innerText =
             "تجاوز الحد";
 
+
         afterView.className =
-            "stat-value warning";
+            "summary-value red";
 
     }
     else{
 
         afterView.innerText =
             formatMoney(
-                Math.max(cachedBefore - amount, 0)
+                Math.max(
+                    after,
+                    0
+                )
             );
 
+
         afterView.className =
-            "stat-value";
+            "summary-value";
 
     }
 
 }
 
 
-/* =========================================
-   حفظ السلفة
-========================================= */
+/* ==========================================
+   تسجيل السلفة
+========================================== */
 
 async function saveAdvance(){
 
@@ -1177,7 +972,7 @@ async function saveAdvance(){
     if(!month){
 
         showMessage(
-            "❌ يرجى اختيار شهر السلفة",
+            "❌ يرجى اختيار شهر الراتب",
             "error"
         );
 
@@ -1186,15 +981,31 @@ async function saveAdvance(){
     }
 
 
-    const amount =
-        Number(
-            document.getElementById(
-                "advanceAmount"
-            ).value || 0
+    const salary =
+        parseNumber(
+            selectedEmployee["الراتب"]
         );
 
 
-    if(!amount || amount <= 0){
+    const before =
+        salary;
+
+
+    const max =
+        Math.floor(
+            before * 0.35
+        );
+
+
+    const amount =
+        parseNumber(
+            document.getElementById(
+                "advanceAmount"
+            ).value
+        );
+
+
+    if(amount <= 0){
 
         showMessage(
             "❌ أدخل مبلغ السلفة",
@@ -1206,12 +1017,12 @@ async function saveAdvance(){
     }
 
 
-    if(amount > cachedMax){
+    if(amount > max){
 
         showMessage(
 
-            "❌ مبلغ السلفة يتجاوز الحد المسموح 35% وهو " +
-            formatMoney(cachedMax),
+            "❌ مبلغ السلفة يتجاوز الحد الأعلى 35% وهو " +
+            formatMoney(max),
 
             "error"
 
@@ -1231,10 +1042,10 @@ async function saveAdvance(){
     const confirmed =
         confirm(
 
-            "هل تريد تسجيل هذه السلفة؟\n\n" +
+            "تأكيد تسجيل السلفة؟\n\n" +
 
             "الموظف: " +
-            selectedEmployee["الاسم"] +
+            (selectedEmployee["الاسم"] || "") +
 
             "\n" +
 
@@ -1244,7 +1055,7 @@ async function saveAdvance(){
             "\n" +
 
             "الحد الأعلى: " +
-            formatMoney(cachedMax)
+            formatMoney(max)
 
         );
 
@@ -1272,34 +1083,49 @@ async function saveAdvance(){
 
     try{
 
+
         const response =
             await fetch(API,{
 
                 method:"POST",
 
+                headers:{
+                    "Content-Type":
+                    "text/plain;charset=utf-8"
+                },
+
                 body:JSON.stringify({
 
                     action:
-                        "addAdvance",
+                    "addAdvance",
 
                     employeeId:
-                        selectedEmployee[
-                            "Employee ID"
-                        ],
+                    selectedEmployee[
+                        "Employee ID"
+                    ],
 
                     employeeName:
-                        selectedEmployee[
-                            "الاسم"
-                        ],
+                    selectedEmployee[
+                        "الاسم"
+                    ],
 
                     month:
-                        month,
+                    month,
+
+                    salary:
+                    salary,
+
+                    beforeAdvance:
+                    before,
+
+                    maxAdvance:
+                    max,
 
                     amount:
-                        amount,
+                    amount,
 
                     notes:
-                        notes
+                    notes
 
                 })
 
@@ -1324,86 +1150,29 @@ async function saveAdvance(){
 
 
         showMessage(
-            "✅ تم تسجيل السلفة بنجاح",
+
+            "✅ تم تسجيل السلفة بنجاح — رقم السلفة: " +
+            (data.advanceId || ""),
+
             "success"
+
         );
-
-
-        btn.innerText =
-            "✅ تم تسجيل السلفة";
-
-
-        // حفظ بيانات آخر سلفة ناجحة لأجل الطباعة
-
-        lastAdvance = {
-
-            advanceId:
-                data.advanceId || "",
-
-            employeeName:
-                selectedEmployee["الاسم"],
-
-            employeeId:
-                selectedEmployee["Employee ID"],
-
-            month:
-                month,
-
-            salary:
-                data.salary !== undefined
-                ?
-                data.salary
-                :
-                cachedSalary,
-
-            amount:
-                amount,
-
-            remaining:
-                data.remaining !== undefined
-                ?
-                data.remaining
-                :
-                (cachedBefore - amount)
-
-        };
-
-
-        document.getElementById(
-            "printBtn"
-        ).style.display =
-            "inline-block";
 
 
         document.getElementById(
             "advanceAmount"
-        ).value =
-            "";
+        ).value = "";
 
 
         document.getElementById(
             "notes"
-        ).value =
-            "";
+        ).value = "";
 
 
-        await refreshLimits();
+        calculate();
 
 
-        setTimeout(
-            function(){
-
-                btn.disabled =
-                    false;
-
-                btn.innerText =
-                    "💵 تسجيل السلفة";
-
-                loadAdvances();
-
-            },
-            1200
-        );
+        await loadAdvances();
 
 
     }
@@ -1413,13 +1182,19 @@ async function saveAdvance(){
 
 
         showMessage(
+
             "❌ " + error.message,
+
             "error"
+
         );
 
+    }
+    finally{
 
         btn.disabled =
             false;
+
 
         btn.innerText =
             "💵 تسجيل السلفة";
@@ -1429,16 +1204,33 @@ async function saveAdvance(){
 }
 
 
-/* =========================================
-   سجل السلف (كل السلف المسجلة)
-========================================= */
+/* ==========================================
+   تحميل سجل السلف
+========================================== */
 
 async function loadAdvances(){
 
     const table =
         document.getElementById(
-            "loansTable"
+            "advancesTable"
         );
+
+
+    table.innerHTML = `
+
+        <tr>
+
+            <td
+                colspan="9"
+                class="loading">
+
+                جاري تحميل السلف...
+
+            </td>
+
+        </tr>
+
+    `;
 
 
     try{
@@ -1448,10 +1240,15 @@ async function loadAdvances(){
 
                 method:"POST",
 
+                headers:{
+                    "Content-Type":
+                    "text/plain;charset=utf-8"
+                },
+
                 body:JSON.stringify({
 
                     action:
-                        "getAdvances"
+                    "getAdvances"
 
                 })
 
@@ -1469,7 +1266,7 @@ async function loadAdvances(){
 
             throw new Error(
                 data.message ||
-                "فشل تحميل السجل"
+                "فشل تحميل السلف"
             );
 
         }
@@ -1486,7 +1283,7 @@ async function loadAdvances(){
                 <tr>
 
                     <td
-                        colspan="8"
+                        colspan="9"
                         class="empty">
 
                         لا توجد سلف مسجلة حالياً
@@ -1503,73 +1300,83 @@ async function loadAdvances(){
 
 
         table.innerHTML =
+
             advances
-            .slice()
-            .reverse()
             .map(
-                item => {
+                advance => {
 
                     return `
 
-                        <tr>
+                    <tr>
 
-                            <td>
-                                ${safe(
-                                    getField(item,["Advance ID","رقم السلفة"])
-                                    || "-"
-                                )}
-                            </td>
+                        <td>
+                            ${safe(
+                                advance["Advance ID"]
+                                || "-"
+                            )}
+                        </td>
 
-                            <td>
-                                ${safe(
-                                    getField(item,["الموظف","اسم الموظف"])
-                                    || "-"
-                                )}
-                            </td>
+                        <td>
+                            ${safe(
+                                advance["الموظف"]
+                                || "-"
+                            )}
+                        </td>
 
-                            <td>
-                                ${safe(
-                                    item["الشهر"]
-                                    || "-"
-                                )}
-                            </td>
+                        <td>
+                            ${safe(
+                                advance["الشهر"]
+                                || "-"
+                            )}
+                        </td>
 
-                            <td>
+                        <td>
+                            ${formatMoney(
+                                advance["الراتب"]
+                            )}
+                        </td>
+
+                        <td>
+                            <strong>
                                 ${formatMoney(
-                                    item["مبلغ السلفة"]
+                                    advance["مبلغ السلفة"]
                                 )}
-                            </td>
+                            </strong>
+                        </td>
 
-                            <td>
-                                ${formatMoney(
-                                    item["الحد الأعلى 35%"]
+                        <td>
+                            ${formatMoney(
+                                advance["الحد الأعلى 35%"]
+                            )}
+                        </td>
+
+                        <td>
+                            ${formatMoney(
+                                advance["المتبقي بعد السلفة"]
+                            )}
+                        </td>
+
+                        <td>
+                            ${formatDate(
+                                advance["التاريخ"]
+                            )}
+                        </td>
+
+                        <td>
+
+                            <span
+                                class="badge badge-success">
+
+                                ${safe(
+                                    advance["الحالة"]
+                                    || "مسجلة"
                                 )}
-                            </td>
 
-                            <td>
-                                ${formatMoney(
-                                    item["المتبقي بعد السلفة"]
-                                )}
-                            </td>
+                            </span>
 
-                            <td>
-                                ${formatDate(
-                                    item["التاريخ"]
-                                )}
-                            </td>
+                        </td>
 
-                            <td>
-
-                                <span
-                                    class="badge badge-success">
-
-                                    مسجلة
-
-                                </span>
-
-                            </td>
-
-                        </tr>
+                    </tr>
 
                     `;
 
@@ -1586,10 +1393,16 @@ async function loadAdvances(){
             <tr>
 
                 <td
-                    colspan="8"
+                    colspan="9"
                     class="empty">
 
                     ❌ تعذر تحميل سجل السلف
+
+                    <br>
+
+                    ${safe(
+                        error.message
+                    )}
 
                 </td>
 
@@ -1602,141 +1415,103 @@ async function loadAdvances(){
 }
 
 
-/* =========================================
-   تنسيق المبلغ
-========================================= */
+/* ==========================================
+   تحويل الرقم
+========================================== */
 
-/* =========================================
-   طباعة وصل الاستلام
-========================================= */
+function parseNumber(value){
 
-function printReceipt(){
+    if(
+        value === null ||
+        value === undefined ||
+        value === ""
+    ){
 
-    if(!lastAdvance){
-
-        showMessage(
-            "❌ يجب تسجيل سلفة أولاً قبل الطباعة",
-            "error"
-        );
-
-        return;
+        return 0;
 
     }
 
 
-    document.getElementById(
-        "rNumber"
-    ).innerText =
-        lastAdvance.advanceId || "........";
+    let text =
+        String(value);
 
 
-    document.getElementById(
-        "rDate"
-    ).innerText =
-        formatDate(new Date());
+    text =
+        text.replace(
+            /,/g,
+            ""
+        );
 
 
-    document.getElementById(
-        "rName"
-    ).innerText =
-        lastAdvance.employeeName || "";
+    text =
+        text.replace(
+            /٬/g,
+            ""
+        );
 
 
-    document.getElementById(
-        "rId"
-    ).innerText =
-        lastAdvance.employeeId || "";
+    text =
+        text.replace(
+            /[^\d.-]/g,
+            ""
+        );
 
 
-    document.getElementById(
-        "rMonth"
-    ).innerText =
-        lastAdvance.month || "";
+    const number =
+        Number(text);
 
 
-    document.getElementById(
-        "rSalary"
-    ).innerText =
-        formatMoney(lastAdvance.salary) + " د.ع";
+    return isNaN(number)
+        ? 0
+        : number;
+
+}
 
 
-    document.getElementById(
-        "rAmount"
-    ).innerText =
-        formatMoney(lastAdvance.amount) + " د.ع";
+/* ==========================================
+   تنسيق المبالغ
+========================================== */
+
+function formatMoney(value){
+
+    const number =
+        parseNumber(value);
 
 
-    document.getElementById(
-        "rRemaining"
-    ).innerText =
-        formatMoney(lastAdvance.remaining) + " د.ع";
-
-
-    setTimeout(
-        function(){
-            window.print();
-        },
-        300
+    return number.toLocaleString(
+        "en-US"
     );
 
 }
 
 
-/* =========================================
-   جلب أول قيمة موجودة من عدة أسماء أعمدة محتملة
-   (حتى لو تغير اسم عمود بالشيت لاحقاً)
-========================================= */
-
-function getField(obj, keys){
-
-    for(const key of keys){
-
-        if(
-            obj[key] !== undefined &&
-            obj[key] !== ""
-        ){
-
-            return obj[key];
-
-        }
-
-    }
-
-    return "";
-
-}
-
-
-function formatMoney(value){
-
-    const number =
-        Number(value || 0);
-
-    return number.toLocaleString("en-US");
-
-}
-
-
-/* =========================================
-   التاريخ
-========================================= */
+/* ==========================================
+   تنسيق التاريخ
+========================================== */
 
 function formatDate(value){
 
     if(!value){
+
         return "-";
+
     }
+
 
     const date =
         new Date(value);
+
 
     if(
         isNaN(
             date.getTime()
         )
     ){
-        return value;
+
+        return safe(value);
+
     }
+
 
     return date.toLocaleDateString(
         "en-GB"
@@ -1745,9 +1520,9 @@ function formatDate(value){
 }
 
 
-/* =========================================
+/* ==========================================
    حماية النص
-========================================= */
+========================================== */
 
 function safe(value){
 
@@ -1755,39 +1530,125 @@ function safe(value){
         value === null ||
         value === undefined
     ){
+
         return "";
+
     }
+
 
     return String(value)
 
-        .replace(/&/g,"&amp;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;")
-        .replace(/"/g,"&quot;")
-        .replace(/'/g,"&#039;");
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+
+        .replace(
+            /</g,
+            "&lt;"
+        )
+
+        .replace(
+            />/g,
+            "&gt;"
+        )
+
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+
+        .replace(
+            /'/g,
+            "&#039;"
+        );
 
 }
 
 
-/* =========================================
+/* ==========================================
+   رسالة
+========================================== */
+
+function showMessage(
+    text,
+    type
+){
+
+    const box =
+        document.getElementById(
+            "message"
+        );
+
+
+    box.innerHTML =
+        safe(text);
+
+
+    box.className =
+        "message " +
+        type;
+
+
+    window.scrollTo({
+
+        top:0,
+
+        behavior:"smooth"
+
+    });
+
+
+    setTimeout(
+        function(){
+
+            box.style.display =
+                "none";
+
+        },
+        6000
+    );
+
+}
+
+
+/* ==========================================
+   الشهر الحالي
+========================================== */
+
+function setCurrentMonth(){
+
+    const now =
+        new Date();
+
+
+    const month =
+
+        now.getFullYear()
+        +
+        "-"
+        +
+        String(
+            now.getMonth() + 1
+        ).padStart(
+            2,
+            "0"
+        );
+
+
+    document.getElementById(
+        "month"
+    ).value =
+        month;
+
+}
+
+
+/* ==========================================
    تشغيل الصفحة
-========================================= */
+========================================== */
 
-const today =
-    new Date();
-
-document.getElementById(
-    "month"
-).value =
-
-    today.getFullYear()
-    +
-    "-"
-    +
-    String(
-        today.getMonth()+1
-    ).padStart(2,"0");
-
+setCurrentMonth();
 
 loadEmployees();
 
@@ -1795,6 +1656,8 @@ loadAdvances();
 
 </script>
 
+
 </body>
 
 </html>
+```
