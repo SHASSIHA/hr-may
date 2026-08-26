@@ -248,6 +248,102 @@ th{
     color:#888;
 }
 
+.print{
+    background:#2878d0;
+    color:white;
+    display:none;
+}
+
+/* =====================================
+   PRINT
+===================================== */
+
+.print-area{
+    display:none;
+}
+
+@media print{
+
+    @page{
+        size:A4;
+        margin:20mm;
+    }
+
+    body{
+        background:white;
+    }
+
+    .header,
+    .container{
+        display:none !important;
+    }
+
+    .print-area{
+        display:block !important;
+    }
+
+    .print-header{
+        text-align:center;
+        margin-bottom:35px;
+    }
+
+    .company{
+        font-size:25px;
+        font-weight:bold;
+    }
+
+    .department{
+        font-size:17px;
+        margin-top:5px;
+    }
+
+    .receipt-info{
+        display:flex;
+        justify-content:space-between;
+        font-size:16px;
+        margin-bottom:35px;
+    }
+
+    .receipt-title{
+        text-align:center;
+        font-size:25px;
+        font-weight:bold;
+        text-decoration:underline;
+        margin:35px 0;
+    }
+
+    .receipt-body{
+        font-size:17px;
+        line-height:2.5;
+    }
+
+    .receipt-table{
+        width:100%;
+        border-collapse:collapse;
+        margin:25px 0;
+    }
+
+    .receipt-table td{
+        border:1px solid #999;
+        padding:12px;
+        font-size:16px;
+    }
+
+    .receipt-table td:first-child{
+        font-weight:bold;
+        background:#f5f5f5;
+        width:40%;
+    }
+
+    .signature{
+        margin-top:80px;
+        text-align:left;
+        line-height:2.3;
+        font-size:16px;
+    }
+
+}
+
 @media(max-width:800px){
 
     .stats{
@@ -520,12 +616,130 @@ th{
 
 
             <button
+                id="printBtn"
+                class="print"
+                onclick="printReceipt()">
+
+                🖨️ طباعة وصل الاستلام
+
+            </button>
+
+
+            <button
                 class="back"
                 onclick="location.href='index.html'">
 
                 ← رجوع
 
             </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= وصل الاستلام (للطباعة) ================= -->
+
+    <div
+        id="printArea"
+        class="print-area">
+
+        <div class="print-header">
+
+            <div class="company">
+                مطعم وحدائق ماي
+            </div>
+
+            <div class="department">
+                إدارة الموارد البشرية
+            </div>
+
+        </div>
+
+
+        <div class="receipt-info">
+
+            <div>
+                رقم السلفة:
+                <span id="rNumber">........</span>
+            </div>
+
+            <div>
+                التاريخ:
+                <span id="rDate">........</span>
+            </div>
+
+        </div>
+
+
+        <div class="receipt-title">
+            وصل استلام سلفة
+        </div>
+
+
+        <div class="receipt-body">
+
+            أقر أنا الموقع أدناه بأنني استلمت من إدارة
+            الموارد البشرية سلفة على الراتب بالتفاصيل التالية:
+
+        </div>
+
+
+        <table class="receipt-table">
+
+            <tr>
+                <td>اسم الموظف</td>
+                <td id="rName"></td>
+            </tr>
+
+            <tr>
+                <td>الرقم الوظيفي</td>
+                <td id="rId"></td>
+            </tr>
+
+            <tr>
+                <td>شهر السلفة</td>
+                <td id="rMonth"></td>
+            </tr>
+
+            <tr>
+                <td>الراتب</td>
+                <td id="rSalary"></td>
+            </tr>
+
+            <tr>
+                <td>مبلغ السلفة المستلم</td>
+                <td id="rAmount"></td>
+            </tr>
+
+            <tr>
+                <td>المتبقي من المستحق</td>
+                <td id="rRemaining"></td>
+            </tr>
+
+        </table>
+
+
+        <div class="receipt-body">
+            وأتعهد بخصم هذا المبلغ من مستحقاتي حسب الأنظمة المعتمدة.
+        </div>
+
+
+        <div class="signature">
+
+            توقيع الموظف المستلم
+
+            <br>
+
+            الاسم: __________________
+
+            <br>
+
+            التوقيع: ________________
+
+            <br><br>
+
+            مسؤول الموارد البشرية: __________________
 
         </div>
 
@@ -605,6 +819,10 @@ let cachedSalary = 0;
 let cachedBefore = 0;
 
 let cachedMax = 0;
+
+
+// بيانات آخر سلفة ناجحة (لأجل الطباعة)
+let lastAdvance = null;
 
 
 /* =========================================
@@ -1115,6 +1333,48 @@ async function saveAdvance(){
             "✅ تم تسجيل السلفة";
 
 
+        // حفظ بيانات آخر سلفة ناجحة لأجل الطباعة
+
+        lastAdvance = {
+
+            advanceId:
+                data.advanceId || "",
+
+            employeeName:
+                selectedEmployee["الاسم"],
+
+            employeeId:
+                selectedEmployee["Employee ID"],
+
+            month:
+                month,
+
+            salary:
+                data.salary !== undefined
+                ?
+                data.salary
+                :
+                cachedSalary,
+
+            amount:
+                amount,
+
+            remaining:
+                data.remaining !== undefined
+                ?
+                data.remaining
+                :
+                (cachedBefore - amount)
+
+        };
+
+
+        document.getElementById(
+            "printBtn"
+        ).style.display =
+            "inline-block";
+
+
         document.getElementById(
             "advanceAmount"
         ).value =
@@ -1345,6 +1605,82 @@ async function loadAdvances(){
 /* =========================================
    تنسيق المبلغ
 ========================================= */
+
+/* =========================================
+   طباعة وصل الاستلام
+========================================= */
+
+function printReceipt(){
+
+    if(!lastAdvance){
+
+        showMessage(
+            "❌ يجب تسجيل سلفة أولاً قبل الطباعة",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    document.getElementById(
+        "rNumber"
+    ).innerText =
+        lastAdvance.advanceId || "........";
+
+
+    document.getElementById(
+        "rDate"
+    ).innerText =
+        formatDate(new Date());
+
+
+    document.getElementById(
+        "rName"
+    ).innerText =
+        lastAdvance.employeeName || "";
+
+
+    document.getElementById(
+        "rId"
+    ).innerText =
+        lastAdvance.employeeId || "";
+
+
+    document.getElementById(
+        "rMonth"
+    ).innerText =
+        lastAdvance.month || "";
+
+
+    document.getElementById(
+        "rSalary"
+    ).innerText =
+        formatMoney(lastAdvance.salary) + " د.ع";
+
+
+    document.getElementById(
+        "rAmount"
+    ).innerText =
+        formatMoney(lastAdvance.amount) + " د.ع";
+
+
+    document.getElementById(
+        "rRemaining"
+    ).innerText =
+        formatMoney(lastAdvance.remaining) + " د.ع";
+
+
+    setTimeout(
+        function(){
+            window.print();
+        },
+        300
+    );
+
+}
+
 
 function formatMoney(value){
 
