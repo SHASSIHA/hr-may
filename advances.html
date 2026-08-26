@@ -1515,14 +1515,14 @@ async function loadAdvances(){
 
                             <td>
                                 ${safe(
-                                    item["رقم السلفة"]
+                                    getField(item,["Advance ID","رقم السلفة"])
                                     || "-"
                                 )}
                             </td>
 
                             <td>
                                 ${safe(
-                                    item["اسم الموظف"]
+                                    getField(item,["الموظف","اسم الموظف"])
                                     || "-"
                                 )}
                             </td>
@@ -1678,6 +1678,31 @@ function printReceipt(){
         },
         300
     );
+
+}
+
+
+/* =========================================
+   جلب أول قيمة موجودة من عدة أسماء أعمدة محتملة
+   (حتى لو تغير اسم عمود بالشيت لاحقاً)
+========================================= */
+
+function getField(obj, keys){
+
+    for(const key of keys){
+
+        if(
+            obj[key] !== undefined &&
+            obj[key] !== ""
+        ){
+
+            return obj[key];
+
+        }
+
+    }
+
+    return "";
 
 }
 
