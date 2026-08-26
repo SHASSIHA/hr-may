@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 
@@ -307,7 +306,8 @@ th{
         💡 <strong>نظام السلفة على الراتب</strong><br>
 
         يسمح للموظف بأخذ سلفة بسيطة قبل موعد الراتب،
-        وبحد أقصى <strong>35%</strong> من المستحق المتاح له.
+        وبحد أقصى <strong>35%</strong> من المستحق المتاح له
+        (الراتب بعد خصم أي سلف سابقة أخذها بنفس الشهر).
 
     </div>
 
@@ -456,7 +456,7 @@ th{
             <div class="stat">
 
                 <div class="stat-label">
-                    المستحق
+                    المستحق (بعد خصم سلف الشهر)
                 </div>
 
                 <div
@@ -490,7 +490,7 @@ th{
             <div class="stat">
 
                 <div class="stat-label">
-                    بعد السلفة
+                    بعد هذه السلفة
                 </div>
 
                 <div
@@ -599,6 +599,14 @@ let selectedEmployee = null;
 let advances = [];
 
 
+// القيم المحسوبة حالياً بناءً على الموظف/الشهر المختار
+let cachedSalary = 0;
+
+let cachedBefore = 0;
+
+let cachedMax = 0;
+
+
 /* =========================================
    تحميل الموظفين
 ========================================= */
@@ -690,7 +698,7 @@ async function loadEmployees(){
 
 
 /* =========================================
-   اختيار الموظف
+   اختيار الموظف / تغيير الشهر
 ========================================= */
 
 document
@@ -709,49 +717,146 @@ document
                     String(this.value)
             );
 
-        calculate();
+        refreshLimits();
 
     }
 );
 
 
-/* =========================================
-   تغيير مبلغ السلفة
-========================================= */
+document
+.getElementById("month")
+.addEventListener(
+    "change",
+    refreshLimits
+);
+
 
 document
 .getElementById("advanceAmount")
 .addEventListener(
     "input",
-    calculate
+    updateAfter
 );
 
 
 /* =========================================
-   الحساب
+   حساب المستحق والحد بناءً على السلف
+   السابقة لنفس الموظف ونفس الشهر
 ========================================= */
 
-function calculate(){
+async function refreshLimits(){
 
-    const salary =
-        selectedEmployee
-        ?
+    const month =
+        document.getElementById(
+            "month"
+        ).value;
+
+
+    if(!selectedEmployee || !month){
+
+        cachedSalary = 0;
+        cachedBefore = 0;
+        cachedMax = 0;
+
+        updateAfter();
+
+        return;
+
+    }
+
+
+    cachedSalary =
         Number(
             selectedEmployee["الراتب"] || 0
-        )
-        :
-        0;
-
-
-    const before =
-        salary;
-
-
-    const max =
-        Math.floor(
-            before * 0.35
         );
 
+
+    try{
+
+        const response =
+            await fetch(API,{
+
+                method:"POST",
+
+                body:JSON.stringify({
+
+                    action:
+                        "getAdvances",
+
+                    employeeId:
+                        selectedEmployee[
+                            "Employee ID"
+                        ],
+
+                    month:
+                        month
+
+                })
+
+            });
+
+
+        const data =
+            await response.json();
+
+
+        let previousTotal = 0;
+
+
+        if(data.status === "success"){
+
+            (data.advances || [])
+            .forEach(item => {
+
+                previousTotal +=
+                    Number(
+                        item["مبلغ السلفة"] || 0
+                    );
+
+            });
+
+        }
+
+
+        cachedBefore =
+            cachedSalary - previousTotal;
+
+
+        cachedMax =
+            Math.floor(
+                cachedBefore * 0.35
+            );
+
+
+    }
+    catch(error){
+
+        // لو فشل الجلب، نعتبر ما في سلف سابقة
+        // (السيرفر رح يتحقق مرة ثانية عند الحفظ)
+
+        cachedBefore =
+            cachedSalary;
+
+
+        cachedMax =
+            Math.floor(
+                cachedBefore * 0.35
+            );
+
+    }
+
+
+    updateAfter();
+
+}
+
+
+/* =========================================
+   تحديث عرض "بعد السلفة" فقط
+   (بدون إعادة جلب من السيرفر)
+========================================= */
+
+function updateAfter(){
 
     const amount =
         Number(
@@ -761,44 +866,40 @@ function calculate(){
         );
 
 
-    const after =
-        before - amount;
-
-
     document.getElementById(
         "salary"
     ).value =
-        formatMoney(salary);
+        formatMoney(cachedSalary);
 
 
     document.getElementById(
         "beforeAdvance"
     ).value =
-        formatMoney(before);
+        formatMoney(cachedBefore);
 
 
     document.getElementById(
         "maxAdvance"
     ).value =
-        formatMoney(max);
+        formatMoney(cachedMax);
 
 
     document.getElementById(
         "salaryView"
     ).innerText =
-        formatMoney(salary);
+        formatMoney(cachedSalary);
 
 
     document.getElementById(
         "beforeView"
     ).innerText =
-        formatMoney(before);
+        formatMoney(cachedBefore);
 
 
     document.getElementById(
         "maxView"
     ).innerText =
-        formatMoney(max);
+        formatMoney(cachedMax);
 
 
     const afterView =
@@ -807,7 +908,7 @@ function calculate(){
         );
 
 
-    if(amount > max){
+    if(amount > cachedMax){
 
         afterView.innerText =
             "تجاوز الحد";
@@ -820,7 +921,7 @@ function calculate(){
 
         afterView.innerText =
             formatMoney(
-                Math.max(after,0)
+                Math.max(cachedBefore - amount, 0)
             );
 
         afterView.className =
@@ -867,22 +968,6 @@ async function saveAdvance(){
     }
 
 
-    const salary =
-        Number(
-            selectedEmployee["الراتب"] || 0
-        );
-
-
-    const before =
-        salary;
-
-
-    const max =
-        Math.floor(
-            before * 0.35
-        );
-
-
     const amount =
         Number(
             document.getElementById(
@@ -903,12 +988,12 @@ async function saveAdvance(){
     }
 
 
-    if(amount > max){
+    if(amount > cachedMax){
 
         showMessage(
 
             "❌ مبلغ السلفة يتجاوز الحد المسموح 35% وهو " +
-            formatMoney(max),
+            formatMoney(cachedMax),
 
             "error"
 
@@ -941,7 +1026,7 @@ async function saveAdvance(){
             "\n" +
 
             "الحد الأعلى: " +
-            formatMoney(max)
+            formatMoney(cachedMax)
 
         );
 
@@ -969,13 +1054,6 @@ async function saveAdvance(){
 
     try{
 
-        /*
-         * حالياً نرسل السلفة كمعاملة.
-         * بعد إضافة وظائف السلف إلى Apps Script
-         * يمكن تحويلها إلى جدول Salary Advances
-         * بشكل مباشر.
-         */
-
         const response =
             await fetch(API,{
 
@@ -984,7 +1062,7 @@ async function saveAdvance(){
                 body:JSON.stringify({
 
                     action:
-                        "addTransaction",
+                        "addAdvance",
 
                     employeeId:
                         selectedEmployee[
@@ -996,25 +1074,11 @@ async function saveAdvance(){
                             "الاسم"
                         ],
 
-                    type:
-                        "سلفة راتب",
-
-                    date:
-                        new Date()
-                        .toISOString()
-                        .split("T")[0],
-
-                    bookNumber:
-                        amount,
-
-                    fromDate:
+                    month:
                         month,
 
-                    toDate:
-                        "",
-
-                    reason:
-                        "سلفة على الراتب",
+                    amount:
+                        amount,
 
                     notes:
                         notes
@@ -1063,7 +1127,7 @@ async function saveAdvance(){
             "";
 
 
-        calculate();
+        await refreshLimits();
 
 
         setTimeout(
@@ -1106,7 +1170,7 @@ async function saveAdvance(){
 
 
 /* =========================================
-   سجل السلف
+   سجل السلف (كل السلف المسجلة)
 ========================================= */
 
 async function loadAdvances(){
@@ -1127,7 +1191,7 @@ async function loadAdvances(){
                 body:JSON.stringify({
 
                     action:
-                        "getTransactions"
+                        "getAdvances"
 
                 })
 
@@ -1152,17 +1216,7 @@ async function loadAdvances(){
 
 
         advances =
-            (data.transactions || [])
-            .filter(
-                item =>
-                    String(
-                        item["نوع المعاملة"] ||
-                        item["type"] ||
-                        ""
-                    )
-                    ===
-                    "سلفة راتب"
-            );
+            data.advances || [];
 
 
         if(!advances.length){
@@ -1189,14 +1243,11 @@ async function loadAdvances(){
 
 
         table.innerHTML =
-            advances.map(
+            advances
+            .slice()
+            .reverse()
+            .map(
                 item => {
-
-                    const amount =
-                        Number(
-                            item["رقم الكتاب"] || 0
-                        );
-
 
                     return `
 
@@ -1204,7 +1255,7 @@ async function loadAdvances(){
 
                             <td>
                                 ${safe(
-                                    item["رقم المعاملة"]
+                                    item["رقم السلفة"]
                                     || "-"
                                 )}
                             </td>
@@ -1218,26 +1269,32 @@ async function loadAdvances(){
 
                             <td>
                                 ${safe(
-                                    item["من تاريخ"]
+                                    item["الشهر"]
                                     || "-"
                                 )}
                             </td>
 
                             <td>
-                                ${formatMoney(amount)}
+                                ${formatMoney(
+                                    item["مبلغ السلفة"]
+                                )}
                             </td>
 
                             <td>
-                                -
+                                ${formatMoney(
+                                    item["الحد الأعلى 35%"]
+                                )}
                             </td>
 
                             <td>
-                                -
+                                ${formatMoney(
+                                    item["المتبقي بعد السلفة"]
+                                )}
                             </td>
 
                             <td>
                                 ${formatDate(
-                                    item["تاريخ"]
+                                    item["التاريخ"]
                                 )}
                             </td>
 
@@ -1380,4 +1437,3 @@ loadAdvances();
 </body>
 
 </html>
-```
