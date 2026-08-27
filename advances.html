@@ -606,58 +606,48 @@ async function loadEmployees(){
         document.getElementById("employee");
 
     select.innerHTML =
-        '<option value="">جاري تحميل الموظفين...</option>';
+        '<option value="">⏳ جاري تحميل الموظفين...</option>';
 
-    try{
+    try {
 
-        const response =
-            await fetch(API,{
-                method:"POST",
-                headers:{
-                    "Content-Type":"text/plain;charset=utf-8"
-                },
-                body:JSON.stringify({
-                    action:"getEmployees"
-                })
-            });
+        const response = await fetch(API, {
+            method: "POST",
+            headers: {
+                "Content-Type": "text/plain;charset=utf-8"
+            },
+            body: JSON.stringify({
+                action: "getEmployees"
+            })
+        });
 
-        const text =
-            await response.text();
+        const text = await response.text();
+
+        console.log("GET EMPLOYEES RESPONSE:", text);
 
         let data;
 
-        try{
+        try {
             data = JSON.parse(text);
-        }
-        catch(e){
+        } catch (e) {
             throw new Error(
-                "الـ API لم يرجع JSON صحيح"
+                "الـ Apps Script لم يرجع JSON صحيح"
             );
         }
 
-        if(data.status !== "success"){
+        if (data.status !== "success") {
             throw new Error(
-                data.message ||
-                "فشل تحميل الموظفين"
+                data.message || "فشل تحميل الموظفين"
             );
         }
 
-        employees =
-            data.employees || [];
+        employees = Array.isArray(data.employees)
+            ? data.employees
+            : [];
 
         select.innerHTML =
             '<option value="">اختر الموظف</option>';
 
         employees.forEach(function(employee){
-
-            const status =
-                String(
-                    employee["الحالة"] || ""
-                ).trim();
-
-            if(status === "منتهي الخدمة"){
-                return;
-            }
 
             const id =
                 employee["Employee ID"];
@@ -665,33 +655,46 @@ async function loadEmployees(){
             const name =
                 employee["الاسم"];
 
-            if(!id || !name){
+            const status =
+                String(
+                    employee["الحالة"] || ""
+                ).trim();
+
+            if (!id || !name) {
+                return;
+            }
+
+            if (status === "منتهي الخدمة") {
                 return;
             }
 
             const option =
                 document.createElement("option");
 
-            option.value = id;
+            option.value = String(id);
 
             option.textContent =
-                name + " — " + id;
+                String(name) +
+                " — " +
+                String(id);
 
             select.appendChild(option);
 
         });
 
-        if(select.options.length === 1){
+        if (select.options.length === 1) {
 
             select.innerHTML =
                 '<option value="">لا يوجد موظفون مستمرون</option>';
 
         }
 
-    }
-    catch(error){
+    } catch (error) {
 
-        console.error(error);
+        console.error(
+            "LOAD EMPLOYEES ERROR:",
+            error
+        );
 
         select.innerHTML =
             '<option value="">❌ تعذر تحميل الموظفين</option>';
@@ -700,11 +703,8 @@ async function loadEmployees(){
             "❌ " + error.message,
             "error"
         );
-
     }
-
 }
-
 
 /* ================================================= */
 /* اختيار الموظف */
