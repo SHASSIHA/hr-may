@@ -1146,105 +1146,163 @@ async function saveAdvance(){
 
 function createReceipt(){
 
-    if(!selectedEmployee || !lastAdvance){
+    if(!selectedEmployee){
         return;
     }
 
     const month =
         document.getElementById("month").value;
 
-    const salary =
-        Number(lastAdvance.salary || 0);
-
-    const previousAdvance =
-        Number(
-            lastAdvance.previousAdvance || 0
-        );
-
     const amount =
         Number(
-            lastAdvance.amount || 0
+            document.getElementById("amount").value || 0
         );
 
-    const remaining =
+    const salary =
         Number(
-            lastAdvance.remaining || 0
+            selectedEmployee["الراتب"] || 0
         );
+
+    /*
+     * نأخذ القيم الظاهرة فعلياً من الشاشة
+     */
+
+    const previousAdvanceText =
+        document.getElementById("previousAdvance").textContent
+        .replace(/[^\d.-]/g,"");
+
+    const previousAdvance =
+        Number(previousAdvanceText || 0);
+
+    const absenceDaysText =
+        document.getElementById("absenceValue").textContent
+        .replace(/[^\d.-]/g,"");
+
+    const absenceDays =
+        Number(absenceDaysText || 0);
+
+    const absenceDeductionText =
+        document.getElementById("absenceDeduction").textContent
+        .replace(/[^\d.-]/g,"");
+
+    const absenceDeduction =
+        Number(absenceDeductionText || 0);
 
 
     /*
-     * نعيد حساب الغياب للعرض في الوصل
+     * الراتب بعد خصم الغياب
      */
 
-    const salaryAfterAdvance =
+    const salaryAfterAbsence =
         Math.max(
-            remaining,
+            salary - absenceDeduction,
             0
         );
 
 
+    /*
+     * المتبقي قبل السلفة الحالية
+     */
+
+    const availableBeforeAdvance =
+        Math.max(
+            salaryAfterAbsence - previousAdvance,
+            0
+        );
+
+
+    /*
+     * المتبقي بعد السلفة الحالية
+     */
+
+    const remaining =
+        Math.max(
+            availableBeforeAdvance - amount,
+            0
+        );
+
+
+    /*
+     * رقم السلفة
+     */
+
+    const advanceId =
+        lastAdvance &&
+        lastAdvance.advanceId
+        ? lastAdvance.advanceId
+        : "ADV-........";
+
+
+    /*
+     * تعبئة الوصل
+     */
+
     document.getElementById(
         "printAdvanceId"
     ).textContent =
-        lastAdvance.advanceId || "-";
+        advanceId;
+
 
     document.getElementById(
         "printDate"
     ).textContent =
         new Date().toLocaleDateString("en-GB");
 
+
     document.getElementById(
         "printEmployeeName"
     ).textContent =
         selectedEmployee["الاسم"] || "-";
+
 
     document.getElementById(
         "printEmployeeId"
     ).textContent =
         selectedEmployee["Employee ID"] || "-";
 
+
     document.getElementById(
         "printMonth"
     ).textContent =
         month || "-";
+
 
     document.getElementById(
         "printSalary"
     ).textContent =
         money(salary);
 
+
+    document.getElementById(
+        "printAbsenceDays"
+    ).textContent =
+        absenceDays + " يوم";
+
+
+    document.getElementById(
+        "printAbsenceDeduction"
+    ).textContent =
+        money(absenceDeduction);
+
+
     document.getElementById(
         "printPreviousAdvance"
     ).textContent =
         money(previousAdvance);
+
 
     document.getElementById(
         "printAmount"
     ).textContent =
         money(amount);
 
+
     document.getElementById(
         "printRemaining"
     ).textContent =
-        money(salaryAfterAdvance);
-
-
-    document.getElementById(
-        "printAbsenceDays"
-    ).textContent =
-        document.getElementById(
-            "absenceValue"
-        ).textContent;
-
-    document.getElementById(
-        "printAbsenceDeduction"
-    ).textContent =
-        document.getElementById(
-            "absenceDeduction"
-        ).textContent;
+        money(remaining);
 
 }
-
 
 /* ================================================= */
 /* طباعة */
