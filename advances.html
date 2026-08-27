@@ -1164,38 +1164,85 @@ function createReceipt(){
         );
 
     /*
-     * نأخذ القيم الظاهرة فعلياً من الشاشة
+     * السلفة السابقة نأخذها مباشرة من Apps Script
+     * وليس من الشاشة
      */
+    let previousAdvance = 0;
 
-    const previousAdvanceText =
-        document.getElementById("previousAdvance").textContent
-        .replace(/[^\d.-]/g,"");
+    if(
+        lastAdvance &&
+        lastAdvance.previousAdvance !== undefined
+    ){
+        previousAdvance =
+            Number(lastAdvance.previousAdvance || 0);
+    }
 
-    const previousAdvance =
-        Number(previousAdvanceText || 0);
+    /*
+     * إذا لم توجد نتيجة من السيرفر،
+     * نحاول أخذ القيمة من الشاشة كاحتياط
+     */
+    if(
+        previousAdvance === 0 &&
+        !lastAdvance
+    ){
+
+        const text =
+            document.getElementById(
+                "previousAdvance"
+            ).textContent
+            .replace(/[^\d.-]/g,"");
+
+        previousAdvance =
+            Number(text || 0);
+    }
+
+    /*
+     * أيام الغياب
+     */
+    let absenceDays = 0;
 
     const absenceDaysText =
-        document.getElementById("absenceValue").textContent
+        document.getElementById(
+            "absenceValue"
+        ).textContent
         .replace(/[^\d.-]/g,"");
 
-    const absenceDays =
+    absenceDays =
         Number(absenceDaysText || 0);
 
-    const absenceDeductionText =
-        document.getElementById("absenceDeduction").textContent
-        .replace(/[^\d.-]/g,"");
 
-    const absenceDeduction =
-        Number(absenceDeductionText || 0);
+    /*
+     * خصم الغياب
+     */
+    let absenceDeduction = 0;
+
+    if(
+        lastAdvance &&
+        lastAdvance.absenceDeduction !== undefined
+    ){
+        absenceDeduction =
+            Number(lastAdvance.absenceDeduction || 0);
+    }
+    else{
+
+        const deductionText =
+            document.getElementById(
+                "absenceDeduction"
+            ).textContent
+            .replace(/[^\d.-]/g,"");
+
+        absenceDeduction =
+            Number(deductionText || 0);
+    }
 
 
     /*
      * الراتب بعد خصم الغياب
      */
-
     const salaryAfterAbsence =
         Math.max(
-            salary - absenceDeduction,
+            salary -
+            absenceDeduction,
             0
         );
 
@@ -1203,10 +1250,10 @@ function createReceipt(){
     /*
      * المتبقي قبل السلفة الحالية
      */
-
     const availableBeforeAdvance =
         Math.max(
-            salaryAfterAbsence - previousAdvance,
+            salaryAfterAbsence -
+            previousAdvance,
             0
         );
 
@@ -1214,10 +1261,10 @@ function createReceipt(){
     /*
      * المتبقي بعد السلفة الحالية
      */
-
     const remaining =
         Math.max(
-            availableBeforeAdvance - amount,
+            availableBeforeAdvance -
+            amount,
             0
         );
 
@@ -1225,7 +1272,6 @@ function createReceipt(){
     /*
      * رقم السلفة
      */
-
     const advanceId =
         lastAdvance &&
         lastAdvance.advanceId
