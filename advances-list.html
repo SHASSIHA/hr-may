@@ -1,0 +1,2251 @@
+<!DOCTYPE html>
+
+<html lang="ar" dir="rtl">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>سجل السلف - Shassiha HR</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:'Cairo',sans-serif;
+}
+
+body{
+    background:#f4f6f9;
+    color:#222;
+}
+
+.header{
+    background:#c62828;
+    color:white;
+    padding:18px 25px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 3px 10px rgba(0,0,0,.12);
+}
+
+.header h1{
+    font-size:22px;
+}
+
+.header a{
+    color:white;
+    text-decoration:none;
+    font-size:14px;
+}
+
+.container{
+    max-width:1250px;
+    margin:25px auto;
+    padding:0 15px;
+}
+
+.card{
+    background:white;
+    border-radius:18px;
+    padding:22px;
+    box-shadow:0 2px 10px rgba(0,0,0,.07);
+    margin-bottom:20px;
+}
+
+.title{
+    font-size:20px;
+    font-weight:bold;
+    margin-bottom:20px;
+    padding-bottom:12px;
+    border-bottom:1px solid #eee;
+}
+
+.filters{
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr auto;
+    gap:12px;
+    align-items:end;
+}
+
+.field{
+    display:flex;
+    flex-direction:column;
+}
+
+label{
+    font-size:13px;
+    color:#666;
+    margin-bottom:6px;
+    font-weight:600;
+}
+
+input,
+select{
+    width:100%;
+    padding:11px 12px;
+    border:1px solid #ddd;
+    border-radius:10px;
+    font-size:14px;
+    outline:none;
+    background:white;
+}
+
+input:focus,
+select:focus{
+    border-color:#c62828;
+}
+
+.btn{
+    border:0;
+    border-radius:10px;
+    padding:11px 20px;
+    cursor:pointer;
+    font-size:14px;
+    font-weight:600;
+}
+
+.search{
+    background:#c62828;
+    color:white;
+}
+
+.print{
+    background:#2878d0;
+    color:white;
+}
+
+.back{
+    background:#333;
+    color:white;
+}
+
+.actions{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+    margin-bottom:20px;
+}
+
+.stat{
+    background:white;
+    border-radius:15px;
+    padding:18px;
+    box-shadow:0 2px 10px rgba(0,0,0,.06);
+    text-align:center;
+}
+
+.stat small{
+    display:block;
+    color:#777;
+    margin-bottom:7px;
+}
+
+.stat strong{
+    font-size:21px;
+}
+
+.table-wrap{
+    width:100%;
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:1050px;
+}
+
+thead{
+    background:#f7f7f7;
+}
+
+th,
+td{
+    padding:12px 10px;
+    border-bottom:1px solid #eee;
+    text-align:center;
+    white-space:nowrap;
+    font-size:13px;
+}
+
+th{
+    font-weight:700;
+    color:#444;
+}
+
+tbody tr:hover{
+    background:#fff8f8;
+}
+
+.amount{
+    font-weight:700;
+}
+
+.remaining{
+    color:#16833b;
+    font-weight:700;
+}
+
+.status{
+    display:inline-block;
+    padding:5px 10px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:600;
+}
+
+.status-active{
+    background:#e7f7ed;
+    color:#16833b;
+}
+
+.status-cancelled{
+    background:#ffe5e5;
+    color:#c62828;
+}
+
+.loading{
+    text-align:center;
+    padding:40px;
+    color:#777;
+}
+
+.empty{
+    text-align:center;
+    padding:40px;
+    color:#777;
+}
+
+.message{
+    display:none;
+    padding:13px;
+    border-radius:10px;
+    margin-bottom:20px;
+    text-align:center;
+    font-weight:600;
+}
+
+.success{
+    display:block;
+    background:#e7f7ed;
+    color:#16833b;
+}
+
+.error{
+    display:block;
+    background:#ffe5e5;
+    color:#c62828;
+}
+
+.summary-row{
+    display:flex;
+    justify-content:space-between;
+    gap:20px;
+    padding:9px 0;
+    border-bottom:1px solid #eee;
+}
+
+.summary-row:last-child{
+    border-bottom:0;
+}
+
+.summary-row strong{
+    color:#c62828;
+}
+
+@media(max-width:900px){
+
+    .filters{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .stats{
+        grid-template-columns:1fr 1fr;
+    }
+
+}
+
+@media(max-width:600px){
+
+    .header{
+        flex-direction:column;
+        gap:8px;
+        text-align:center;
+    }
+
+    .filters{
+        grid-template-columns:1fr;
+    }
+
+    .stats{
+        grid-template-columns:1fr;
+    }
+
+    .btn{
+        width:100%;
+    }
+
+    .actions{
+        flex-direction:column;
+    }
+
+}
+
+/* ========================= */
+/* الطباعة */
+/* ========================= */
+
+.print-area{
+    display:none;
+}
+
+@media print{
+
+    @page{
+        size:A4 landscape;
+        margin:12mm;
+    }
+
+    body{
+        background:white;
+    }
+
+    .header,
+    .container,
+    .stats{
+        display:none !important;
+    }
+
+    .print-area{
+        display:block !important;
+        color:#111;
+    }
+
+    .print-header{
+        text-align:center;
+        margin-bottom:20px;
+    }
+
+    .print-header h1{
+        font-size:22px;
+        margin-bottom:4px;
+    }
+
+    .print-header div{
+        font-size:14px;
+    }
+
+    .print-title{
+        text-align:center;
+        font-size:21px;
+        font-weight:bold;
+        margin:15px 0 20px;
+        text-decoration:underline;
+    }
+
+    .print-date{
+        text-align:left;
+        font-size:12px;
+        margin-bottom:12px;
+    }
+
+    .print-summary{
+        border:1px solid #333;
+        margin-bottom:18px;
+    }
+
+    .print-summary-row{
+        display:flex;
+        justify-content:space-between;
+        padding:7px 12px;
+        border-bottom:1px solid #ccc;
+        font-size:13px;
+    }
+
+    .print-summary-row:last-child{
+        border-bottom:0;
+    }
+
+    .print-table{
+        width:100%;
+        border-collapse:collapse;
+        font-size:10px;
+    }
+
+    .print-table th,
+    .print-table td{
+        border:1px solid #333;
+        padding:6px 5px;
+        text-align:center;
+    }
+
+    .print-table th{
+        background:#eee !important;
+    }
+
+    .print-footer{
+        margin-top:35px;
+        text-align:left;
+        font-size:13px;
+        line-height:2;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="header">
+
+```
+<h1>💰 سجل السلف</h1>
+
+<a href="transactions.html">
+    ← العودة للمعاملات
+</a>
+```
+
+</div>
+
+<div class="container">
+
+```
+<div id="message" class="message"></div>
+
+
+<!-- ========================= -->
+<!-- الفلاتر -->
+<!-- ========================= -->
+
+<div class="card">
+
+    <div class="title">
+        🔎 البحث في السلف
+    </div>
+
+    <div class="filters">
+
+        <div class="field">
+
+            <label>
+                الموظف
+            </label>
+
+            <input
+                type="text"
+                id="employeeSearch"
+                placeholder="اسم الموظف أو الرقم الوظيفي">
+
+        </div>
+
+
+        <div class="field">
+
+            <label>
+                الشهر
+            </label>
+
+            <input
+                type="month"
+                id="monthFilter">
+
+        </div>
+
+
+        <div class="field">
+
+            <label>
+                الحالة
+            </label>
+
+            <select id="statusFilter">
+
+                <option value="">
+                    الكل
+                </option>
+
+                <option value="مسجلة">
+                    مسجلة
+                </option>
+
+                <option value="ملغاة">
+                    ملغاة
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <button
+            class="btn search"
+            onclick="filterAdvances()">
+
+            🔎 بحث
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- ========================= -->
+<!-- الإحصائيات -->
+<!-- ========================= -->
+
+<div class="stats">
+
+    <div class="stat">
+
+        <small>
+            عدد السلف
+        </small>
+
+        <strong id="countValue">
+            0
+        </strong>
+
+    </div>
+
+
+    <div class="stat">
+
+        <small>
+            إجمالي السلف
+        </small>
+
+        <strong id="totalValue">
+            0 د.ع
+        </strong>
+
+    </div>
+
+
+    <div class="stat">
+
+        <small>
+            إجمالي المتبقي
+        </small>
+
+        <strong id="remainingValue">
+            0 د.ع
+        </strong>
+
+    </div>
+
+
+    <div class="stat">
+
+        <small>
+            متوسط السلفة
+        </small>
+
+        <strong id="averageValue">
+            0 د.ع
+        </strong>
+
+    </div>
+
+</div>
+
+
+<!-- ========================= -->
+<!-- الجدول -->
+<!-- ========================= -->
+
+<div class="card">
+
+    <div class="title">
+        📋 قائمة السلف
+    </div>
+
+
+    <div class="actions" style="margin-bottom:15px;">
+
+        <button
+            class="btn print"
+            onclick="printReport()">
+
+            🖨️ طباعة الكشف
+
+        </button>
+
+
+        <button
+            class="btn back"
+            onclick="window.location.href='advances.html'">
+
+            💰 تسجيل سلفة جديدة
+
+        </button>
+
+    </div>
+
+
+    <div class="table-wrap">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>
+                        #
+                    </th>
+
+                    <th>
+                        رقم السلفة
+                    </th>
+
+                    <th>
+                        التاريخ
+                    </th>
+
+                    <th>
+                        الرقم الوظيفي
+                    </th>
+
+                    <th>
+                        الموظف
+                    </th>
+
+                    <th>
+                        الشهر
+                    </th>
+
+                    <th>
+                        الراتب
+                    </th>
+
+                    <th>
+                        المستحق قبل السلفة
+                    </th>
+
+                    <th>
+                        الحد الأعلى 35%
+                    </th>
+
+                    <th>
+                        مبلغ السلفة
+                    </th>
+
+                    <th>
+                        المتبقي بعد السلفة
+                    </th>
+
+                    <th>
+                        الحالة
+                    </th>
+
+                    <th>
+                        ملاحظات
+                    </th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody id="tableBody">
+
+                <tr>
+
+                    <td
+                        colspan="13"
+                        class="loading">
+
+                        ⏳ جاري تحميل السلف...
+
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+```
+
+</div>
+
+<!-- ========================= -->
+
+<!-- منطقة الطباعة -->
+
+<!-- ========================= -->
+
+<div class="print-area">
+
+```
+<div class="print-header">
+
+    <h1>
+        اسم الشركة / المطعم
+    </h1>
+
+    <div>
+        إدارة الموارد البشرية
+    </div>
+
+</div>
+
+
+<div class="print-title">
+    كشف السلف على الرواتب
+</div>
+
+
+<div class="print-date">
+
+    تاريخ الطباعة:
+    <strong id="printDate">
+        -
+    </strong>
+
+</div>
+
+
+<div class="print-summary">
+
+    <div class="print-summary-row">
+
+        <span>
+            عدد السلف
+        </span>
+
+        <strong id="printCount">
+            0
+        </strong>
+
+    </div>
+
+
+    <div class="print-summary-row">
+
+        <span>
+            إجمالي السلف
+        </span>
+
+        <strong id="printTotal">
+            0 د.ع
+        </strong>
+
+    </div>
+
+
+    <div class="print-summary-row">
+
+        <span>
+            إجمالي المتبقي
+        </span>
+
+        <strong id="printRemaining">
+            0 د.ع
+        </strong>
+
+    </div>
+
+</div>
+
+
+<table class="print-table">
+
+    <thead>
+
+        <tr>
+
+            <th>
+                #
+            </th>
+
+            <th>
+                رقم السلفة
+            </th>
+
+            <th>
+                الموظف
+            </th>
+
+            <th>
+                الرقم الوظيفي
+            </th>
+
+            <th>
+                الشهر
+            </th>
+
+            <th>
+                الراتب
+            </th>
+
+            <th>
+                المستحق قبل السلفة
+            </th>
+
+            <th>
+                الحد الأعلى
+            </th>
+
+            <th>
+                مبلغ السلفة
+            </th>
+
+            <th>
+                المتبقي بعد السلفة
+            </th>
+
+            <th>
+                الحالة
+            </th>
+
+        </tr>
+
+    </thead>
+
+
+    <tbody id="printTableBody">
+    </tbody>
+
+</table>
+
+
+<div class="print-footer">
+
+    مسؤول الموارد البشرية
+
+    <br>
+
+    الاسم: ______________________
+
+    <br>
+
+    التوقيع: ____________________
+
+    <br>
+
+    الختم: ______________________
+
+</div>
+```
+
+</div>
+
+<script>
+
+/* ================================================= */
+/* API */
+/* ================================================= */
+
+const API =
+"https://script.google.com/macros/s/AKfycbw6pnqbRn3VyJvFjk0RGfEt8VXdBkOq2uqooSvxi0onjcUStpJ_hOGNZVPLimRA-ZNAGQ/exec";
+
+
+/* ================================================= */
+/* البيانات */
+/* ================================================= */
+
+let allAdvances = [];
+let filteredAdvances = [];
+
+
+/* ================================================= */
+/* التشغيل */
+/* ================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function(){
+
+        const now =
+            new Date();
+
+        document.getElementById(
+            "monthFilter"
+        ).value =
+            now.getFullYear() +
+            "-" +
+            String(
+                now.getMonth() + 1
+            ).padStart(2,"0");
+
+
+        loadAdvances();
+
+    }
+);
+
+
+/* ================================================= */
+/* تحميل السلف */
+/* ================================================= */
+
+async function loadAdvances(){
+
+    const tbody =
+        document.getElementById(
+            "tableBody"
+        );
+
+    tbody.innerHTML = `
+
+        <tr>
+
+            <td
+                colspan="13"
+                class="loading">
+
+                ⏳ جاري تحميل السلف...
+
+            </td>
+
+        </tr>
+
+    `;
+
+    try{
+
+        /*
+         * نطلب كل السلف.
+         *
+         * لا نرسل موظف أو شهر حتى يرجع
+         * Apps Script جميع السجلات.
+         */
+
+        const result =
+            await postAPI({
+
+                action:"getAdvances"
+
+            });
+
+
+        if(
+            result.status !==
+            "success"
+        ){
+
+            throw new Error(
+                result.message ||
+                "فشل تحميل السلف"
+            );
+
+        }
+
+
+        allAdvances =
+            Array.isArray(
+                result.advances
+            )
+            ? result.advances
+            : [];
+
+
+        /*
+         * الأحدث أولاً
+         */
+
+        allAdvances.sort(
+            function(a,b){
+
+                const da =
+                    parseDateValue(
+                        getAdvanceField(
+                            a,
+                            "التاريخ"
+                        )
+                    );
+
+                const db =
+                    parseDateValue(
+                        getAdvanceField(
+                            b,
+                            "التاريخ"
+                        )
+                    );
+
+                return db - da;
+
+            }
+        );
+
+
+        filteredAdvances =
+            [...allAdvances];
+
+
+        renderTable(
+            filteredAdvances
+        );
+
+
+        updateStats(
+            filteredAdvances
+        );
+
+
+    }
+    catch(error){
+
+        console.error(
+            "LOAD ADVANCES ERROR:",
+            error
+        );
+
+        tbody.innerHTML = `
+
+            <tr>
+
+                <td
+                    colspan="13"
+                    class="empty">
+
+                    ❌ ${safe(
+                        error.message
+                    )}
+
+                </td>
+
+            </tr>
+
+        `;
+
+
+        showMessage(
+            "❌ " +
+            error.message,
+            "error"
+        );
+
+    }
+
+}
+
+
+/* ================================================= */
+/* البحث */
+/* ================================================= */
+
+function filterAdvances(){
+
+    const employeeSearch =
+        document.getElementById(
+            "employeeSearch"
+        ).value
+        .trim()
+        .toLowerCase();
+
+
+    const month =
+        document.getElementById(
+            "monthFilter"
+        ).value;
+
+
+    const status =
+        document.getElementById(
+            "statusFilter"
+        ).value
+        .trim();
+
+
+    filteredAdvances =
+        allAdvances.filter(
+            function(item){
+
+                const employeeId =
+                    String(
+                        getAdvanceField(
+                            item,
+                            "Employee ID"
+                        )
+                    )
+                    .toLowerCase();
+
+
+                const employeeName =
+                    String(
+                        getAdvanceField(
+                            item,
+                            "الموظف"
+                        )
+                    )
+                    .toLowerCase();
+
+
+                const itemMonth =
+                    String(
+                        getAdvanceField(
+                            item,
+                            "الشهر"
+                        )
+                    )
+                    .trim();
+
+
+                const itemStatus =
+                    String(
+                        getAdvanceField(
+                            item,
+                            "الحالة"
+                        )
+                    )
+                    .trim();
+
+
+                const employeeMatch =
+                    !employeeSearch ||
+                    employeeName.includes(
+                        employeeSearch
+                    ) ||
+                    employeeId.includes(
+                        employeeSearch
+                    );
+
+
+                const monthMatch =
+                    !month ||
+                    itemMonth === month;
+
+
+                const statusMatch =
+                    !status ||
+                    itemStatus === status;
+
+
+                return (
+                    employeeMatch &&
+                    monthMatch &&
+                    statusMatch
+                );
+
+            }
+        );
+
+
+    renderTable(
+        filteredAdvances
+    );
+
+
+    updateStats(
+        filteredAdvances
+    );
+
+}
+
+
+/* ================================================= */
+/* رسم الجدول */
+/* ================================================= */
+
+function renderTable(list){
+
+    const tbody =
+        document.getElementById(
+            "tableBody"
+        );
+
+
+    if(!list.length){
+
+        tbody.innerHTML = `
+
+            <tr>
+
+                <td
+                    colspan="13"
+                    class="empty">
+
+                    لا توجد سلف مطابقة للبحث
+
+                </td>
+
+            </tr>
+
+        `;
+
+        return;
+
+    }
+
+
+    tbody.innerHTML = "";
+
+
+    list.forEach(
+        function(item,index){
+
+            const advanceId =
+                getAdvanceField(
+                    item,
+                    "Advance ID"
+                );
+
+
+            const date =
+                getAdvanceField(
+                    item,
+                    "التاريخ"
+                );
+
+
+            const employeeId =
+                getAdvanceField(
+                    item,
+                    "Employee ID"
+                );
+
+
+            const employeeName =
+                getAdvanceField(
+                    item,
+                    "الموظف"
+                );
+
+
+            const month =
+                getAdvanceField(
+                    item,
+                    "الشهر"
+                );
+
+
+            const salary =
+                numberValue(
+                    getAdvanceField(
+                        item,
+                        "الراتب"
+                    )
+                );
+
+
+            const entitledBefore =
+                numberValue(
+                    getAdvanceField(
+                        item,
+                        "المستحق قبل السلفة"
+                    )
+                );
+
+
+            const maxAllowed =
+                numberValue(
+                    getAdvanceField(
+                        item,
+                        "الحد الأعلى 35%"
+                    )
+                );
+
+
+            const amount =
+                numberValue(
+                    getAdvanceField(
+                        item,
+                        "مبلغ السلفة"
+                    )
+                );
+
+
+            const remaining =
+                numberValue(
+                    getAdvanceField(
+                        item,
+                        "المتبقي بعد السلفة"
+                    )
+                );
+
+
+            const status =
+                String(
+                    getAdvanceField(
+                        item,
+                        "الحالة"
+                    ) || "مسجلة"
+                ).trim();
+
+
+            const notes =
+                getAdvanceField(
+                    item,
+                    "ملاحظات"
+                );
+
+
+            const tr =
+                document.createElement(
+                    "tr"
+                );
+
+
+            tr.innerHTML = `
+
+                <td>
+                    ${index + 1}
+                </td>
+
+                <td>
+                    <strong>
+                        ${safe(advanceId)}
+                    </strong>
+                </td>
+
+                <td>
+                    ${safe(formatDate(date))}
+                </td>
+
+                <td>
+                    ${safe(employeeId)}
+                </td>
+
+                <td>
+                    <strong>
+                        ${safe(employeeName)}
+                    </strong>
+                </td>
+
+                <td>
+                    ${safe(month)}
+                </td>
+
+                <td class="amount">
+                    ${money(salary)}
+                </td>
+
+                <td class="amount">
+                    ${money(entitledBefore)}
+                </td>
+
+                <td class="amount">
+                    ${money(maxAllowed)}
+                </td>
+
+                <td class="amount">
+                    ${money(amount)}
+                </td>
+
+                <td class="remaining">
+                    ${money(remaining)}
+                </td>
+
+                <td>
+                    ${statusBadge(status)}
+                </td>
+
+                <td>
+                    ${safe(notes || "-")}
+                </td>
+
+            `;
+
+
+            tbody.appendChild(tr);
+
+        }
+    );
+
+}
+
+
+/* ================================================= */
+/* الإحصائيات */
+/* ================================================= */
+
+function updateStats(list){
+
+    let total = 0;
+    let remainingTotal = 0;
+
+
+    list.forEach(
+        function(item){
+
+            const status =
+                String(
+                    getAdvanceField(
+                        item,
+                        "الحالة"
+                    ) || "مسجلة"
+                ).trim();
+
+
+            if(status === "ملغاة"){
+                return;
+            }
+
+
+            total +=
+                numberValue(
+                    getAdvanceField(
+                        item,
+                        "مبلغ السلفة"
+                    )
+                );
+
+
+            remainingTotal +=
+                numberValue(
+                    getAdvanceField(
+                        item,
+                        "المتبقي بعد السلفة"
+                    )
+                );
+
+        }
+    );
+
+
+    const count =
+        list.filter(
+            function(item){
+
+                return String(
+                    getAdvanceField(
+                        item,
+                        "الحالة"
+                    ) || "مسجلة"
+                ).trim()
+                !== "ملغاة";
+
+            }
+        ).length;
+
+
+    const average =
+        count > 0
+        ? Math.round(
+            total / count
+        )
+        : 0;
+
+
+    document.getElementById(
+        "countValue"
+    ).textContent =
+        count;
+
+
+    document.getElementById(
+        "totalValue"
+    ).textContent =
+        money(total);
+
+
+    document.getElementById(
+        "remainingValue"
+    ).textContent =
+        money(remainingTotal);
+
+
+    document.getElementById(
+        "averageValue"
+    ).textContent =
+        money(average);
+
+}
+
+
+/* ================================================= */
+/* طباعة التقرير */
+/* ================================================= */
+
+function printReport(){
+
+    if(!filteredAdvances.length){
+
+        showMessage(
+            "❌ لا توجد بيانات للطباعة",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    let total = 0;
+    let remainingTotal = 0;
+
+
+    const activeList =
+        filteredAdvances.filter(
+            function(item){
+
+                const status =
+                    String(
+                        getAdvanceField(
+                            item,
+                            "الحالة"
+                        ) || "مسجلة"
+                    ).trim();
+
+                return status !== "ملغاة";
+
+            }
+        );
+
+
+    activeList.forEach(
+        function(item){
+
+            total +=
+                numberValue(
+                    getAdvanceField(
+                        item,
+                        "مبلغ السلفة"
+                    )
+                );
+
+
+            remainingTotal +=
+                numberValue(
+                    getAdvanceField(
+                        item,
+                        "المتبقي بعد السلفة"
+                    )
+                );
+
+        }
+    );
+
+
+    document.getElementById(
+        "printCount"
+    ).textContent =
+        activeList.length;
+
+
+    document.getElementById(
+        "printTotal"
+    ).textContent =
+        money(total);
+
+
+    document.getElementById(
+        "printRemaining"
+    ).textContent =
+        money(remainingTotal);
+
+
+    document.getElementById(
+        "printDate"
+    ).textContent =
+        new Date().toLocaleDateString(
+            "en-GB"
+        );
+
+
+    const tbody =
+        document.getElementById(
+            "printTableBody"
+        );
+
+
+    tbody.innerHTML = "";
+
+
+    activeList.forEach(
+        function(item,index){
+
+            const tr =
+                document.createElement(
+                    "tr"
+                );
+
+
+            tr.innerHTML = `
+
+                <td>
+                    ${index + 1}
+                </td>
+
+                <td>
+                    ${safe(
+                        getAdvanceField(
+                            item,
+                            "Advance ID"
+                        )
+                    )}
+                </td>
+
+                <td>
+                    ${safe(
+                        getAdvanceField(
+                            item,
+                            "الموظف"
+                        )
+                    )}
+                </td>
+
+                <td>
+                    ${safe(
+                        getAdvanceField(
+                            item,
+                            "Employee ID"
+                        )
+                    )}
+                </td>
+
+                <td>
+                    ${safe(
+                        getAdvanceField(
+                            item,
+                            "الشهر"
+                        )
+                    )}
+                </td>
+
+                <td>
+                    ${money(
+                        numberValue(
+                            getAdvanceField(
+                                item,
+                                "الراتب"
+                            )
+                        )
+                    )}
+                </td>
+
+                <td>
+                    ${money(
+                        numberValue(
+                            getAdvanceField(
+                                item,
+                                "المستحق قبل السلفة"
+                            )
+                        )
+                    )}
+                </td>
+
+                <td>
+                    ${money(
+                        numberValue(
+                            getAdvanceField(
+                                item,
+                                "الحد الأعلى 35%"
+                            )
+                        )
+                    )}
+                </td>
+
+                <td>
+                    ${money(
+                        numberValue(
+                            getAdvanceField(
+                                item,
+                                "مبلغ السلفة"
+                            )
+                        )
+                    )}
+                </td>
+
+                <td>
+                    ${money(
+                        numberValue(
+                            getAdvanceField(
+                                item,
+                                "المتبقي بعد السلفة"
+                            )
+                        )
+                    )}
+                </td>
+
+                <td>
+                    ${safe(
+                        getAdvanceField(
+                            item,
+                            "الحالة"
+                        ) || "مسجلة"
+                    )}
+                </td>
+
+            `;
+
+
+            tbody.appendChild(tr);
+
+        }
+    );
+
+
+    window.print();
+
+}
+
+
+/* ================================================= */
+/* جلب قيمة العمود */
+/* ================================================= */
+
+function getAdvanceField(
+    item,
+    field
+){
+
+    if(!item){
+        return "";
+    }
+
+
+    /*
+     * الأسماء الأساسية التي يستخدمها
+     * Apps Script الحالي.
+     */
+
+    if(
+        item[field] !== undefined &&
+        item[field] !== null
+    ){
+
+        return item[field];
+
+    }
+
+
+    /*
+     * دعم بعض الأسماء البديلة بدون
+     * تغيير بنية الـApps Script.
+     */
+
+    const alternatives = {
+
+        "Advance ID":[
+            "advanceId",
+            "AdvanceID",
+            "رقم السلفة"
+        ],
+
+        "Employee ID":[
+            "employeeId",
+            "EmployeeID"
+        ],
+
+        "الموظف":[
+            "employeeName",
+            "name",
+            "الاسم"
+        ],
+
+        "الشهر":[
+            "month",
+            "Month"
+        ],
+
+        "الراتب":[
+            "salary",
+            "Salary"
+        ],
+
+        "المستحق قبل السلفة":[
+            "entitledBefore",
+            "EntitledBefore"
+        ],
+
+        "الحد الأعلى 35%":[
+            "maxAllowed",
+            "MaxAllowed"
+        ],
+
+        "مبلغ السلفة":[
+            "amount",
+            "Amount"
+        ],
+
+        "المتبقي بعد السلفة":[
+            "remaining",
+            "Remaining"
+        ],
+
+        "التاريخ":[
+            "date",
+            "Date"
+        ],
+
+        "الحالة":[
+            "status",
+            "Status"
+        ],
+
+        "ملاحظات":[
+            "notes",
+            "Notes"
+        ]
+
+    };
+
+
+    const keys =
+        alternatives[field] || [];
+
+
+    for(
+        let i = 0;
+        i < keys.length;
+        i++
+    ){
+
+        const key =
+            keys[i];
+
+
+        if(
+            item[key] !== undefined &&
+            item[key] !== null
+        ){
+
+            return item[key];
+
+        }
+
+    }
+
+
+    return "";
+
+}
+
+
+/* ================================================= */
+/* تحويل الرقم */
+/* ================================================= */
+
+function numberValue(value){
+
+    if(
+        value === null ||
+        value === undefined ||
+        value === ""
+    ){
+
+        return 0;
+
+    }
+
+
+    if(typeof value === "number"){
+        return isFinite(value)
+            ? value
+            : 0;
+    }
+
+
+    let text =
+        String(value)
+        .trim();
+
+
+    /*
+     * إزالة IQD والفواصل والمسافات.
+     */
+
+    text =
+        text
+        .replace(/IQD/gi,"")
+        .replace(/د\.ع/g,"")
+        .replace(/,/g,"")
+        .replace(/٬/g,"")
+        .replace(/،/g,"")
+        .replace(/\s/g,"");
+
+
+    /*
+     * دعم الأرقام العربية والفارسية.
+     */
+
+    const arabicDigits =
+        "٠١٢٣٤٥٦٧٨٩";
+
+    const persianDigits =
+        "۰۱۲۳۴۵۶۷۸۹";
+
+
+    text =
+        text.replace(
+            /[٠-٩]/g,
+            function(d){
+                return arabicDigits.indexOf(d);
+            }
+        );
+
+
+    text =
+        text.replace(
+            /[۰-۹]/g,
+            function(d){
+                return persianDigits.indexOf(d);
+            }
+        );
+
+
+    text =
+        text.replace(
+            /[^\d.-]/g,
+            ""
+        );
+
+
+    const number =
+        Number(text);
+
+
+    return isFinite(number)
+        ? number
+        : 0;
+
+}
+
+
+/* ================================================= */
+/* تنسيق المبلغ */
+/* ================================================= */
+
+function money(value){
+
+    const number =
+        numberValue(value);
+
+
+    return number.toLocaleString(
+        "en-US"
+    ) + " د.ع";
+
+}
+
+
+/* ================================================= */
+/* حالة السلفة */
+/* ================================================= */
+
+function statusBadge(status){
+
+    if(status === "ملغاة"){
+
+        return `
+            <span class="status status-cancelled">
+                ملغاة
+            </span>
+        `;
+
+    }
+
+
+    return `
+        <span class="status status-active">
+            ${safe(status || "مسجلة")}
+        </span>
+    `;
+
+}
+
+
+/* ================================================= */
+/* التاريخ */
+/* ================================================= */
+
+function formatDate(value){
+
+    if(!value){
+        return "-";
+    }
+
+
+    const date =
+        parseDateValue(value);
+
+
+    if(
+        isNaN(date.getTime())
+    ){
+
+        return String(value);
+
+    }
+
+
+    return date.toLocaleDateString(
+        "en-GB"
+    );
+
+}
+
+
+/* ================================================= */
+/* قراءة التاريخ */
+/* ================================================= */
+
+function parseDateValue(value){
+
+    if(!value){
+
+        return new Date(
+            0
+        );
+
+    }
+
+
+    if(value instanceof Date){
+        return value;
+    }
+
+
+    const text =
+        String(value).trim();
+
+
+    /*
+     * إذا كان Apps Script يرجع
+     * ISO date.
+     */
+
+    const iso =
+        new Date(text);
+
+
+    if(
+        !isNaN(
+            iso.getTime()
+        )
+    ){
+
+        return iso;
+
+    }
+
+
+    /*
+     * محاولة قراءة:
+     * 7:42:31 م 2026/08/27
+     */
+
+    const match =
+        text.match(
+            /(\d{4})\/(\d{1,2})\/(\d{1,2})/
+        );
+
+
+    if(match){
+
+        return new Date(
+            Number(match[1]),
+            Number(match[2])-1,
+            Number(match[3])
+        );
+
+    }
+
+
+    return new Date(
+        0
+    );
+
+}
+
+
+/* ================================================= */
+/* POST API */
+/* ================================================= */
+
+async function postAPI(data){
+
+    const response =
+        await fetch(
+            API,
+            {
+                method:"POST",
+
+                headers:{
+                    "Content-Type":
+                        "text/plain;charset=utf-8"
+                },
+
+                body:
+                    JSON.stringify(data)
+            }
+        );
+
+
+    const text =
+        await response.text();
+
+
+    let result;
+
+
+    try{
+
+        result =
+            JSON.parse(text);
+
+    }
+    catch(error){
+
+        console.error(
+            "API RESPONSE:",
+            text
+        );
+
+
+        throw new Error(
+            "الخادم لم يرجع JSON. تأكد من نشر Apps Script كـ Web App."
+        );
+
+    }
+
+
+    return result;
+
+}
+
+
+/* ================================================= */
+/* الرسائل */
+/* ================================================= */
+
+function showMessage(
+    text,
+    type
+){
+
+    const box =
+        document.getElementById(
+            "message"
+        );
+
+
+    box.textContent =
+        text;
+
+
+    box.className =
+        "message " + type;
+
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+
+    setTimeout(
+        function(){
+
+            box.style.display =
+                "none";
+
+        },
+        5000
+    );
+
+}
+
+
+/* ================================================= */
+/* حماية النص */
+/* ================================================= */
+
+function safe(value){
+
+    if(
+        value === null ||
+        value === undefined
+    ){
+
+        return "";
+
+    }
+
+
+    return String(value)
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+        .replace(
+            /</g,
+            "&lt;"
+        )
+        .replace(
+            />/g,
+            "&gt;"
+        )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+/* ================================================= */
+/* البحث بالضغط على Enter */
+/* ================================================= */
+
+document
+.getElementById("employeeSearch")
+.addEventListener(
+    "keydown",
+    function(event){
+
+        if(
+            event.key === "Enter"
+        ){
+
+            filterAdvances();
+
+        }
+
+    }
+);
+
+
+document
+.getElementById("monthFilter")
+.addEventListener(
+    "change",
+    function(){
+
+        filterAdvances();
+
+    }
+);
+
+
+document
+.getElementById("statusFilter")
+.addEventListener(
+    "change",
+    function(){
+
+        filterAdvances();
+
+    }
+);
+
+</script>
+
+</body>
+</html>
