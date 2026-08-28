@@ -1,0 +1,2879 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>كشف راتب الموظف - Shassiha HR</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:'Cairo',sans-serif;
+}
+
+body{
+    background:#f4f6f9;
+    color:#222;
+}
+
+.header{
+    background:#c62828;
+    color:white;
+    padding:18px 25px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 3px 10px rgba(0,0,0,.12);
+}
+
+.header h1{
+    font-size:22px;
+}
+
+.header a{
+    color:white;
+    text-decoration:none;
+    font-size:14px;
+}
+
+.container{
+    max-width:1000px;
+    margin:25px auto;
+    padding:0 15px;
+}
+
+.card{
+    background:white;
+    border-radius:18px;
+    padding:25px;
+    box-shadow:0 2px 10px rgba(0,0,0,.07);
+    margin-bottom:20px;
+}
+
+.title{
+    font-size:20px;
+    font-weight:bold;
+    margin-bottom:20px;
+    padding-bottom:12px;
+    border-bottom:1px solid #eee;
+}
+
+.filters{
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:18px;
+}
+
+.field{
+    display:flex;
+    flex-direction:column;
+}
+
+label{
+    font-size:13px;
+    color:#666;
+    margin-bottom:6px;
+    font-weight:600;
+}
+
+select,
+input{
+    width:100%;
+    padding:12px;
+    border:1px solid #ddd;
+    border-radius:10px;
+    font-size:14px;
+    outline:none;
+    background:white;
+}
+
+select:focus,
+input:focus{
+    border-color:#c62828;
+}
+
+.employee-info{
+    display:none;
+    margin-top:20px;
+    padding:18px;
+    background:#fff8f8;
+    border:1px solid #ffd0d0;
+    border-radius:12px;
+    line-height:2;
+}
+
+.employee-info strong{
+    color:#c62828;
+}
+
+.summary{
+    display:none;
+    margin-top:25px;
+}
+
+.summary-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:14px;
+}
+
+.box{
+    background:#f8f9fb;
+    border:1px solid #e5e7eb;
+    border-radius:12px;
+    padding:16px;
+    text-align:center;
+}
+
+.box small{
+    display:block;
+    color:#777;
+    margin-bottom:6px;
+}
+
+.box strong{
+    font-size:19px;
+}
+
+.box.danger{
+    background:#fff5f5;
+    border-color:#ffd0d0;
+}
+
+.box.success{
+    background:#f0faf4;
+    border-color:#c7ead4;
+}
+
+.box.total{
+    background:#f5f8ff;
+    border-color:#d5e0ff;
+}
+
+.net{
+    margin-top:20px;
+    padding:22px;
+    background:#c62828;
+    color:white;
+    border-radius:14px;
+    text-align:center;
+}
+
+.net small{
+    display:block;
+    font-size:14px;
+    margin-bottom:5px;
+}
+
+.net strong{
+    font-size:28px;
+}
+
+.advance-list{
+    display:none;
+    margin-top:25px;
+}
+
+.advance-list h3{
+    margin-bottom:12px;
+    font-size:17px;
+}
+
+.table-wrap{
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:650px;
+}
+
+th,
+td{
+    padding:11px;
+    border-bottom:1px solid #eee;
+    text-align:center;
+    font-size:13px;
+}
+
+th{
+    background:#f5f5f5;
+    font-weight:bold;
+}
+
+.actions{
+    display:flex;
+    gap:10px;
+    margin-top:25px;
+    flex-wrap:wrap;
+}
+
+.btn{
+    border:0;
+    border-radius:10px;
+    padding:12px 22px;
+    cursor:pointer;
+    font-size:14px;
+}
+
+.print{
+    background:#2878d0;
+    color:white;
+}
+
+.back{
+    background:#333;
+    color:white;
+}
+
+.message{
+    display:none;
+    padding:13px;
+    border-radius:10px;
+    margin-bottom:20px;
+    text-align:center;
+    font-weight:600;
+}
+
+.success-message{
+    display:block;
+    background:#e7f7ed;
+    color:#16833b;
+}
+
+.error-message{
+    display:block;
+    background:#ffe5e5;
+    color:#c62828;
+}
+
+.loading{
+    color:#777;
+}
+
+@media(max-width:700px){
+
+    .filters{
+        grid-template-columns:1fr;
+    }
+
+    .summary-grid{
+        grid-template-columns:1fr;
+    }
+
+    .header{
+        flex-direction:column;
+        gap:8px;
+        text-align:center;
+    }
+
+    .btn{
+        width:100%;
+    }
+}
+
+
+/* =========================================
+   الطباعة
+========================================= */
+
+.print-area{
+    display:none;
+}
+
+@media print{
+
+    @page{
+        size:A4;
+        margin:15mm;
+    }
+
+    body{
+        background:white;
+    }
+
+    .header,
+    .container{
+        display:none !important;
+    }
+
+    .print-area{
+        display:block !important;
+        color:#111;
+    }
+
+    .print-header{
+        text-align:center;
+        margin-bottom:25px;
+    }
+
+    .print-header h1{
+        font-size:25px;
+        margin-bottom:4px;
+    }
+
+    .print-header div{
+        font-size:15px;
+    }
+
+    .print-title{
+        text-align:center;
+        font-size:24px;
+        font-weight:bold;
+        text-decoration:underline;
+        margin:20px 0 30px;
+    }
+
+    .print-info{
+        display:grid;
+        grid-template-columns:1fr 1fr;
+        gap:10px;
+        margin-bottom:25px;
+        font-size:15px;
+    }
+
+    .print-info div{
+        border-bottom:1px solid #ccc;
+        padding:7px;
+    }
+
+    .print-summary{
+        border:1px solid #333;
+        border-radius:7px;
+        overflow:hidden;
+    }
+
+    .print-row{
+        display:flex;
+        justify-content:space-between;
+        padding:9px 14px;
+        border-bottom:1px solid #ccc;
+        font-size:15px;
+    }
+
+    .print-row:last-child{
+        border-bottom:0;
+    }
+
+    .print-row.net-row{
+        font-size:18px;
+        font-weight:bold;
+        background:#eee;
+    }
+
+    .print-advances{
+        margin-top:25px;
+    }
+
+    .print-advances h3{
+        margin-bottom:10px;
+        font-size:17px;
+    }
+
+    .print-advances table{
+        min-width:0;
+    }
+
+    .print-advances th,
+    .print-advances td{
+        border:1px solid #aaa;
+        padding:7px;
+        font-size:12px;
+    }
+
+    .print-footer{
+        margin-top:55px;
+        display:flex;
+        justify-content:space-between;
+        font-size:14px;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<div class="header">
+
+    <h1>💵 كشف راتب الموظف</h1>
+
+    <a href="transactions.html">
+        ← العودة للمعاملات
+    </a>
+
+</div>
+
+
+<div class="container">
+
+
+    <div id="message" class="message"></div>
+
+
+    <div class="card">
+
+        <div class="title">
+            📋 إعداد كشف الراتب
+        </div>
+
+
+        <div class="filters">
+
+
+            <div class="field">
+
+                <label>
+                    الموظف
+                </label>
+
+                <select id="employee">
+
+                    <option value="">
+                        ⏳ جاري تحميل الموظفين...
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="field">
+
+                <label>
+                    شهر الراتب
+                </label>
+
+                <input
+                    type="month"
+                    id="month">
+
+            </div>
+
+
+        </div>
+
+
+        <div
+            id="employeeInfo"
+            class="employee-info">
+        </div>
+
+
+        <div
+            id="summary"
+            class="summary">
+
+
+            <div class="summary-grid">
+
+
+                <div class="box">
+
+                    <small>
+                        الراتب الأساسي
+                    </small>
+
+                    <strong id="salary">
+                        0 د.ع
+                    </strong>
+
+                </div>
+
+
+                <div class="box">
+
+                    <small>
+                        أيام الغياب
+                    </small>
+
+                    <strong id="absenceDays">
+                        0 يوم
+                    </strong>
+
+                </div>
+
+
+                <div class="box danger">
+
+                    <small>
+                        خصم الغياب
+                    </small>
+
+                    <strong id="absenceDeduction">
+                        0 د.ع
+                    </strong>
+
+                </div>
+
+
+                <div class="box danger">
+
+                    <small>
+                        السلف السابقة
+                    </small>
+
+                    <strong id="previousAdvance">
+                        0 د.ع
+                    </strong>
+
+                </div>
+
+
+                <div class="box">
+
+                    <small>
+                        المستحق قبل السلفة
+                    </small>
+
+                    <strong id="beforeAdvance">
+                        0 د.ع
+                    </strong>
+
+                </div>
+
+
+                <div class="box total">
+
+                    <small>
+                        إجمالي الخصومات
+                    </small>
+
+                    <strong id="totalDeductions">
+                        0 د.ع
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="net">
+
+                <small>
+                    💰 صافي الراتب المستحق
+                </small>
+
+                <strong id="netSalary">
+                    0 د.ع
+                </strong>
+
+            </div>
+
+
+            <div
+                id="advanceList"
+                class="advance-list">
+
+                <h3>
+                    💰 تفاصيل السلف لهذا الشهر
+                </h3>
+
+                <div class="table-wrap">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    رقم السلفة
+                                </th>
+
+                                <th>
+                                    المبلغ
+                                </th>
+
+                                <th>
+                                    قبل السلفة
+                                </th>
+
+                                <th>
+                                    المتبقي
+                                </th>
+
+                                <th>
+                                    التاريخ
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody id="advancesTable">
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+
+            <div class="actions">
+
+                <button
+                    class="btn print"
+                    onclick="printSalarySlip()">
+
+                    🖨️ طباعة كشف الراتب
+
+                </button>
+
+
+                <button
+                    class="btn back"
+                    onclick="window.location.href='transactions.html'">
+
+                    ← رجوع
+
+                </button>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================================
+     منطقة الطباعة
+========================================= -->
+
+
+<div
+    id="printArea"
+    class="print-area">
+
+
+    <div class="print-header">
+
+        <h1>
+            اسم الشركة / المطعم
+        </h1>
+
+        <div>
+            إدارة الموارد البشرية
+        </div>
+
+    </div>
+
+
+    <div class="print-title">
+
+        كشف راتب موظف
+
+    </div>
+
+
+    <div class="print-info">
+
+        <div>
+            الموظف:
+            <strong id="pName">-</strong>
+        </div>
+
+        <div>
+            الرقم الوظيفي:
+            <strong id="pId">-</strong>
+        </div>
+
+        <div>
+            الوظيفة:
+            <strong id="pJob">-</strong>
+        </div>
+
+        <div>
+            القسم:
+            <strong id="pDepartment">-</strong>
+        </div>
+
+        <div>
+            شهر الراتب:
+            <strong id="pMonth">-</strong>
+        </div>
+
+        <div>
+            تاريخ الكشف:
+            <strong id="pDate">-</strong>
+        </div>
+
+    </div>
+
+
+    <div class="print-summary">
+
+
+        <div class="print-row">
+
+            <span>
+                الراتب الأساسي
+            </span>
+
+            <strong id="pSalary">
+                0 د.ع
+            </strong>
+
+        </div>
+
+
+        <div class="print-row">
+
+            <span>
+                عدد أيام الغياب
+            </span>
+
+            <strong id="pAbsenceDays">
+                0 يوم
+            </strong>
+
+        </div>
+
+
+        <div class="print-row">
+
+            <span>
+                خصم الغياب
+            </span>
+
+            <strong id="pAbsenceDeduction">
+                0 د.ع
+            </strong>
+
+        </div>
+
+
+        <div class="print-row">
+
+            <span>
+                السلف السابقة
+            </span>
+
+            <strong id="pPreviousAdvance">
+                0 د.ع
+            </strong>
+
+        </div>
+
+
+        <div class="print-row">
+
+            <span>
+                المستحق قبل السلفة
+            </span>
+
+            <strong id="pBeforeAdvance">
+                0 د.ع
+            </strong>
+
+        </div>
+
+
+        <div class="print-row">
+
+            <span>
+                إجمالي الخصومات
+            </span>
+
+            <strong id="pTotalDeductions">
+                0 د.ع
+            </strong>
+
+        </div>
+
+
+        <div class="print-row">
+
+            <span>
+                السلف المسجلة
+            </span>
+
+            <strong id="pAdvanceCount">
+                0
+            </strong>
+
+        </div>
+
+
+        <div class="print-row net-row">
+
+            <span>
+                صافي الراتب المستحق
+            </span>
+
+            <strong id="pNetSalary">
+                0 د.ع
+            </strong>
+
+        </div>
+
+
+    </div>
+
+
+    <div
+        id="printAdvances"
+        class="print-advances">
+
+        <h3>
+            تفاصيل السلف
+        </h3>
+
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>
+                        رقم السلفة
+                    </th>
+
+                    <th>
+                        المبلغ
+                    </th>
+
+                    <th>
+                        قبل السلفة
+                    </th>
+
+                    <th>
+                        المتبقي
+                    </th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody id="printAdvancesTable">
+            </tbody>
+
+        </table>
+
+    </div>
+
+
+    <div class="print-footer">
+
+        <div>
+
+            مسؤول الموارد البشرية
+
+            <br><br>
+
+            الاسم: __________________
+
+            <br>
+
+            التوقيع: ________________
+
+        </div>
+
+
+        <div>
+
+            الموظف
+
+            <br><br>
+
+            الاسم: __________________
+
+            <br>
+
+            التوقيع: ________________
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+
+<script>
+
+
+/* =========================================
+   API
+========================================= */
+
+
+const API =
+"https://script.google.com/macros/s/AKfycbw6pnqbRn3VyJvFjk0RGfEt8VXdBkOq2uqooSvxi0onjcUStpJ_hOGNZVPLimRA-ZNAGQ/exec";
+
+
+let employees = [];
+
+let selectedEmployee = null;
+
+let currentData = {
+
+    salary:0,
+
+    absenceDays:0,
+
+    absenceDeduction:0,
+
+    previousAdvance:0,
+
+    beforeAdvance:0,
+
+    totalDeductions:0,
+
+    netSalary:0,
+
+    advances:[]
+
+};
+
+
+
+/* =========================================
+   التشغيل
+========================================= */
+
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function(){
+
+        setCurrentMonth();
+
+        loadEmployees();
+
+    }
+);
+
+
+
+function setCurrentMonth(){
+
+    const now =
+        new Date();
+
+    document.getElementById(
+        "month"
+    ).value =
+        now.getFullYear() +
+        "-" +
+        String(
+            now.getMonth()+1
+        ).padStart(2,"0");
+
+}
+
+
+
+/* =========================================
+   تحميل الموظفين
+========================================= */
+
+
+async function loadEmployees(){
+
+    const select =
+        document.getElementById(
+            "employee"
+        );
+
+
+    select.innerHTML =
+        '<option value="">⏳ جاري تحميل الموظفين...</option>';
+
+
+    try{
+
+        const result =
+            await postAPI({
+                action:"getEmployees"
+            });
+
+
+        if(
+            result.status !==
+            "success"
+        ){
+
+            throw new Error(
+                result.message ||
+                "فشل تحميل الموظفين"
+            );
+
+        }
+
+
+        employees =
+            Array.isArray(
+                result.employees
+            )
+            ? result.employees
+            : [];
+
+
+        select.innerHTML =
+            '<option value="">اختر الموظف</option>';
+
+
+        employees.forEach(
+            function(employee){
+
+                const id =
+                    employee["Employee ID"];
+
+                const name =
+                    employee["الاسم"] ||
+                    employee["اسم الموظف"] ||
+                    employee["Employee Name"];
+
+
+                const status =
+                    String(
+                        employee["الحالة"] ||
+                        employee["Status"] ||
+                        ""
+                    ).trim();
+
+
+                if(!id || !name){
+                    return;
+                }
+
+
+                if(
+                    status ===
+                    "منتهي الخدمة"
+                ){
+                    return;
+                }
+
+
+                const option =
+                    document.createElement(
+                        "option"
+                    );
+
+
+                option.value =
+                    String(id);
+
+
+                option.textContent =
+                    String(name) +
+                    " — " +
+                    String(id);
+
+
+                select.appendChild(
+                    option
+                );
+
+            }
+        );
+
+
+        if(
+            select.options.length ===
+            1
+        ){
+
+            select.innerHTML =
+                '<option value="">لا يوجد موظفون</option>';
+
+        }
+
+    }
+    catch(error){
+
+        console.error(
+            "LOAD EMPLOYEES:",
+            error
+        );
+
+
+        select.innerHTML =
+            '<option value="">❌ تعذر تحميل الموظفين</option>';
+
+
+        showMessage(
+            "❌ " +
+            error.message,
+            "error"
+        );
+
+    }
+
+}
+
+
+
+/* =========================================
+   اختيار الموظف
+========================================= */
+
+
+document
+.getElementById("employee")
+.addEventListener(
+    "change",
+    function(){
+
+        const id =
+            this.value;
+
+
+        selectedEmployee =
+            employees.find(
+                function(employee){
+
+                    return String(
+                        employee["Employee ID"]
+                    ) ===
+                    String(id);
+
+                }
+            );
+
+
+        if(!selectedEmployee){
+
+            hideReport();
+
+            return;
+
+        }
+
+
+        showEmployeeInfo();
+
+        loadSalarySlip();
+
+    }
+);
+
+
+
+/* =========================================
+   تغيير الشهر
+========================================= */
+
+
+document
+.getElementById("month")
+.addEventListener(
+    "change",
+    function(){
+
+        if(
+            selectedEmployee
+        ){
+
+            loadSalarySlip();
+
+        }
+
+    }
+);
+
+
+
+/* =========================================
+   معلومات الموظف
+========================================= */
+
+
+function showEmployeeInfo(){
+
+    const box =
+        document.getElementById(
+            "employeeInfo"
+        );
+
+
+    const name =
+        getEmployeeName();
+
+
+    const id =
+        selectedEmployee[
+            "Employee ID"
+        ];
+
+
+    const job =
+        selectedEmployee["الوظيفة"] ||
+        selectedEmployee["العمل"] ||
+        selectedEmployee["Job"] ||
+        selectedEmployee["Position"] ||
+        "-";
+
+
+    const department =
+        selectedEmployee["القسم"] ||
+        selectedEmployee["Department"] ||
+        "-";
+
+
+    const salary =
+        parseNumber(
+            selectedEmployee["الراتب"] ||
+            selectedEmployee["الراتب الأساسي"] ||
+            selectedEmployee["Salary"] ||
+            0
+        );
+
+
+    box.style.display =
+        "block";
+
+
+    box.innerHTML = `
+
+        <strong>
+            ${safe(name)}
+        </strong>
+
+        <br>
+
+        الرقم الوظيفي:
+        ${safe(id)}
+
+        <br>
+
+        الوظيفة:
+        ${safe(job)}
+
+        <br>
+
+        القسم:
+        ${safe(department)}
+
+        <br>
+
+        الراتب:
+        ${money(salary)}
+
+    `;
+
+}
+
+
+
+/* =========================================
+   كشف الراتب
+========================================= */
+
+
+async function loadSalarySlip(){
+
+    if(!selectedEmployee){
+        return;
+    }
+
+
+    const month =
+        document.getElementById(
+            "month"
+        ).value;
+
+
+    if(!month){
+        return;
+    }
+
+
+    showLoading();
+
+
+    try{
+
+        const salary =
+            parseNumber(
+                selectedEmployee["الراتب"] ||
+                selectedEmployee["الراتب الأساسي"] ||
+                selectedEmployee["Salary"] ||
+                0
+            );
+
+
+        /*
+         * =====================================
+         * جلب السلف الخاصة بالموظف والشهر
+         * =====================================
+         */
+
+
+        const advanceResult =
+            await postAPI({
+
+                action:"getAdvances",
+
+                employeeId:
+                    selectedEmployee[
+                        "Employee ID"
+                    ],
+
+                month:
+                    month
+
+            });
+
+
+        if(
+            advanceResult.status !==
+            "success"
+        ){
+
+            throw new Error(
+                advanceResult.message ||
+                "تعذر جلب السلف"
+            );
+
+        }
+
+
+        let advances =
+            Array.isArray(
+                advanceResult.advances
+            )
+            ? advanceResult.advances
+            : [];
+
+
+        /*
+         * التأكد مرة ثانية من الموظف والشهر
+         * حتى يكون الكشف دقيقاً حتى لو رجع
+         * Apps Script سجلات أكثر.
+         */
+
+
+        advances =
+            advances.filter(
+                function(item){
+
+                    const itemId =
+                        getValue(
+                            item,
+                            [
+                                "Employee ID",
+                                "الرقم الوظيفي",
+                                "رقم الموظف"
+                            ]
+                        );
+
+
+                    const itemMonth =
+                        getValue(
+                            item,
+                            [
+                                "الشهر",
+                                "شهر الراتب",
+                                "Month"
+                            ]
+                        );
+
+
+                    const sameEmployee =
+                        !itemId ||
+                        String(itemId).trim() ===
+                        String(
+                            selectedEmployee[
+                                "Employee ID"
+                            ]
+                        ).trim();
+
+
+                    const sameMonth =
+                        !itemMonth ||
+                        normalizeMonth(
+                            itemMonth
+                        ) ===
+                        normalizeMonth(
+                            month
+                        );
+
+
+                    return (
+                        sameEmployee &&
+                        sameMonth
+                    );
+
+                }
+            );
+
+
+
+        /*
+         * استبعاد السلف الملغاة
+         */
+
+
+        advances =
+            advances.filter(
+                function(item){
+
+                    const status =
+                        String(
+                            getValue(
+                                item,
+                                [
+                                    "الحالة",
+                                    "Status"
+                                ]
+                            ) || ""
+                        ).trim();
+
+
+                    return status !==
+                        "ملغاة";
+
+                }
+            );
+
+
+
+        /*
+         * مجموع السلف السابقة
+         */
+
+
+        let previousAdvance = 0;
+
+
+        advances.forEach(
+            function(item){
+
+                previousAdvance +=
+                    getAdvanceAmount(
+                        item
+                    );
+
+            }
+        );
+
+
+
+        /*
+         * =====================================
+         * جلب الحضور والغياب
+         * =====================================
+         */
+
+
+        const attendanceResult =
+            await postAPI({
+
+                action:"getAttendance",
+
+                employeeName:
+                    getEmployeeName()
+
+            });
+
+
+        if(
+            attendanceResult.status !==
+            "success"
+        ){
+
+            throw new Error(
+                attendanceResult.message ||
+                "تعذر جلب الحضور والغياب"
+            );
+
+        }
+
+
+        let attendance =
+            Array.isArray(
+                attendanceResult.attendance
+            )
+            ? attendanceResult.attendance
+            : [];
+
+
+        /*
+         * تصفية الموظف والشهر
+         */
+
+
+        attendance =
+            attendance.filter(
+                function(item){
+
+                    const name =
+                        getValue(
+                            item,
+                            [
+                                "الاسم",
+                                "اسم الموظف",
+                                "Employee Name"
+                            ]
+                        );
+
+
+                    if(
+                        name &&
+                        normalize(name) !==
+                        normalize(
+                            getEmployeeName()
+                        )
+                    ){
+
+                        return false;
+
+                    }
+
+
+                    const date =
+                        getValue(
+                            item,
+                            [
+                                "التاريخ",
+                                "Date"
+                            ]
+                        );
+
+
+                    if(
+                        date
+                    ){
+
+                        return (
+                            normalizeMonth(
+                                date
+                            ) ===
+                            normalizeMonth(
+                                month
+                            )
+                        );
+
+                    }
+
+
+                    return true;
+
+                }
+            );
+
+
+
+        /*
+         * حساب الغياب
+         */
+
+
+        let absenceDays = 0;
+
+
+        attendance.forEach(
+            function(item){
+
+                const status =
+                    String(
+                        getValue(
+                            item,
+                            [
+                                "الحالة",
+                                "Status"
+                            ]
+                        ) || ""
+                    ).trim();
+
+
+                if(
+                    status ===
+                    "غائب"
+                ){
+
+                    absenceDays++;
+
+                }
+
+            }
+        );
+
+
+
+        /*
+         * خصم الغياب
+         *
+         * الراتب ÷ 30 × عدد أيام الغياب
+         */
+
+
+        const dailySalary =
+            salary / 30;
+
+
+        const absenceDeduction =
+            Math.round(
+                dailySalary *
+                absenceDays
+            );
+
+
+
+        /*
+         * الراتب بعد الغياب
+         */
+
+
+        const salaryAfterAbsence =
+            Math.max(
+                salary -
+                absenceDeduction,
+                0
+            );
+
+
+
+        /*
+         * المستحق قبل السلفة
+         */
+
+
+        const beforeAdvance =
+            Math.max(
+                salaryAfterAbsence -
+                previousAdvance,
+                0
+            );
+
+
+
+        /*
+         * إجمالي الخصومات
+         */
+
+
+        const totalDeductions =
+            absenceDeduction +
+            previousAdvance;
+
+
+
+        /*
+         * صافي الراتب
+         */
+
+
+        const netSalary =
+            Math.max(
+                salary -
+                totalDeductions,
+                0
+            );
+
+
+
+        currentData = {
+
+            salary:
+                salary,
+
+            absenceDays:
+                absenceDays,
+
+            absenceDeduction:
+                absenceDeduction,
+
+            previousAdvance:
+                previousAdvance,
+
+            beforeAdvance:
+                beforeAdvance,
+
+            totalDeductions:
+                totalDeductions,
+
+            netSalary:
+                netSalary,
+
+            advances:
+                advances
+
+        };
+
+
+
+        renderReport();
+
+    }
+    catch(error){
+
+        console.error(
+            "SALARY SLIP ERROR:",
+            error
+        );
+
+
+        hideReport();
+
+
+        showMessage(
+            "❌ " +
+            error.message,
+            "error"
+        );
+
+    }
+
+}
+
+
+
+/* =========================================
+   عرض الكشف
+========================================= */
+
+
+function renderReport(){
+
+    const data =
+        currentData;
+
+
+    document.getElementById(
+        "summary"
+    ).style.display =
+        "block";
+
+
+    document.getElementById(
+        "salary"
+    ).textContent =
+        money(data.salary);
+
+
+    document.getElementById(
+        "absenceDays"
+    ).textContent =
+        data.absenceDays +
+        " يوم";
+
+
+    document.getElementById(
+        "absenceDeduction"
+    ).textContent =
+        money(
+            data.absenceDeduction
+        );
+
+
+    document.getElementById(
+        "previousAdvance"
+    ).textContent =
+        money(
+            data.previousAdvance
+        );
+
+
+    document.getElementById(
+        "beforeAdvance"
+    ).textContent =
+        money(
+            data.beforeAdvance
+        );
+
+
+    document.getElementById(
+        "totalDeductions"
+    ).textContent =
+        money(
+            data.totalDeductions
+        );
+
+
+    document.getElementById(
+        "netSalary"
+    ).textContent =
+        money(
+            data.netSalary
+        );
+
+
+    renderAdvances();
+
+}
+
+
+
+/* =========================================
+   عرض السلف
+========================================= */
+
+
+function renderAdvances(){
+
+    const box =
+        document.getElementById(
+            "advanceList"
+        );
+
+
+    const table =
+        document.getElementById(
+            "advancesTable"
+        );
+
+
+    table.innerHTML =
+        "";
+
+
+    if(
+        !currentData.advances.length
+    ){
+
+        box.style.display =
+            "none";
+
+        return;
+
+    }
+
+
+    box.style.display =
+        "block";
+
+
+    currentData.advances.forEach(
+        function(item){
+
+            const id =
+                getValue(
+                    item,
+                    [
+                        "رقم السلفة",
+                        "Advance ID",
+                        "معرف السلفة"
+                    ]
+                ) ||
+                "-";
+
+
+            const amount =
+                getAdvanceAmount(
+                    item
+                );
+
+
+            const before =
+                parseNumber(
+                    getValue(
+                        item,
+                        [
+                            "قبل السلفة",
+                            "المستحق قبل السلفة",
+                            "قبل",
+                            "Before"
+                        ]
+                    ) ||
+                    0
+                );
+
+
+            const remaining =
+                parseNumber(
+                    getValue(
+                        item,
+                        [
+                            "المتبقي",
+                            "المبلغ المتبقي",
+                            "المبلغ المتبقي من الراتب",
+                            "Remaining",
+                            "Remaining Salary"
+                        ]
+                    ) ||
+                    0
+                );
+
+
+            const date =
+                getValue(
+                    item,
+                    [
+                        "التاريخ",
+                        "تاريخ الإنشاء",
+                        "Created At",
+                        "CreatedAt"
+                    ]
+                ) ||
+                "-";
+
+
+            const tr =
+                document.createElement(
+                    "tr"
+                );
+
+
+            tr.innerHTML = `
+
+                <td>
+                    ${safe(id)}
+                </td>
+
+                <td>
+                    ${money(amount)}
+                </td>
+
+                <td>
+                    ${money(before)}
+                </td>
+
+                <td>
+                    ${money(remaining)}
+                </td>
+
+                <td>
+                    ${safe(formatDate(date))}
+                </td>
+
+            `;
+
+
+            table.appendChild(
+                tr
+            );
+
+        }
+    );
+
+}
+
+
+
+/* =========================================
+   تجهيز الطباعة
+========================================= */
+
+
+function preparePrint(){
+
+    if(!selectedEmployee){
+        return;
+    }
+
+
+    const data =
+        currentData;
+
+
+    const name =
+        getEmployeeName();
+
+
+    const id =
+        selectedEmployee[
+            "Employee ID"
+        ] ||
+        "-";
+
+
+    const job =
+        selectedEmployee["الوظيفة"] ||
+        selectedEmployee["العمل"] ||
+        selectedEmployee["Job"] ||
+        selectedEmployee["Position"] ||
+        "-";
+
+
+    const department =
+        selectedEmployee["القسم"] ||
+        selectedEmployee["Department"] ||
+        "-";
+
+
+    const month =
+        document.getElementById(
+            "month"
+        ).value ||
+        "-";
+
+
+    document.getElementById(
+        "pName"
+    ).textContent =
+        name;
+
+
+    document.getElementById(
+        "pId"
+    ).textContent =
+        id;
+
+
+    document.getElementById(
+        "pJob"
+    ).textContent =
+        job;
+
+
+    document.getElementById(
+        "pDepartment"
+    ).textContent =
+        department;
+
+
+    document.getElementById(
+        "pMonth"
+    ).textContent =
+        month;
+
+
+    document.getElementById(
+        "pDate"
+    ).textContent =
+        new Date()
+        .toLocaleDateString(
+            "en-GB"
+        );
+
+
+    document.getElementById(
+        "pSalary"
+    ).textContent =
+        money(data.salary);
+
+
+    document.getElementById(
+        "pAbsenceDays"
+    ).textContent =
+        data.absenceDays +
+        " يوم";
+
+
+    document.getElementById(
+        "pAbsenceDeduction"
+    ).textContent =
+        money(
+            data.absenceDeduction
+        );
+
+
+    document.getElementById(
+        "pPreviousAdvance"
+    ).textContent =
+        money(
+            data.previousAdvance
+        );
+
+
+    document.getElementById(
+        "pBeforeAdvance"
+    ).textContent =
+        money(
+            data.beforeAdvance
+        );
+
+
+    document.getElementById(
+        "pTotalDeductions"
+    ).textContent =
+        money(
+            data.totalDeductions
+        );
+
+
+    document.getElementById(
+        "pAdvanceCount"
+    ).textContent =
+        data.advances.length;
+
+
+    document.getElementById(
+        "pNetSalary"
+    ).textContent =
+        money(
+            data.netSalary
+        );
+
+
+
+    /*
+     * جدول السلف بالطباعة
+     */
+
+
+    const printTable =
+        document.getElementById(
+            "printAdvancesTable"
+        );
+
+
+    printTable.innerHTML =
+        "";
+
+
+    if(
+        !data.advances.length
+    ){
+
+        document.getElementById(
+            "printAdvances"
+        ).style.display =
+            "none";
+
+    }
+    else{
+
+        document.getElementById(
+            "printAdvances"
+        ).style.display =
+            "block";
+
+
+        data.advances.forEach(
+            function(item){
+
+                const id =
+                    getValue(
+                        item,
+                        [
+                            "رقم السلفة",
+                            "Advance ID",
+                            "معرف السلفة"
+                        ]
+                    ) ||
+                    "-";
+
+
+                const amount =
+                    getAdvanceAmount(
+                        item
+                    );
+
+
+                const before =
+                    parseNumber(
+                        getValue(
+                            item,
+                            [
+                                "قبل السلفة",
+                                "المستحق قبل السلفة",
+                                "قبل",
+                                "Before"
+                            ]
+                        ) ||
+                        0
+                    );
+
+
+                const remaining =
+                    parseNumber(
+                        getValue(
+                            item,
+                            [
+                                "المتبقي",
+                                "المبلغ المتبقي",
+                                "المبلغ المتبقي من الراتب",
+                                "Remaining",
+                                "Remaining Salary"
+                            ]
+                        ) ||
+                        0
+                    );
+
+
+                const tr =
+                    document.createElement(
+                        "tr"
+                    );
+
+
+                tr.innerHTML = `
+
+                    <td>
+                        ${safe(id)}
+                    </td>
+
+                    <td>
+                        ${money(amount)}
+                    </td>
+
+                    <td>
+                        ${money(before)}
+                    </td>
+
+                    <td>
+                        ${money(remaining)}
+                    </td>
+
+                `;
+
+
+                printTable.appendChild(
+                    tr
+                );
+
+            }
+        );
+
+    }
+
+}
+
+
+
+/* =========================================
+   الطباعة
+========================================= */
+
+
+function printSalarySlip(){
+
+    if(
+        !selectedEmployee ||
+        !currentData.salary
+    ){
+
+        showMessage(
+            "❌ يرجى اختيار الموظف وانتظار تحميل الكشف",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    preparePrint();
+
+
+    window.print();
+
+}
+
+
+
+/* =========================================
+   POST API
+========================================= */
+
+
+async function postAPI(data){
+
+    const response =
+        await fetch(
+            API,
+            {
+                method:"POST",
+
+                headers:{
+                    "Content-Type":
+                        "text/plain;charset=utf-8"
+                },
+
+                body:
+                    JSON.stringify(data)
+            }
+        );
+
+
+    const text =
+        await response.text();
+
+
+    let result;
+
+
+    try{
+
+        result =
+            JSON.parse(text);
+
+    }
+    catch(error){
+
+        console.error(
+            "API RESPONSE:",
+            text
+        );
+
+
+        throw new Error(
+            "الخادم لم يرجع JSON صحيح"
+        );
+
+    }
+
+
+    return result;
+
+}
+
+
+
+/* =========================================
+   حساب مبلغ السلفة
+========================================= */
+
+
+function getAdvanceAmount(item){
+
+    return parseNumber(
+        getValue(
+            item,
+            [
+                "المبلغ",
+                "مبلغ السلفة",
+                "المبلغ المسحوب الآن",
+                "Amount"
+            ]
+        ) ||
+        0
+    );
+
+}
+
+
+
+/* =========================================
+   قراءة قيمة من عدة أسماء
+========================================= */
+
+
+function getValue(
+    object,
+    keys
+){
+
+    if(
+        !object ||
+        !Array.isArray(keys)
+    ){
+
+        return "";
+
+    }
+
+
+    for(
+        let i=0;
+        i<keys.length;
+        i++
+    ){
+
+        const key =
+            keys[i];
+
+
+        if(
+            object[key] !==
+            undefined &&
+            object[key] !==
+            null &&
+            object[key] !==
+            ""
+        ){
+
+            return object[key];
+
+        }
+
+    }
+
+
+    return "";
+
+}
+
+
+
+/* =========================================
+   اسم الموظف
+========================================= */
+
+
+function getEmployeeName(){
+
+    if(!selectedEmployee){
+        return "";
+    }
+
+
+    return (
+        selectedEmployee["الاسم"] ||
+        selectedEmployee["اسم الموظف"] ||
+        selectedEmployee["Employee Name"] ||
+        ""
+    );
+
+}
+
+
+
+/* =========================================
+   تحويل الرقم
+========================================= */
+
+
+function parseNumber(value){
+
+    if(
+        value ===
+        null ||
+        value ===
+        undefined
+    ){
+
+        return 0;
+
+    }
+
+
+    if(
+        typeof value ===
+        "number"
+    ){
+
+        return isFinite(value)
+            ? value
+            : 0;
+
+    }
+
+
+    let text =
+        String(value)
+        .trim();
+
+
+    if(!text){
+        return 0;
+    }
+
+
+    /*
+     * إزالة العملة والفواصل
+     */
+
+
+    text =
+        text
+        .replace(
+            /IQD/gi,
+            ""
+        )
+        .replace(
+            /د\.?\s*ع/gi,
+            ""
+        )
+        .replace(
+            /٬/g,
+            ""
+        )
+        .replace(
+            /,/g,
+            ""
+        )
+        .replace(
+            /،/g,
+            ""
+        )
+        .trim();
+
+
+    const match =
+        text.match(
+            /-?\d+(?:\.\d+)?/
+        );
+
+
+    if(!match){
+        return 0;
+    }
+
+
+    return Number(
+        match[0]
+    ) || 0;
+
+}
+
+
+
+/* =========================================
+   تنسيق المبلغ
+========================================= */
+
+
+function money(value){
+
+    return (
+        parseNumber(value)
+        .toLocaleString(
+            "en-US"
+        ) +
+        " د.ع"
+    );
+
+}
+
+
+
+/* =========================================
+   تطبيع النص
+========================================= */
+
+
+function normalize(value){
+
+    if(
+        value ===
+        null ||
+        value ===
+        undefined
+    ){
+
+        return "";
+
+    }
+
+
+    return String(value)
+        .trim()
+        .replace(
+            /\s+/g,
+            " "
+        );
+
+}
+
+
+
+/* =========================================
+   تطبيع الشهر
+========================================= */
+
+
+function normalizeMonth(value){
+
+    if(
+        value ===
+        null ||
+        value ===
+        undefined
+    ){
+
+        return "";
+
+    }
+
+
+    if(
+        Object.prototype
+        .toString
+        .call(value) ===
+        "[object Date]"
+    ){
+
+        if(
+            isNaN(
+                value.getTime()
+            )
+        ){
+
+            return "";
+
+        }
+
+
+        return (
+            value.getFullYear() +
+            "-" +
+            String(
+                value.getMonth()+1
+            ).padStart(2,"0")
+        );
+
+    }
+
+
+    const text =
+        String(value)
+        .trim();
+
+
+    /*
+     * yyyy-MM
+     */
+
+
+    let match =
+        text.match(
+            /^(\d{4})-(\d{1,2})/
+        );
+
+
+    if(match){
+
+        return (
+            match[1] +
+            "-" +
+            String(
+                Number(match[2])
+            ).padStart(2,"0")
+        );
+
+    }
+
+
+    /*
+     * تواريخ Google
+     */
+
+
+    const date =
+        new Date(text);
+
+
+    if(
+        !isNaN(
+            date.getTime()
+        )
+    ){
+
+        return (
+            date.getFullYear() +
+            "-" +
+            String(
+                date.getMonth()+1
+            ).padStart(2,"0")
+        );
+
+    }
+
+
+    return text;
+
+}
+
+
+
+/* =========================================
+   تنسيق التاريخ
+========================================= */
+
+
+function formatDate(value){
+
+    if(
+        !value
+    ){
+
+        return "-";
+
+    }
+
+
+    const date =
+        new Date(value);
+
+
+    if(
+        !isNaN(
+            date.getTime()
+        )
+    ){
+
+        return date.toLocaleDateString(
+            "en-GB"
+        );
+
+    }
+
+
+    return String(value);
+
+}
+
+
+
+/* =========================================
+   إظهار التحميل
+========================================= */
+
+
+function showLoading(){
+
+    document.getElementById(
+        "summary"
+    ).style.display =
+        "block";
+
+
+    document.getElementById(
+        "salary"
+    ).textContent =
+        "جاري التحميل...";
+
+
+    document.getElementById(
+        "absenceDays"
+    ).textContent =
+        "...";
+
+
+    document.getElementById(
+        "absenceDeduction"
+    ).textContent =
+        "...";
+
+
+    document.getElementById(
+        "previousAdvance"
+    ).textContent =
+        "...";
+
+
+    document.getElementById(
+        "beforeAdvance"
+    ).textContent =
+        "...";
+
+
+    document.getElementById(
+        "totalDeductions"
+    ).textContent =
+        "...";
+
+
+    document.getElementById(
+        "netSalary"
+    ).textContent =
+        "...";
+
+
+    document.getElementById(
+        "advanceList"
+    ).style.display =
+        "none";
+
+}
+
+
+
+/* =========================================
+   إخفاء الكشف
+========================================= */
+
+
+function hideReport(){
+
+    document.getElementById(
+        "summary"
+    ).style.display =
+        "none";
+
+}
+
+
+
+/* =========================================
+   الرسائل
+========================================= */
+
+
+function showMessage(
+    text,
+    type
+){
+
+    const box =
+        document.getElementById(
+            "message"
+        );
+
+
+    box.textContent =
+        text;
+
+
+    box.className =
+        "message " +
+        (
+            type === "error"
+            ? "error-message"
+            : "success-message"
+        );
+
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
+
+
+
+/* =========================================
+   حماية النص
+========================================= */
+
+
+function safe(value){
+
+    if(
+        value ===
+        null ||
+        value ===
+        undefined
+    ){
+
+        return "";
+
+    }
+
+
+    return String(value)
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+        .replace(
+            /</g,
+            "&lt;"
+        )
+        .replace(
+            />/g,
+            "&gt;"
+        )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+</script>
+
+</body>
+</html>
