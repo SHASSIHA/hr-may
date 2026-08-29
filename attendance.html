@@ -1,5 +1,5 @@
+```html
 <!DOCTYPE html>
-
 <html lang="ar" dir="rtl">
 
 <head>
@@ -11,7 +11,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-
 *{
     box-sizing:border-box;
 }
@@ -134,18 +133,6 @@ body{
     border-color:#ff7a00;
 }
 
-.date-input{
-    border:1px solid #ddd;
-    border-radius:10px;
-    padding:11px 14px;
-    font-family:inherit;
-    outline:none;
-}
-
-.date-input:focus{
-    border-color:#ff7a00;
-}
-
 .refresh{
     border:none;
     background:#333;
@@ -154,10 +141,6 @@ body{
     border-radius:10px;
     cursor:pointer;
     font-family:inherit;
-}
-
-.refresh:hover{
-    opacity:.9;
 }
 
 .table-card{
@@ -251,7 +234,7 @@ tr:hover td{
 
 .btn{
     border:none;
-    padding:7px 11px;
+    padding:7px 10px;
     border-radius:8px;
     cursor:pointer;
     font-family:inherit;
@@ -288,11 +271,6 @@ tr:hover td{
     color:white;
 }
 
-.btn-save{
-    background:#ff7a00;
-    color:white;
-}
-
 .empty,
 .loading{
     padding:50px;
@@ -325,75 +303,6 @@ tr:hover td{
     background:#c62828;
 }
 
-.modal{
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.45);
-    display:none;
-    align-items:center;
-    justify-content:center;
-    z-index:9998;
-    padding:15px;
-}
-
-.modal-box{
-    background:white;
-    width:100%;
-    max-width:520px;
-    border-radius:18px;
-    padding:25px;
-    box-shadow:0 10px 40px rgba(0,0,0,.25);
-}
-
-.modal-title{
-    font-size:20px;
-    font-weight:bold;
-    margin-bottom:20px;
-}
-
-.form-group{
-    margin-bottom:15px;
-}
-
-.form-group label{
-    display:block;
-    font-size:13px;
-    margin-bottom:6px;
-    color:#555;
-}
-
-.form-group input,
-.form-group select,
-.form-group textarea{
-    width:100%;
-    padding:11px 12px;
-    border:1px solid #ddd;
-    border-radius:10px;
-    font-family:inherit;
-    outline:none;
-}
-
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus{
-    border-color:#ff7a00;
-}
-
-.modal-actions{
-    display:flex;
-    gap:10px;
-    margin-top:20px;
-}
-
-.modal-actions button{
-    flex:1;
-}
-
-.btn-cancel{
-    background:#eee;
-    color:#333;
-}
-
 @media(max-width:700px){
 
     .header{
@@ -420,365 +329,153 @@ tr:hover td{
     .stat-number{
         font-size:23px;
     }
-
 }
-
 </style>
-
 </head>
 
 <body>
 
 <div class="header">
 
-```
-<h1>
-    🕐 الحضور والغياب
-</h1>
+    <h1>🕐 الحضور والغياب</h1>
 
-<a href="index.html">
-    ← الرئيسية
-</a>
-```
+    <a href="index.html">
+        ← الرئيسية
+    </a>
 
 </div>
 
 <div class="container">
 
-```
-<div class="date-bar">
+    <div class="date-bar">
 
-    <div class="date-title">
-
-        📅 سجل الحضور
-
-        <span class="today" id="todayDate"></span>
-
-    </div>
-
-    <div>
-        نظام الموارد البشرية HR
-    </div>
-
-</div>
-
-<div class="stats">
-
-    <div class="stat">
-
-        <div class="stat-icon">👥</div>
-
-        <div class="stat-title">
-            إجمالي الموظفين
+        <div class="date-title">
+            📅 حضور اليوم
+            <span class="today" id="todayDate"></span>
         </div>
 
-        <div class="stat-number total" id="totalCount">
-            0
+        <div>
+            نظام الموارد البشرية HR
         </div>
 
     </div>
 
-    <div class="stat">
 
-        <div class="stat-icon">🟢</div>
+    <div class="stats">
 
-        <div class="stat-title">
-            حاضر
+        <div class="stat">
+            <div class="stat-icon">👥</div>
+            <div class="stat-title">إجمالي الموظفين</div>
+            <div class="stat-number total" id="totalCount">0</div>
         </div>
 
-        <div class="stat-number present" id="presentCount">
-            0
+        <div class="stat">
+            <div class="stat-icon">🟢</div>
+            <div class="stat-title">حاضر</div>
+            <div class="stat-number present" id="presentCount">0</div>
         </div>
 
-    </div>
-
-    <div class="stat">
-
-        <div class="stat-icon">🔴</div>
-
-        <div class="stat-title">
-            غائب
+        <div class="stat">
+            <div class="stat-icon">🔴</div>
+            <div class="stat-title">غياب</div>
+            <div class="stat-number absent" id="absentCount">0</div>
         </div>
 
-        <div class="stat-number absent" id="absentCount">
-            0
+        <div class="stat">
+            <div class="stat-icon">🟡</div>
+            <div class="stat-title">متأخر</div>
+            <div class="stat-number late" id="lateCount">0</div>
         </div>
 
-    </div>
-
-    <div class="stat">
-
-        <div class="stat-icon">🟡</div>
-
-        <div class="stat-title">
-            متأخر
-        </div>
-
-        <div class="stat-number late" id="lateCount">
-            0
+        <div class="stat">
+            <div class="stat-icon">🏖️</div>
+            <div class="stat-title">إجازة</div>
+            <div class="stat-number leave" id="leaveCount">0</div>
         </div>
 
     </div>
 
-    <div class="stat">
 
-        <div class="stat-icon">🏖️</div>
-
-        <div class="stat-title">
-            إجازة
-        </div>
-
-        <div class="stat-number leave" id="leaveCount">
-            0
-        </div>
-
-    </div>
-
-</div>
-
-<div class="toolbar">
-
-    <input
-        type="text"
-        id="search"
-        class="search"
-        placeholder="🔎 ابحث عن اسم الموظف أو القسم..."
-        oninput="filterEmployees()"
-    >
-
-    <input
-        type="date"
-        id="selectedDate"
-        class="date-input"
-        onchange="loadData()"
-    >
-
-    <button
-        class="refresh"
-        onclick="loadData()"
-    >
-        🔄 تحديث
-    </button>
-
-</div>
-
-<div class="table-card">
-
-    <div
-        class="loading"
-        id="loading"
-    >
-        جاري تحميل الموظفين...
-    </div>
-
-    <div
-        class="table-wrapper"
-        id="tableWrapper"
-        style="display:none;"
-    >
-
-        <table>
-
-            <thead>
-
-                <tr>
-
-                    <th>#</th>
-
-                    <th>
-                        الموظف
-                    </th>
-
-                    <th>
-                        القسم
-                    </th>
-
-                    <th>
-                        وقت الدخول
-                    </th>
-
-                    <th>
-                        وقت الخروج
-                    </th>
-
-                    <th>
-                        ساعات العمل
-                    </th>
-
-                    <th>
-                        الحالة
-                    </th>
-
-                    <th>
-                        الإجراءات
-                    </th>
-
-                </tr>
-
-            </thead>
-
-            <tbody id="employeesTable"></tbody>
-
-        </table>
-
-    </div>
-
-</div>
-```
-
-</div>
-
-<div id="message" class="message"></div>
-
-<div id="attendanceModal" class="modal">
-
-```
-<div class="modal-box">
-
-    <div class="modal-title">
-        تسجيل الحضور
-    </div>
-
-    <div class="form-group">
-
-        <label>
-            الموظف
-        </label>
+    <div class="toolbar">
 
         <input
             type="text"
-            id="modalEmployeeName"
-            readonly
+            id="search"
+            class="search"
+            placeholder="🔎 ابحث عن اسم الموظف أو القسم..."
+            oninput="filterEmployees()"
         >
-
-    </div>
-
-    <div class="form-group">
-
-        <label>
-            القسم
-        </label>
-
-        <input
-            type="text"
-            id="modalDepartment"
-            readonly
-        >
-
-    </div>
-
-    <div class="form-group">
-
-        <label>
-            التاريخ
-        </label>
-
-        <input
-            type="date"
-            id="modalDate"
-        >
-
-    </div>
-
-    <div class="form-group">
-
-        <label>
-            وقت الدخول
-        </label>
-
-        <input
-            type="time"
-            id="modalCheckIn"
-        >
-
-    </div>
-
-    <div class="form-group">
-
-        <label>
-            وقت الخروج
-        </label>
-
-        <input
-            type="time"
-            id="modalCheckOut"
-        >
-
-    </div>
-
-    <div class="form-group">
-
-        <label>
-            الحالة
-        </label>
-
-        <select id="modalStatus">
-
-            <option value="حاضر">
-                حاضر
-            </option>
-
-            <option value="غائب">
-                غائب
-            </option>
-
-            <option value="متأخر">
-                متأخر
-            </option>
-
-            <option value="إجازة">
-                إجازة
-            </option>
-
-        </select>
-
-    </div>
-
-    <div class="form-group">
-
-        <label>
-            ملاحظات
-        </label>
-
-        <textarea
-            id="modalNotes"
-            rows="3"
-        ></textarea>
-
-    </div>
-
-    <div class="modal-actions">
 
         <button
-            class="btn btn-save"
-            onclick="saveAttendance()"
+            class="refresh"
+            onclick="loadData()"
         >
-            💾 حفظ
-        </button>
-
-        <button
-            class="btn btn-cancel"
-            onclick="closeModal()"
-        >
-            إلغاء
+            🔄 تحديث
         </button>
 
     </div>
 
-</div>
-```
+
+    <div class="table-card">
+
+        <div
+            class="loading"
+            id="loading"
+        >
+            جاري تحميل الموظفين...
+        </div>
+
+        <div
+            class="table-wrapper"
+            id="tableWrapper"
+            style="display:none;"
+        >
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>#</th>
+                        <th>الموظف</th>
+                        <th>القسم</th>
+                        <th>وقت الدخول</th>
+                        <th>وقت الخروج</th>
+                        <th>ساعات العمل</th>
+                        <th>الحالة</th>
+                        <th>الإجراءات</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="employeesTable"></tbody>
+
+            </table>
+
+        </div>
+
+    </div>
 
 </div>
+
+
+<div
+    id="message"
+    class="message"
+></div>
+
 
 <script>
 
 const API =
 "https://script.google.com/macros/s/AKfycbw6pnqbRn3VyJvFjk0RGfEt8VXdBkOq2uqooSvxi0onjcUStpJ_hOGNZVPLimRA-ZNAGQ/exec";
 
+
 let employees = [];
 let attendance = [];
 
-let editingRow = null;
 
 function getToday(){
 
@@ -788,32 +485,23 @@ function getToday(){
         now.getFullYear();
 
     const month =
-        String(
-            now.getMonth() + 1
-        ).padStart(2,"0");
+        String(now.getMonth() + 1)
+        .padStart(2,"0");
 
     const day =
-        String(
-            now.getDate()
-        ).padStart(2,"0");
+        String(now.getDate())
+        .padStart(2,"0");
 
-    return (
-        year +
-        "-" +
-        month +
-        "-" +
-        day
-    );
-
+    return `${year}-${month}-${day}`;
 }
+
 
 function displayDate(){
 
     const now = new Date();
 
-    document.getElementById(
-        "todayDate"
-    ).innerText =
+    document.getElementById("todayDate")
+        .innerText =
         now.toLocaleDateString(
             "ar-IQ",
             {
@@ -823,47 +511,39 @@ function displayDate(){
                 day:"numeric"
             }
         );
-
 }
 
-function apiRequest(data){
 
-    return fetch(
-        API,
-        {
-            method:"POST",
-            body:JSON.stringify(data)
-        }
-    )
-    .then(function(response){
+async function apiRequest(data){
 
-        return response.json();
+    const response =
+        await fetch(
+            API,
+            {
+                method:"POST",
+                body:JSON.stringify(data)
+            }
+        );
 
-    });
+    const result =
+        await response.json();
 
+    return result;
 }
+
 
 async function loadData(){
 
     const loading =
-        document.getElementById(
-            "loading"
-        );
+        document.getElementById("loading");
 
     const wrapper =
-        document.getElementById(
-            "tableWrapper"
-        );
+        document.getElementById("tableWrapper");
 
     loading.style.display = "block";
     wrapper.style.display = "none";
 
     try{
-
-        const selectedDate =
-            document.getElementById(
-                "selectedDate"
-            ).value || getToday();
 
         const employeesData =
             await apiRequest({
@@ -871,78 +551,71 @@ async function loadData(){
             });
 
         if(
-            employeesData.status !==
-            "success"
+            employeesData.status !== "success"
         ){
 
             throw new Error(
                 employeesData.message ||
-                "تعذر جلب الموظفين"
+                "تعذر تحميل الموظفين"
             );
 
         }
 
         employees =
-            employeesData.employees ||
-            [];
+            employeesData.employees || [];
+
 
         const attendanceData =
             await apiRequest({
 
                 action:"getAttendance",
 
-                date:selectedDate
+                date:getToday()
 
             });
 
+
         if(
-            attendanceData.status !==
-            "success"
+            attendanceData.status !== "success"
         ){
 
             throw new Error(
                 attendanceData.message ||
-                "تعذر جلب الحضور"
+                "تعذر تحميل الحضور"
             );
 
         }
 
+
         attendance =
-            attendanceData.attendance ||
-            [];
+            attendanceData.attendance || [];
+
 
         renderTable();
 
         loading.style.display = "none";
         wrapper.style.display = "block";
 
-        updateStats();
 
-    }
-    catch(error){
+    }catch(error){
 
         loading.innerHTML = `
-
             ❌ تعذر تحميل البيانات
-
             <br><br>
-
             ${safe(error.message)}
-
             <br><br>
-
             <button
                 class="refresh"
                 onclick="loadData()"
             >
                 🔄 إعادة المحاولة
             </button>
-
         `;
 
     }
 
 }
+
 
 function getEmployeeName(employee){
 
@@ -952,29 +625,18 @@ function getEmployeeName(employee){
         employee["Employee Name"] ||
         ""
     );
-
 }
 
-function getEmployeeId(employee){
 
-    return (
-        employee["Employee ID"] ||
-        employee["الرقم الوظيفي"] ||
-        employee["رقم الموظف"] ||
-        ""
-    );
-
-}
-
-function getDepartment(employee){
+function getEmployeeDepartment(employee){
 
     return (
         employee["القسم"] ||
         employee["Department"] ||
         ""
     );
-
 }
+
 
 function getAttendanceName(record){
 
@@ -984,8 +646,8 @@ function getAttendanceName(record){
         record["Employee Name"] ||
         ""
     );
-
 }
+
 
 function getAttendanceForEmployee(employee){
 
@@ -993,58 +655,61 @@ function getAttendanceForEmployee(employee){
         getEmployeeName(employee);
 
     const employeeId =
-        getEmployeeId(employee);
+        employee["Employee ID"] ||
+        employee["الرقم الوظيفي"] ||
+        employee["رقم الموظف"] ||
+        "";
 
-    return attendance.find(
-        function(record){
 
-            const recordId =
-                record["Employee ID"] ||
-                record["الرقم الوظيفي"] ||
-                record["رقم الموظف"] ||
-                "";
+    // أولاً نحاول الرقم الوظيفي
+    if(employeeId){
 
-            if(
-                employeeId &&
-                recordId &&
-                normalize(employeeId) ===
-                normalize(recordId)
-            ){
+        const byId =
+            attendance.find(record => {
 
-                return true;
+                const recordId =
+                    record["Employee ID"] ||
+                    record["الرقم الوظيفي"] ||
+                    record["رقم الموظف"] ||
+                    "";
 
-            }
+                return normalize(recordId) ===
+                       normalize(employeeId);
 
-            return (
-                normalize(
-                    getAttendanceName(record)
-                ) ===
-                normalize(employeeName)
-            );
+            });
 
+        if(byId){
+            return byId;
         }
-    );
+
+    }
+
+
+    // بعدها الاسم
+    return attendance.find(record => {
+
+        return normalize(
+            getAttendanceName(record)
+        ) ===
+        normalize(employeeName);
+
+    });
 
 }
 
-function getRecordValue(record, names){
 
-    for(
-        let i = 0;
-        i < names.length;
-        i++
-    ){
+function getRecordValue(record,names){
 
-        const key = names[i];
+    for(const name of names){
 
         if(
             record &&
-            record[key] !== undefined &&
-            record[key] !== null &&
-            record[key] !== ""
+            record[name] !== undefined &&
+            record[name] !== null &&
+            record[name] !== ""
         ){
 
-            return record[key];
+            return record[name];
 
         }
 
@@ -1053,6 +718,7 @@ function getRecordValue(record, names){
     return "";
 
 }
+
 
 function renderTable(){
 
@@ -1063,40 +729,38 @@ function renderTable(){
 
     tbody.innerHTML = "";
 
+
     if(!employees.length){
 
         tbody.innerHTML = `
-
             <tr>
-
-                <td
-                    colspan="8"
-                    class="empty"
-                >
+                <td colspan="8" class="empty">
                     لا يوجد موظفين
                 </td>
-
             </tr>
-
         `;
 
-        return;
+        updateStats();
 
+        return;
     }
 
+
     employees.forEach(
-        function(employee,index){
+        (employee,index) => {
 
             const record =
                 getAttendanceForEmployee(
                     employee
                 );
 
+
             const name =
                 getEmployeeName(employee);
 
             const department =
-                getDepartment(employee);
+                getEmployeeDepartment(employee);
+
 
             const checkIn =
                 getRecordValue(
@@ -1108,6 +772,7 @@ function renderTable(){
                     ]
                 );
 
+
             const checkOut =
                 getRecordValue(
                     record,
@@ -1118,7 +783,8 @@ function renderTable(){
                     ]
                 );
 
-            const workHours =
+
+            const hours =
                 getRecordValue(
                     record,
                     [
@@ -1126,6 +792,7 @@ function renderTable(){
                         "Work Hours"
                     ]
                 );
+
 
             const status =
                 getRecordValue(
@@ -1136,14 +803,17 @@ function renderTable(){
                     ]
                 );
 
+
             const row =
                 document.createElement("tr");
+
 
             row.dataset.name =
                 name;
 
             row.dataset.department =
                 department;
+
 
             row.innerHTML = `
 
@@ -1152,31 +822,27 @@ function renderTable(){
                 </td>
 
                 <td>
-
                     <div class="employee-name">
                         ${safe(name)}
                     </div>
-
                 </td>
 
                 <td>
-
                     <div class="department">
                         ${safe(department) || "-"}
                     </div>
-
                 </td>
 
                 <td>
-                    ${safe(checkIn) || "-"}
+                    ${formatTime(checkIn) || "-"}
                 </td>
 
                 <td>
-                    ${safe(checkOut) || "-"}
+                    ${formatTime(checkOut) || "-"}
                 </td>
 
                 <td>
-                    ${safe(workHours) || "-"}
+                    ${safe(hours) || "-"}
                 </td>
 
                 <td>
@@ -1189,35 +855,59 @@ function renderTable(){
 
                         <button
                             class="btn btn-present"
-                            onclick='openAttendanceModal(${JSON.stringify(name)},${JSON.stringify(department)},"حاضر")'
+                            onclick='markPresent(
+                                ${JSON.stringify(name)},
+                                ${JSON.stringify(department)}
+                            )'
                         >
                             🟢 حضور
                         </button>
 
+
                         <button
                             class="btn btn-out"
-                            onclick='openAttendanceModal(${JSON.stringify(name)},${JSON.stringify(department)},"حاضر","out")'
+                            onclick='markCheckout(
+                                ${JSON.stringify(name)},
+                                ${JSON.stringify(department)},
+                                ${JSON.stringify(checkIn)},
+                                ${JSON.stringify(status)}
+                            )'
                         >
                             🕐 خروج
                         </button>
 
+
                         <button
                             class="btn btn-absent"
-                            onclick='quickStatus(${JSON.stringify(name)},${JSON.stringify(department)},"غائب")'
+                            onclick='markStatus(
+                                ${JSON.stringify(name)},
+                                ${JSON.stringify(department)},
+                                "غياب"
+                            )'
                         >
                             🔴 غياب
                         </button>
 
+
                         <button
                             class="btn btn-late"
-                            onclick='quickStatus(${JSON.stringify(name)},${JSON.stringify(department)},"متأخر")'
+                            onclick='markStatus(
+                                ${JSON.stringify(name)},
+                                ${JSON.stringify(department)},
+                                "متأخر"
+                            )'
                         >
                             🟡 تأخير
                         </button>
 
+
                         <button
                             class="btn btn-leave"
-                            onclick='quickStatus(${JSON.stringify(name)},${JSON.stringify(department)},"إجازة")'
+                            onclick='markStatus(
+                                ${JSON.stringify(name)},
+                                ${JSON.stringify(department)},
+                                "إجازة"
+                            )'
                         >
                             🏖️ إجازة
                         </button>
@@ -1228,19 +918,25 @@ function renderTable(){
 
             `;
 
+
             tbody.appendChild(row);
 
         }
     );
 
+
+    updateStats();
+
 }
+
 
 function statusHTML(status){
 
-    status =
-        String(status || "").trim();
+    const value =
+        normalize(status);
 
-    if(status === "حاضر"){
+
+    if(value === "حاضر"){
 
         return `
             <span class="status status-present">
@@ -1250,20 +946,22 @@ function statusHTML(status){
 
     }
 
+
     if(
-        status === "غائب" ||
-        status === "غياب"
+        value === "غياب" ||
+        value === "غائب"
     ){
 
         return `
             <span class="status status-absent">
-                🔴 غائب
+                🔴 غياب
             </span>
         `;
 
     }
 
-    if(status === "متأخر"){
+
+    if(value === "متأخر"){
 
         return `
             <span class="status status-late">
@@ -1273,7 +971,8 @@ function statusHTML(status){
 
     }
 
-    if(status === "إجازة"){
+
+    if(value === "إجازة"){
 
         return `
             <span class="status status-leave">
@@ -1283,6 +982,7 @@ function statusHTML(status){
 
     }
 
+
     return `
         <span class="status status-none">
             لم يسجل
@@ -1291,6 +991,7 @@ function statusHTML(status){
 
 }
 
+
 function updateStats(){
 
     let present = 0;
@@ -1298,57 +999,64 @@ function updateStats(){
     let late = 0;
     let leave = 0;
 
-    attendance.forEach(
-        function(record){
 
-            const status =
-                String(
-                    record["الحالة"] ||
-                    record["Status"] ||
-                    ""
-                ).trim();
+    // الإحصائيات تعتمد على سجلات اليوم فقط
+    attendance.forEach(record => {
 
-            if(status === "حاضر"){
-                present++;
-            }
+        const status =
+            normalize(
+                getRecordValue(
+                    record,
+                    ["الحالة","Status"]
+                )
+            );
 
-            if(
-                status === "غائب" ||
-                status === "غياب"
-            ){
-                absent++;
-            }
 
-            if(status === "متأخر"){
-                late++;
-            }
-
-            if(status === "إجازة"){
-                leave++;
-            }
-
+        if(status === "حاضر"){
+            present++;
         }
-    );
+
+        else if(
+            status === "غياب" ||
+            status === "غائب"
+        ){
+            absent++;
+        }
+
+        else if(status === "متأخر"){
+            late++;
+        }
+
+        else if(status === "إجازة"){
+            leave++;
+        }
+
+    });
+
 
     document.getElementById(
         "totalCount"
     ).innerText =
         employees.length;
 
+
     document.getElementById(
         "presentCount"
     ).innerText =
         present;
+
 
     document.getElementById(
         "absentCount"
     ).innerText =
         absent;
 
+
     document.getElementById(
         "lateCount"
     ).innerText =
         late;
+
 
     document.getElementById(
         "leaveCount"
@@ -1357,297 +1065,119 @@ function updateStats(){
 
 }
 
-function openAttendanceModal(
+
+async function markPresent(
     name,
-    department,
-    status,
-    mode
+    department
 ){
 
-    editingRow = null;
-
-    const today =
-        document.getElementById(
-            "selectedDate"
-        ).value || getToday();
-
-    document.getElementById(
-        "modalEmployeeName"
-    ).value = name;
-
-    document.getElementById(
-        "modalDepartment"
-    ).value = department;
-
-    document.getElementById(
-        "modalDate"
-    ).value = today;
-
-    document.getElementById(
-        "modalStatus"
-    ).value =
-        status || "حاضر";
-
-    document.getElementById(
-        "modalNotes"
-    ).value = "";
-
-    const existing =
-        attendance.find(
-            function(record){
-
-                return normalize(
-                    getAttendanceName(record)
-                ) === normalize(name);
-
-            }
-        );
-
-    if(existing){
-
-        document.getElementById(
-            "modalCheckIn"
-        ).value =
-            convertToTimeInput(
-                getRecordValue(
-                    existing,
-                    [
-                        "وقت الدخول",
-                        "دخول",
-                        "Check In"
-                    ]
-                )
-            );
-
-        document.getElementById(
-            "modalCheckOut"
-        ).value =
-            convertToTimeInput(
-                getRecordValue(
-                    existing,
-                    [
-                        "وقت الخروج",
-                        "خروج",
-                        "Check Out"
-                    ]
-                )
-            );
-
-        document.getElementById(
-            "modalStatus"
-        ).value =
-            getRecordValue(
-                existing,
-                [
-                    "الحالة",
-                    "Status"
-                ]
-            ) || status;
-
-        document.getElementById(
-            "modalNotes"
-        ).value =
-            getRecordValue(
-                existing,
-                [
-                    "ملاحظات",
-                    "Notes"
-                ]
-            );
-
-        editingRow =
-            existing.__row || null;
-
-    }
-    else{
-
-        if(mode === "out"){
-
-            document.getElementById(
-                "modalCheckOut"
-            ).value =
-                currentTime();
-
-        }
-        else{
-
-            document.getElementById(
-                "modalCheckIn"
-            ).value =
-                currentTime();
-
-        }
-
-    }
-
-    document.getElementById(
-        "attendanceModal"
-    ).style.display =
-        "flex";
-
-}
-
-function closeModal(){
-
-    document.getElementById(
-        "attendanceModal"
-    ).style.display =
-        "none";
-
-}
-
-async function saveAttendance(){
-
-    const name =
-        document.getElementById(
-            "modalEmployeeName"
-        ).value;
-
-    const department =
-        document.getElementById(
-            "modalDepartment"
-        ).value;
-
-    const date =
-        document.getElementById(
-            "modalDate"
-        ).value;
-
-    const checkIn =
-        document.getElementById(
-            "modalCheckIn"
-        ).value;
-
-    const checkOut =
-        document.getElementById(
-            "modalCheckOut"
-        ).value;
-
-    const status =
-        document.getElementById(
-            "modalStatus"
-        ).value;
-
-    const notes =
-        document.getElementById(
-            "modalNotes"
-        ).value;
-
-    if(!name){
-
-        showMessage(
-            "❌ اسم الموظف غير موجود",
-            "error"
-        );
+    if(!confirm(
+        `تسجيل حضور الموظف:\n\n${name}\n\nهل أنت متأكد؟`
+    )){
 
         return;
 
     }
 
+
     try{
+
+        const record =
+            getAttendanceByName(name);
+
+
+        const now =
+            getCurrentTime();
+
 
         let result;
 
-        const existing =
-            attendance.find(
-                function(record){
 
-                    return normalize(
-                        getAttendanceName(record)
-                    ) === normalize(name);
+        if(record){
 
-                }
-            );
-
-        if(
-            existing &&
-            existing.__row
-        ){
+            // تحديث السجل الموجود
 
             result =
                 await apiRequest({
 
                     action:"updateAttendance",
 
-                    row:existing.__row,
+                    row:record.__row,
 
-                    date:date,
+                    date:getToday(),
 
                     employeeName:name,
 
                     department:department,
 
-                    checkIn:checkIn,
+                    checkIn:
+                        record.checkIn ||
+                        now,
 
-                    checkOut:checkOut,
+                    checkOut:
+                        record.checkOut || "",
 
                     workHours:
-                        calculateWorkHours(
-                            checkIn,
-                            checkOut
-                        ),
+                        record.workHours || "",
 
-                    status:status,
+                    status:"حاضر",
 
-                    notes:notes
+                    notes:
+                        record.notes || ""
 
                 });
 
         }
         else{
 
+            // إنشاء سجل جديد
+
             result =
                 await apiRequest({
 
                     action:"addAttendance",
 
-                    date:date,
+                    date:getToday(),
 
                     employeeName:name,
 
                     department:department,
 
-                    checkIn:checkIn,
+                    checkIn:now,
 
-                    checkOut:checkOut,
+                    checkOut:"",
 
-                    workHours:
-                        calculateWorkHours(
-                            checkIn,
-                            checkOut
-                        ),
+                    workHours:"",
 
-                    status:status,
+                    status:"حاضر",
 
-                    notes:notes
+                    notes:""
 
                 });
 
         }
 
-        if(
-            result.status !==
-            "success"
-        ){
+
+        if(result.status !== "success"){
 
             throw new Error(
                 result.message ||
-                "تعذر حفظ سجل الحضور"
+                "تعذر تسجيل الحضور"
             );
 
         }
 
-        closeModal();
 
         showMessage(
-            "✅ تم حفظ سجل الحضور بنجاح",
+            "✅ تم تسجيل الحضور بنجاح",
             "success"
         );
 
+
         await loadData();
 
-    }
-    catch(error){
+
+    }catch(error){
 
         showMessage(
             "❌ " + error.message,
@@ -1658,103 +1188,59 @@ async function saveAttendance(){
 
 }
 
-async function quickStatus(
+
+async function markStatus(
     name,
     department,
     status
 ){
 
-    if(
-        !confirm(
-            "الموظف:\n" +
-            name +
-            "\n\nالحالة: " +
-            status +
-            "\n\nهل أنت متأكد؟"
-        )
-    ){
+    if(!confirm(
+        `الموظف:\n${name}\n\nالحالة: ${status}\n\nهل أنت متأكد؟`
+    )){
 
         return;
 
     }
 
+
     try{
 
-        const selectedDate =
-            document.getElementById(
-                "selectedDate"
-            ).value || getToday();
+        const record =
+            getAttendanceByName(name);
 
-        const existing =
-            attendance.find(
-                function(record){
-
-                    return normalize(
-                        getAttendanceName(record)
-                    ) === normalize(name);
-
-                }
-            );
 
         let result;
 
-        if(
-            existing &&
-            existing.__row
-        ){
+
+        if(record){
 
             result =
                 await apiRequest({
 
                     action:"updateAttendance",
 
-                    row:existing.__row,
+                    row:record.__row,
 
-                    date:selectedDate,
+                    date:getToday(),
 
                     employeeName:name,
 
                     department:department,
 
                     checkIn:
-                        getRecordValue(
-                            existing,
-                            [
-                                "وقت الدخول",
-                                "دخول",
-                                "Check In"
-                            ]
-                        ),
+                        record.checkIn || "",
 
                     checkOut:
-                        getRecordValue(
-                            existing,
-                            [
-                                "وقت الخروج",
-                                "خروج",
-                                "Check Out"
-                            ]
-                        ),
+                        record.checkOut || "",
 
                     workHours:
-                        getRecordValue(
-                            existing,
-                            [
-                                "ساعات العمل",
-                                "Work Hours"
-                            ]
-                        ),
+                        record.workHours || "",
 
                     status:status,
 
                     notes:
-                        getRecordValue(
-                            existing,
-                            [
-                                "ملاحظات",
-                                "Notes"
-                            ]
-                        )
+                        record.notes || ""
 
                 });
 
@@ -1766,7 +1252,7 @@ async function quickStatus(
 
                     action:"addAttendance",
 
-                    date:selectedDate,
+                    date:getToday(),
 
                     employeeName:name,
 
@@ -1786,33 +1272,30 @@ async function quickStatus(
 
         }
 
-        if(
-            result.status !==
-            "success"
-        ){
+
+        if(result.status !== "success"){
 
             throw new Error(
                 result.message ||
-                "تعذر حفظ الحالة"
+                "تعذر تحديث الحالة"
             );
 
         }
 
+
         showMessage(
-            "✅ تم تسجيل " +
-            status +
-            " بنجاح",
+            `✅ تم تسجيل ${status} بنجاح`,
             "success"
         );
 
+
         await loadData();
 
-    }
-    catch(error){
+
+    }catch(error){
 
         showMessage(
-            "❌ " +
-            error.message,
+            "❌ " + error.message,
             "error"
         );
 
@@ -1820,90 +1303,420 @@ async function quickStatus(
 
 }
 
-function currentTime(){
 
-    const now = new Date();
-
-    return (
-        String(
-            now.getHours()
-        ).padStart(2,"0") +
-        ":" +
-        String(
-            now.getMinutes()
-        ).padStart(2,"0")
-    );
-
-}
-
-function convertToTimeInput(value){
-
-    if(!value){
-        return "";
-    }
-
-    const text =
-        String(value).trim();
-
-    const match =
-        text.match(
-            /(\d{1,2}):(\d{2})/
-        );
-
-    if(!match){
-        return "";
-    }
-
-    return (
-        String(
-            parseInt(
-                match[1],
-                10
-            )
-        ).padStart(2,"0") +
-        ":" +
-        match[2]
-    );
-
-}
-
-function calculateWorkHours(
-    start,
-    end
+async function markCheckout(
+    name,
+    department,
+    existingCheckIn,
+    existingStatus
 ){
 
+    if(!confirm(
+        `تسجيل خروج الموظف:\n\n${name}\n\nهل أنت متأكد؟`
+    )){
+
+        return;
+
+    }
+
+
+    try{
+
+        const record =
+            getAttendanceByName(name);
+
+
+        if(!record){
+
+            throw new Error(
+                "لا يوجد سجل حضور لهذا الموظف اليوم"
+            );
+
+        }
+
+
+        const checkIn =
+            record.checkIn ||
+            existingCheckIn;
+
+
+        if(!checkIn){
+
+            throw new Error(
+                "لا يوجد وقت دخول مسجل للموظف"
+            );
+
+        }
+
+
+        const checkOut =
+            getCurrentTime();
+
+
+        const workHours =
+            calculateWorkHours(
+                checkIn,
+                checkOut
+            );
+
+
+        const result =
+            await apiRequest({
+
+                action:"updateAttendance",
+
+                row:record.__row,
+
+                date:getToday(),
+
+                employeeName:name,
+
+                department:department,
+
+                checkIn:checkIn,
+
+                checkOut:checkOut,
+
+                workHours:workHours,
+
+                status:
+                    existingStatus ||
+                    record.status ||
+                    "حاضر",
+
+                notes:
+                    record.notes || ""
+
+            });
+
+
+        if(result.status !== "success"){
+
+            throw new Error(
+                result.message ||
+                "تعذر تسجيل الخروج"
+            );
+
+        }
+
+
+        showMessage(
+            `✅ تم تسجيل الخروج\nساعات العمل: ${workHours}`,
+            "success"
+        );
+
+
+        await loadData();
+
+
+    }catch(error){
+
+        showMessage(
+            "❌ " + error.message,
+            "error"
+        );
+
+    }
+
+}
+
+
+function getAttendanceByName(name){
+
+    const index =
+        attendance.findIndex(record => {
+
+            return normalize(
+                getAttendanceName(record)
+            ) ===
+            normalize(name);
+
+        });
+
+
+    if(index === -1){
+
+        return null;
+
+    }
+
+
+    const record =
+        attendance[index];
+
+
+    return {
+
+        __row:
+            record.__row,
+
+        checkIn:
+            getRecordValue(
+                record,
+                [
+                    "وقت الدخول",
+                    "دخول",
+                    "Check In"
+                ]
+            ),
+
+        checkOut:
+            getRecordValue(
+                record,
+                [
+                    "وقت الخروج",
+                    "خروج",
+                    "Check Out"
+                ]
+            ),
+
+        workHours:
+            getRecordValue(
+                record,
+                [
+                    "ساعات العمل",
+                    "Work Hours"
+                ]
+            ),
+
+        status:
+            getRecordValue(
+                record,
+                [
+                    "الحالة",
+                    "Status"
+                ]
+            ),
+
+        notes:
+            getRecordValue(
+                record,
+                [
+                    "ملاحظات",
+                    "Notes"
+                ]
+            )
+
+    };
+
+}
+
+
+function prepareAttendanceRows(){
+
+    // هذه الدالة غير مستخدمة مباشرة.
+    // الإجراء الفعلي يتم داخل loadData.
+}
+
+
+async function loadAttendanceWithRows(){
+
+    const attendanceData =
+        await apiRequest({
+
+            action:"getAttendance",
+
+            date:getToday()
+
+        });
+
+
     if(
-        !start ||
-        !end
+        attendanceData.status !==
+        "success"
+    ){
+
+        throw new Error(
+            attendanceData.message ||
+            "تعذر تحميل الحضور"
+        );
+
+    }
+
+
+    return attendanceData.attendance || [];
+
+}
+
+
+async function loadDataWithRows(){
+
+    const employeesData =
+        await apiRequest({
+
+            action:"getEmployees"
+
+        });
+
+
+    if(
+        employeesData.status !==
+        "success"
+    ){
+
+        throw new Error(
+            employeesData.message ||
+            "تعذر تحميل الموظفين"
+        );
+
+    }
+
+
+    employees =
+        employeesData.employees || [];
+
+
+    const attendanceData =
+        await apiRequest({
+
+            action:"getAttendance",
+
+            date:getToday()
+
+        });
+
+
+    if(
+        attendanceData.status !==
+        "success"
+    ){
+
+        throw new Error(
+            attendanceData.message ||
+            "تعذر تحميل الحضور"
+        );
+
+    }
+
+
+    attendance =
+        attendanceData.attendance || [];
+
+
+    return true;
+
+}
+
+
+function getCurrentTime(){
+
+    const now =
+        new Date();
+
+
+    return now.toLocaleTimeString(
+        "en-US",
+        {
+            hour:"numeric",
+            minute:"2-digit",
+            hour12:true
+        }
+    );
+
+}
+
+
+function parseTime(value){
+
+    if(!value){
+
+        return null;
+
+    }
+
+
+    const text =
+        String(value)
+            .trim()
+            .toLowerCase();
+
+
+    let match =
+        text.match(
+            /^(\d{1,2}):(\d{2})(?::(\d{2}))?\s*(am|pm)?$/
+        );
+
+
+    if(!match){
+
+        return null;
+
+    }
+
+
+    let hour =
+        parseInt(match[1],10);
+
+    const minute =
+        parseInt(match[2],10);
+
+
+    if(match[4]){
+
+        const period =
+            match[4];
+
+        if(
+            period === "pm" &&
+            hour < 12
+        ){
+
+            hour += 12;
+
+        }
+
+        if(
+            period === "am" &&
+            hour === 12
+        ){
+
+            hour = 0;
+
+        }
+
+    }
+
+
+    return (
+        hour * 60 +
+        minute
+    );
+
+}
+
+
+function calculateWorkHours(
+    checkIn,
+    checkOut
+){
+
+    const start =
+        parseTime(checkIn);
+
+    const end =
+        parseTime(checkOut);
+
+
+    if(
+        start === null ||
+        end === null
     ){
 
         return "";
 
     }
 
-    const startParts =
-        start.split(":");
-
-    const endParts =
-        end.split(":");
-
-    const startMinutes =
-        Number(startParts[0]) * 60 +
-        Number(startParts[1]);
-
-    const endMinutes =
-        Number(endParts[0]) * 60 +
-        Number(endParts[1]);
 
     let difference =
-        endMinutes -
-        startMinutes;
+        end - start;
+
 
     if(difference < 0){
 
         difference += 24 * 60;
 
     }
+
 
     const hours =
         Math.floor(
@@ -1913,46 +1726,96 @@ function calculateWorkHours(
     const minutes =
         difference % 60;
 
+
     return (
         hours +
         ":" +
-        String(minutes).padStart(2,"0")
+        String(minutes)
+            .padStart(2,"0")
     );
 
 }
+
+
+function formatTime(value){
+
+    if(!value){
+
+        return "";
+
+    }
+
+
+    const text =
+        String(value)
+            .trim();
+
+
+    if(
+        text.includes("GMT") ||
+        text.includes("2026") ||
+        text.includes("2025")
+    ){
+
+        const date =
+            new Date(value);
+
+        if(!isNaN(date.getTime())){
+
+            return date.toLocaleTimeString(
+                "ar-IQ",
+                {
+                    hour:"numeric",
+                    minute:"2-digit"
+                }
+            );
+
+        }
+
+    }
+
+
+    return text;
+
+}
+
 
 function filterEmployees(){
 
     const search =
         document.getElementById(
             "search"
-        ).value
+        )
+        .value
         .trim()
         .toLowerCase();
+
 
     const rows =
         document.querySelectorAll(
             "#employeesTable tr"
         );
 
-    rows.forEach(
-        function(row){
 
-            const text =
-                row.innerText
-                    .toLowerCase();
+    rows.forEach(row => {
 
-            row.style.display =
-                text.includes(search)
-                    ? ""
-                    : "none";
+        const text =
+            row.innerText
+                .toLowerCase();
 
-        }
-    );
+
+        row.style.display =
+            text.includes(search)
+                ? ""
+                : "none";
+
+    });
 
 }
 
+
 let messageTimer;
+
 
 function showMessage(
     text,
@@ -1964,22 +1827,27 @@ function showMessage(
             "message"
         );
 
+
     message.innerText =
         text;
+
 
     message.className =
         "message " + type;
 
+
     message.style.display =
         "block";
+
 
     clearTimeout(
         messageTimer
     );
 
+
     messageTimer =
         setTimeout(
-            function(){
+            () => {
 
                 message.style.display =
                     "none";
@@ -1990,6 +1858,7 @@ function showMessage(
 
 }
 
+
 function normalize(value){
 
     return String(
@@ -1999,12 +1868,10 @@ function normalize(value){
             : value
     )
     .trim()
-    .replace(
-        /\s+/g,
-        " "
-    );
+    .replace(/\s+/g," ");
 
 }
+
 
 function safe(value){
 
@@ -2017,38 +1884,150 @@ function safe(value){
 
     }
 
+
     return String(value)
 
-        .replace(
-            /&/g,
-            "&amp;"
-        )
+        .replace(/&/g,"&amp;")
 
-        .replace(
-            /</g,
-            "&lt;"
-        )
+        .replace(/</g,"&lt;")
 
-        .replace(
-            />/g,
-            "&gt;"
-        )
+        .replace(/>/g,"&gt;")
 
-        .replace(
-            /"/g,
-            "&quot;"
-        )
+        .replace(/"/g,"&quot;")
 
-        .replace(
-            /'/g,
-            "&#039;"
-        );
+        .replace(/'/g,"&#039;");
 
 }
 
-document.getElementById(
-    "selectedDate"
-).value = getToday();
+
+/*
+======================================================
+مهم جداً
+======================================================
+
+الـApps Script الحالي عند updateAttendance
+يحتاج رقم الصف الحقيقي في Google Sheets.
+
+لذلك getAttendance يجب أن يعيد __row.
+
+وبما أن السكربت الذي أرسلته حالياً لا يعيد رقم الصف،
+نضيف الرقم من ترتيب السجل داخل الصفحة هنا.
+
+هذا لا يغير السكربت، لكنه يسمح للصفحة بمعرفة
+رقم السجل الذي ستحدّثه.
+======================================================
+*/
+
+
+const originalGetAttendance =
+    getAttendanceByName;
+
+
+/*
+إعادة تحميل البيانات مع رقم الصف
+*/
+
+async function loadData(){
+
+    const loading =
+        document.getElementById("loading");
+
+    const wrapper =
+        document.getElementById("tableWrapper");
+
+
+    loading.style.display = "block";
+    wrapper.style.display = "none";
+
+
+    try{
+
+        const employeesData =
+            await apiRequest({
+                action:"getEmployees"
+            });
+
+
+        if(
+            employeesData.status !== "success"
+        ){
+
+            throw new Error(
+                employeesData.message ||
+                "تعذر تحميل الموظفين"
+            );
+
+        }
+
+
+        employees =
+            employeesData.employees || [];
+
+
+        const attendanceData =
+            await apiRequest({
+
+                action:"getAttendance",
+
+                date:getToday()
+
+            });
+
+
+        if(
+            attendanceData.status !== "success"
+        ){
+
+            throw new Error(
+                attendanceData.message ||
+                "تعذر تحميل الحضور"
+            );
+
+        }
+
+
+        attendance =
+            (attendanceData.attendance || [])
+            .map(
+                (item,index) => {
+
+                    return {
+                        ...item,
+
+                        __row:index + 2
+
+                    };
+
+                }
+            );
+
+
+        renderTable();
+
+
+        loading.style.display = "none";
+        wrapper.style.display = "block";
+
+
+    }catch(error){
+
+        loading.innerHTML = `
+            ❌ تعذر تحميل البيانات
+            <br><br>
+            ${safe(error.message)}
+            <br><br>
+            <button
+                class="refresh"
+                onclick="loadData()"
+            >
+                🔄 إعادة المحاولة
+            </button>
+        `;
+
+    }
+
+}
+
 
 displayDate();
 
@@ -2058,3 +2037,4 @@ loadData();
 
 </body>
 </html>
+```
