@@ -1,21 +1,30 @@
 <!DOCTYPE html>
-
 <html lang="ar" dir="rtl">
 
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Shassiha HR - إدارة الموارد البشرية</title>
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
 
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<title>نظام الموارد البشرية HR</title>
+
+<link
+href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap"
+rel="stylesheet">
+
 
 <style>
 
+/* =========================
+   GENERAL
+========================= */
+
 *{
-    box-sizing:border-box;
     margin:0;
     padding:0;
+    box-sizing:border-box;
     font-family:'Cairo',sans-serif;
 }
 
@@ -24,264 +33,214 @@ body{
     color:#222;
 }
 
-/* ================= HEADER ================= */
+
+/* =========================
+   HEADER
+========================= */
 
 .header{
-    background:#c62828;
+
+    background:#ff7a00;
+
     color:white;
-    padding:22px 30px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    box-shadow:0 3px 12px rgba(0,0,0,.15);
+
+    padding:20px;
+
+    text-align:center;
+
+    font-size:24px;
+
+    font-weight:bold;
+
+    box-shadow:
+        0 3px 10px rgba(0,0,0,.12);
+
 }
 
-.header-right{
-    display:flex;
-    align-items:center;
-    gap:15px;
-}
 
-.logo{
-    width:52px;
-    height:52px;
-    background:white;
-    color:#c62828;
-    border-radius:14px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:26px;
-    font-weight:800;
-}
-
-.header h1{
-    font-size:23px;
-}
-
-.header p{
-    font-size:13px;
-    opacity:.9;
-    margin-top:2px;
-}
-
-.header a{
-    color:white;
-    text-decoration:none;
-    font-size:13px;
-}
-
-/* ================= CONTAINER ================= */
+/* =========================
+   CONTAINER
+========================= */
 
 .container{
-    max-width:1200px;
-    margin:30px auto;
-    padding:0 18px;
-}
 
-/* ================= WELCOME ================= */
-
-.welcome{
-    background:white;
-    border-radius:18px;
     padding:25px;
-    margin-bottom:25px;
-    box-shadow:0 2px 10px rgba(0,0,0,.06);
+
+    max-width:1200px;
+
+    margin:auto;
+
 }
 
-.welcome h2{
-    font-size:21px;
-    margin-bottom:7px;
-}
 
-.welcome p{
-    color:#777;
-    font-size:14px;
-}
-
-/* ================= CARDS ================= */
-
-.cards{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:18px;
-    margin-bottom:30px;
-}
-
-.stat{
-    background:white;
-    border-radius:16px;
-    padding:20px;
-    box-shadow:0 2px 10px rgba(0,0,0,.06);
-    display:flex;
-    align-items:center;
-    gap:15px;
-}
-
-.stat-icon{
-    width:50px;
-    height:50px;
-    border-radius:13px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:24px;
-    background:#fff0f0;
-}
-
-.stat-info small{
-    display:block;
-    color:#777;
-    font-size:12px;
-}
-
-.stat-info strong{
-    display:block;
-    font-size:21px;
-    margin-top:3px;
-}
-
-/* ================= SECTION ================= */
+/* =========================
+   SECTION TITLE
+========================= */
 
 .section-title{
-    font-size:19px;
-    font-weight:700;
-    margin-bottom:15px;
+
+    font-size:15px;
+
+    font-weight:bold;
+
+    color:#666;
+
+    margin:28px 0 12px;
+
 }
 
-/* ================= MENU ================= */
+.section-title:first-child{
 
-.menu{
+    margin-top:0;
+
+}
+
+
+/* =========================
+   CARDS
+========================= */
+
+.cards{
+
     display:grid;
-    grid-template-columns:repeat(3,1fr);
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(220px,1fr)
+        );
+
     gap:18px;
+
 }
 
-.menu-card{
+
+/* =========================
+   CARD
+========================= */
+
+.card{
+
     background:white;
-    border-radius:18px;
-    padding:22px;
-    box-shadow:0 2px 10px rgba(0,0,0,.06);
-    cursor:pointer;
-    transition:.2s;
-    text-decoration:none;
-    color:#222;
-    border:1px solid transparent;
-}
 
-.menu-card:hover{
-    transform:translateY(-3px);
-    border-color:#ffcaca;
-    box-shadow:0 7px 18px rgba(0,0,0,.09);
-}
+    padding:28px 20px;
 
-.menu-icon{
-    width:55px;
-    height:55px;
-    border-radius:15px;
-    background:#fff1f1;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:27px;
-    margin-bottom:14px;
-}
+    border-radius:16px;
 
-.menu-card h3{
-    font-size:17px;
-    margin-bottom:5px;
-}
+    box-shadow:
+        0 2px 10px rgba(0,0,0,.08);
 
-.menu-card p{
-    font-size:12px;
-    color:#777;
-    line-height:1.8;
-}
-
-/* ================= QUICK ================= */
-
-.quick{
-    margin-top:30px;
-    background:white;
-    border-radius:18px;
-    padding:22px;
-    box-shadow:0 2px 10px rgba(0,0,0,.06);
-}
-
-.quick-title{
-    font-size:17px;
-    font-weight:700;
-    margin-bottom:15px;
-}
-
-.quick-buttons{
-    display:flex;
-    gap:10px;
-    flex-wrap:wrap;
-}
-
-.quick-btn{
-    border:0;
-    background:#f5f5f5;
-    padding:11px 17px;
-    border-radius:10px;
-    cursor:pointer;
-    font-family:'Cairo',sans-serif;
-    font-size:13px;
-    text-decoration:none;
-    color:#222;
-}
-
-.quick-btn:hover{
-    background:#ffeaea;
-}
-
-/* ================= FOOTER ================= */
-
-.footer{
     text-align:center;
-    color:#999;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+    text-decoration:none;
+
+    color:#222;
+
+    display:block;
+
+    position:relative;
+
+}
+
+
+.card:hover{
+
+    transform:translateY(-5px);
+
+    box-shadow:
+        0 6px 18px rgba(0,0,0,.12);
+
+}
+
+
+/* =========================
+   ICON
+========================= */
+
+.icon{
+
+    font-size:42px;
+
+    margin-bottom:10px;
+
+}
+
+
+/* =========================
+   TITLE
+========================= */
+
+.title{
+
+    font-size:18px;
+
+    font-weight:bold;
+
+}
+
+
+/* =========================
+   SUBTITLE
+========================= */
+
+.subtitle{
+
     font-size:12px;
-    padding:35px 10px 20px;
-}
 
-/* ================= MOBILE ================= */
+    color:#999;
 
-@media(max-width:900px){
-
-    .cards{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .menu{
-        grid-template-columns:repeat(2,1fr);
-    }
+    margin-top:4px;
 
 }
+
+
+/* =========================
+   COUNT
+========================= */
+
+.count{
+
+    font-size:28px;
+
+    color:#ff7a00;
+
+    margin-top:8px;
+
+    font-weight:bold;
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
 
 @media(max-width:600px){
 
     .header{
-        padding:18px;
-        flex-direction:column;
-        gap:10px;
-        text-align:center;
+
+        font-size:20px;
+
+        padding:17px;
+
     }
 
-    .header-right{
-        flex-direction:column;
-    }
-
-    .cards{
-        grid-template-columns:1fr;
-    }
-
-    .menu{
-        grid-template-columns:1fr;
-    }
 
     .container{
-        margin-top:20px;
+
+        padding:15px;
+
+    }
+
+
+    .cards{
+
+        grid-template-columns:1fr;
+
     }
 
 }
@@ -290,569 +249,314 @@ body{
 
 </head>
 
+
 <body>
 
-<!-- ================= HEADER ================= -->
 
-<header class="header">
+<!-- =========================
+     HEADER
+========================= -->
 
-```
-<div class="header-right">
+<div class="header">
 
-    <div class="logo">
-        HR
-    </div>
-
-    <div>
-        <h1>Shassiha HR</h1>
-        <p>نظام إدارة الموارد البشرية</p>
-    </div>
+    نظام الموارد البشرية HR
 
 </div>
 
-<a href="index.html">
-    🏠 الرئيسية
-</a>
-```
-
-</header>
-
-<!-- ================= MAIN ================= -->
-
-<main class="container">
-
-```
-<!-- الترحيب -->
-
-<section class="welcome">
-
-    <h2>
-        لوحة التحكم الرئيسية
-    </h2>
-
-    <p>
-        من هنا يمكنك إدارة الموظفين والرواتب والسلف والمعاملات والتقارير.
-    </p>
-
-</section>
 
 
-<!-- الإحصائيات -->
+<!-- =========================
+     MAIN
+========================= -->
 
-<section class="cards">
-
-    <div class="stat">
-
-        <div class="stat-icon">
-            👥
-        </div>
-
-        <div class="stat-info">
-
-            <small>
-                الموظفون
-            </small>
-
-            <strong id="employeesCount">
-                -
-            </strong>
-
-        </div>
-
-    </div>
+<div class="container">
 
 
-    <div class="stat">
-
-        <div class="stat-icon">
-            💰
-        </div>
-
-        <div class="stat-info">
-
-            <small>
-                السلف
-            </small>
-
-            <strong id="advancesCount">
-                -
-            </strong>
-
-        </div>
-
-    </div>
-
-
-    <div class="stat">
-
-        <div class="stat-icon">
-            📋
-        </div>
-
-        <div class="stat-info">
-
-            <small>
-                المعاملات
-            </small>
-
-            <strong id="transactionsCount">
-                -
-            </strong>
-
-        </div>
-
-    </div>
-
-
-    <div class="stat">
-
-        <div class="stat-icon">
-            📊
-        </div>
-
-        <div class="stat-info">
-
-            <small>
-                التقارير
-            </small>
-
-            <strong>
-                جاهز
-            </strong>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- النظام -->
+<!-- =========================
+     قسم: الموظفين
+========================= -->
 
 <div class="section-title">
-    أقسام النظام
+    👥 الموظفين
+</div>
+
+<div class="cards">
+
+<a
+    class="card"
+    href="./employees.html">
+
+    <div class="icon">
+        👥
+    </div>
+
+    <div class="title">
+        ادارة الموظفين
+    </div>
+
+    <div
+        class="count"
+        id="employeesCount">
+
+        0
+
+    </div>
+
+</a>
+
+
+<a class="card" href="./add-employee.html">
+
+    <div class="icon">➕</div>
+
+    <div class="title">
+        إضافة موظف
+    </div>
+
+</a>
+
+
+<a
+    class="card"
+    href="./attendance.html">
+
+    <div class="icon">
+        🕐
+    </div>
+
+    <div class="title">
+        الحضور والغياب
+    </div>
+
+</a>
+
 </div>
 
 
-<section class="menu">
+<!-- =========================
+     قسم: المعاملات والرواتب
+========================= -->
 
+<div class="section-title">
+    💼 المعاملات والرواتب
+</div>
 
-    <!-- الموظفين -->
+<div class="cards">
 
-    <a class="menu-card" href="employees.html">
+<a class="card" href="transactions.html">
 
-        <div class="menu-icon">
-            👥
-        </div>
-
-        <h3>
-            الموظفين
-        </h3>
-
-        <p>
-            إضافة الموظفين وتعديل بياناتهم وعرض تفاصيلهم وحالتهم الوظيفية.
-        </p>
-
-    </a>
-
-
-    <!-- المعاملات -->
-
-    <a class="menu-card" href="transactions.html">
-
-        <div class="menu-icon">
-            📋
-        </div>
-
-        <h3>
-            المعاملات
-        </h3>
-
-        <p>
-            إدارة المباشرة وإنهاء الخدمة والسلف وبقية معاملات الموظفين.
-        </p>
-
-    </a>
-
-
-    <!-- السلف -->
-
-    <a class="menu-card" href="advances.html">
-
-        <div class="menu-icon">
-            💰
-        </div>
-
-        <h3>
-            تسجيل سلفة
-        </h3>
-
-        <p>
-            تسجيل سلفة جديدة وحساب السلف السابقة والحد المسموح.
-        </p>
-
-    </a>
-
-
-    <!-- كشف السلف -->
-
-    <a class="menu-card" href="advances-list.html">
-
-        <div class="menu-icon">
-            💵
-        </div>
-
-        <h3>
-            كشف السلف
-        </h3>
-
-        <p>
-            عرض جميع السلف المسجلة والبحث ومراجعة تفاصيل السلف.
-        </p>
-
-    </a>
-
-
-    <!-- كشف الراتب -->
-
-    <a class="menu-card" href="salary-slip.html">
-
-        <div class="menu-icon">
-            🧾
-        </div>
-
-        <h3>
-            كشف راتب الموظف
-        </h3>
-
-        <p>
-            عرض راتب الموظف بالتفصيل مع السلف والغيابات والخصومات والصافي.
-        </p>
-
-    </a>
-
-
-    <!-- الرواتب -->
-
-    <a class="menu-card" href="payroll.html">
-
-        <div class="menu-icon">
-            💳
-        </div>
-
-        <h3>
-            الرواتب
-        </h3>
-
-        <p>
-            إعداد كشف الرواتب الشهري لجميع الموظفين وحساب صافي المستحقات.
-        </p>
-
-    </a>
-
-
-    <!-- التقارير -->
-
-    <a class="menu-card" href="reports.html">
-
-        <div class="menu-icon">
-            📊
-        </div>
-
-        <h3>
-            التقارير
-        </h3>
-
-        <p>
-            تقارير الموظفين والسلف والرواتب والمعاملات والحضور.
-        </p>
-
-    </a>
-
-
-</section>
-
-
-<!-- اختصارات -->
-
-<section class="quick">
-
-    <div class="quick-title">
-        ⚡ اختصارات سريعة
+    <div class="icon">
+        📄
     </div>
 
-    <div class="quick-buttons">
-
-        <a
-            class="quick-btn"
-            href="employees.html">
-            ➕ إضافة موظف
-        </a>
-
-        <a
-            class="quick-btn"
-            href="advances.html">
-            💰 تسجيل سلفة
-        </a>
-
-        <a
-            class="quick-btn"
-            href="salary-slip.html">
-            🧾 كشف راتب
-        </a>
-
-        <a
-            class="quick-btn"
-            href="payroll.html">
-            💳 كشف الرواتب
-        </a>
-
-        <a
-            class="quick-btn"
-            href="reports.html">
-            📊 التقارير
-        </a>
-
+    <div class="title">
+        المعاملات
     </div>
 
-</section>
-```
+    <div class="subtitle">
+        مباشرة، إجازة، إنذار، إنهاء خدمة
+    </div>
 
-</main>
+</a>
 
-<!-- ================= FOOTER ================= -->
 
-<footer class="footer">
+<a class="card" href="advances.html">
 
-```
-Shassiha HR
-©
-<span id="year"></span>
+    <div class="icon">
+        💰
+    </div>
 
-—
-نظام إدارة الموارد البشرية
-```
+    <div class="title">
+        سلفة جديدة
+    </div>
 
-</footer>
+    <div class="subtitle">
+        تسجيل سلفة على الراتب
+    </div>
+
+</a>
+
+
+<a class="card" href="advances-list.html">
+
+    <div class="icon">
+        📑
+    </div>
+
+    <div class="title">
+        سجل السلف
+    </div>
+
+    <div class="subtitle">
+        عرض كل السلف المسجلة
+    </div>
+
+</a>
+
+
+<a class="card" href="payroll.html">
+
+    <div class="icon">
+        🧾
+    </div>
+
+    <div class="title">
+        كشف الرواتب
+    </div>
+
+</a>
+
+
+<a class="card" href="salary-slip.html">
+
+    <div class="icon">
+        🧮
+    </div>
+
+    <div class="title">
+        قسيمة راتب موظف
+    </div>
+
+</a>
+
+</div>
+
+
+<!-- =========================
+     قسم: التقارير
+========================= -->
+
+<div class="section-title">
+    📊 التقارير
+</div>
+
+<div class="cards">
+
+<a class="card" href="reports.html">
+
+    <div class="icon">
+        📊
+    </div>
+
+    <div class="title">
+        التقارير العامة
+    </div>
+
+</a>
+
+
+<a class="card" href="salary-report.html">
+
+    <div class="icon">
+        📈
+    </div>
+
+    <div class="title">
+        تقرير الرواتب
+    </div>
+
+</a>
+
+</div>
+
+
+<!-- =========================
+     قسم: الإعدادات
+========================= -->
+
+<div class="section-title">
+    ⚙️ عام
+</div>
+
+<div class="cards">
+
+<div
+    class="card"
+    onclick="comingSoon('الإعدادات')">
+
+    <div class="icon">
+        ⚙️
+    </div>
+
+    <div class="title">
+        الإعدادات
+    </div>
+
+</div>
+
+</div>
+
+
+</div>
+
+
 
 <script>
 
-/* ================================================= */
-/* API */
-/* ================================================= */
+
+// =====================================================
+// API
+// =====================================================
 
 const API =
 "https://script.google.com/macros/s/AKfycbw6pnqbRn3VyJvFjk0RGfEt8VXdBkOq2uqooSvxi0onjcUStpJ_hOGNZVPLimRA-ZNAGQ/exec";
 
 
-/* ================================================= */
-/* السنة */
-/* ================================================= */
 
-document.getElementById("year").textContent =
-    new Date().getFullYear();
+// =====================================================
+// LOAD EMPLOYEES COUNT
+// =====================================================
 
-
-/* ================================================= */
-/* تحميل الإحصائيات */
-/* ================================================= */
-
-async function loadDashboard(){
+async function loadEmployees(){
 
     try{
 
-        const result =
-            await postAPI({
-                action:"getEmployees"
-            });
+        const response =
+            await fetch(
+
+                API,
+
+                {
+
+                    method:"POST",
+
+                    body:
+                        JSON.stringify({
+
+                            action:
+                                "getEmployees"
+
+                        })
+
+                }
+
+            );
+
+
+        const data =
+            await response.json();
+
 
         if(
-            result &&
-            result.status === "success"
+            data.status ===
+            "success"
         ){
-
-            const employees =
-                Array.isArray(result.employees)
-                ? result.employees
-                : [];
-
-            const active =
-                employees.filter(function(employee){
-
-                    const status =
-                        String(
-                            employee["الحالة"] || ""
-                        ).trim();
-
-                    return status !== "منتهي الخدمة";
-
-                });
 
             document.getElementById(
                 "employeesCount"
-            ).textContent =
-                active.length;
+            ).innerText =
+                data.employees.length;
 
         }
 
-    }
-    catch(error){
-
-        console.error(
-            "Dashboard:",
-            error
-        );
-
-        document.getElementById(
-            "employeesCount"
-        ).textContent =
-            "-";
 
     }
 
-
-    /*
-     * نحاول جلب السلف
-     */
-
-    try{
-
-        const result =
-            await postAPI({
-                action:"getAdvances"
-            });
-
-        if(
-            result &&
-            result.status === "success"
-        ){
-
-            const advances =
-                Array.isArray(result.advances)
-                ? result.advances
-                : [];
-
-            const activeAdvances =
-                advances.filter(function(item){
-
-                    const status =
-                        String(
-                            item["الحالة"] ||
-                            item["Status"] ||
-                            ""
-                        ).trim();
-
-                    return status !== "ملغاة";
-
-                });
-
-            document.getElementById(
-                "advancesCount"
-            ).textContent =
-                activeAdvances.length;
-
-        }
-
-    }
-    catch(error){
-
-        console.error(
-            "Advances:",
-            error
-        );
-
-        document.getElementById(
-            "advancesCount"
-        ).textContent =
-            "-";
-
-    }
-
-
-    /*
-     * المعاملات
-     *
-     * إذا كان الـApps Script الحالي
-     * لا يدعم getTransactions، تبقى -
-     * ولا تؤثر على باقي النظام.
-     */
-
-    try{
-
-        const result =
-            await postAPI({
-                action:"getTransactions"
-            });
-
-        if(
-            result &&
-            result.status === "success"
-        ){
-
-            const transactions =
-                Array.isArray(result.transactions)
-                ? result.transactions
-                : [];
-
-            document.getElementById(
-                "transactionsCount"
-            ).textContent =
-                transactions.length;
-
-        }
-
-    }
     catch(error){
 
         console.log(
-            "Transactions count unavailable"
-        );
-
-        document.getElementById(
-            "transactionsCount"
-        ).textContent =
-            "-";
-
-    }
-
-}
-
-
-/* ================================================= */
-/* POST API */
-/* ================================================= */
-
-async function postAPI(data){
-
-    const response =
-        await fetch(API,{
-
-            method:"POST",
-
-            headers:{
-                "Content-Type":
-                    "text/plain;charset=utf-8"
-            },
-
-            body:
-                JSON.stringify(data)
-
-        });
-
-
-    const text =
-        await response.text();
-
-
-    try{
-
-        return JSON.parse(text);
-
-    }
-    catch(error){
-
-        throw new Error(
-            "الخادم لم يرجع JSON صحيح"
+            "Employees API Error:",
+            error
         );
 
     }
@@ -860,16 +564,35 @@ async function postAPI(data){
 }
 
 
-/* ================================================= */
-/* تشغيل */
-/* ================================================= */
 
-document.addEventListener(
-    "DOMContentLoaded",
-    loadDashboard
-);
+// =====================================================
+// COMING SOON
+// =====================================================
+
+function comingSoon(name){
+
+    alert(
+
+        "قسم " +
+        name +
+        " راح يتم تفعيله بالمرحلة القادمة 🔥"
+
+    );
+
+}
+
+
+
+// =====================================================
+// START
+// =====================================================
+
+loadEmployees();
+
 
 </script>
 
+
 </body>
+
 </html>
