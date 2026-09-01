@@ -1605,8 +1605,39 @@ async function generateReport(){
 
             advances:
                 advances
-await savePayrollRow(currentReport);
+
         };
+
+
+        /* ========================================= */
+        /* حفظ/تحديث كشف الراتب بشيت Payroll */
+        /*                                           */
+        /* ملاحظة: لو فشلت هاي الخطوة (مثلاً الشيت    */
+        /* لسا مو موجود) ما نوقف عرض التقرير — بس     */
+        /* نطلع تنبيه بسيط.                          */
+        /* ========================================= */
+
+        try{
+
+            await savePayrollRow(
+                currentReport
+            );
+
+        }
+        catch(saveError){
+
+            console.error(
+                "SAVE PAYROLL ERROR:",
+                saveError
+            );
+
+            showMessage(
+                "⚠️ تم عرض الكشف، لكن تعذر حفظه بشيت Payroll: " +
+                saveError.message,
+                "error"
+            );
+
+        }
 
 
         /* ========================================= */
@@ -1631,12 +1662,6 @@ await savePayrollRow(currentReport);
             "inline-block";
 
 
-        showMessage(
-            "✅ تم تجهيز كشف الراتب",
-            "success"
-        );
-
-
         window.scrollTo({
             top:
                 report.offsetTop -
@@ -1659,6 +1684,89 @@ await savePayrollRow(currentReport);
         );
 
     }
+
+}
+
+
+/* ================================================= */
+/* حفظ / تحديث كشف الراتب بشيت Payroll */
+/* ================================================= */
+
+async function savePayrollRow(data){
+
+    const employee =
+        data.employee || {};
+
+
+    const result =
+        await postAPI({
+
+            action:"savePayrollRow",
+
+            employeeId:
+                employee["Employee ID"] || "",
+
+            month:
+                data.month,
+
+            employeeName:
+                employee["الاسم"] || "",
+
+            department:
+                employee["القسم"] || "",
+
+            salary:
+                data.salary,
+
+            bonuses:
+                0,
+
+            totalAdvance:
+                data.totalAdvance,
+
+            absenceDeduction:
+                data.absenceDeduction,
+
+            absenceDays:
+                data.absenceDays,
+
+            netSalary:
+                data.netSalary,
+
+            paymentStatus:
+                "غير مدفوع",
+
+            paymentDate:
+                ""
+
+        });
+
+
+    if(
+        result.status !==
+        "success"
+    ){
+
+        throw new Error(
+            result.message ||
+            "تعذر حفظ كشف الراتب"
+        );
+
+    }
+
+
+    /*
+     * رسالة نجاح خفيفة (ما توقف الواجهة)
+     */
+
+    showMessage(
+        result.updated
+        ?
+        "✅ تم تجهيز الكشف وتحديثه بشيت Payroll"
+        :
+        "✅ تم تجهيز الكشف وحفظه بشيت Payroll",
+        "success"
+    );
 
 }
 
@@ -2438,67 +2546,8 @@ function safe(value){
         );
 
 }
-async function savePayrollRow(data){
 
-    const employee =
-        data.employee || {};
-
-    const result =
-        await postAPI({
-
-            action:"savePayrollRow",
-
-            month:
-                data.month,
-
-            employeeName:
-                employee["الاسم"] || "",
-
-            department:
-                employee["القسم"] || "",
-
-            salary:
-                data.salary,
-
-            bonuses:
-                0,
-
-            totalAdvance:
-                data.totalAdvance,
-
-            absenceDeduction:
-                data.absenceDeduction,
-
-            absenceDays:
-                data.absenceDays,
-
-            netSalary:
-                data.netSalary,
-
-            paymentStatus:
-                "غير مدفوع",
-
-            paymentDate:
-                ""
-
-        });
-
-
-    if(
-        result.status !==
-        "success"
-    ){
-
-        throw new Error(
-            result.message ||
-            "تعذر حفظ كشف الراتب"
-        );
-
-    }
-
-}
 </script>
 
 </body>
 </html>
-```
