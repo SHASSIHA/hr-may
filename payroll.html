@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="ar" dir="rtl">
 
 <head>
@@ -232,6 +231,27 @@ tbody tr:hover{
 }
 
 /* ============================= */
+/* صندوق تشخيصي مؤقت */
+/* ============================= */
+
+.debug-box{
+    display:none;
+    margin-bottom:20px;
+    padding:15px;
+    border-radius:10px;
+    background:#f0f0f0;
+    border:1px dashed #999;
+    font-size:12px;
+    font-family:monospace;
+    white-space:pre-wrap;
+    direction:ltr;
+    text-align:left;
+    color:#333;
+    max-height:500px;
+    overflow:auto;
+}
+
+/* ============================= */
 /* نافذة التفاصيل */
 /* ============================= */
 
@@ -443,495 +463,483 @@ tbody tr:hover{
 
 <div class="header">
 
-```
-<h1>💰 كشف الرواتب</h1>
+    <h1>💰 كشف الرواتب</h1>
 
-<a href="index.html">
-    ← العودة للرئيسية
-</a>
-```
+    <a href="index.html">
+        ← العودة للرئيسية
+    </a>
 
 </div>
 
 <div class="container">
 
-```
-<div id="message" class="message"></div>
+    <div id="message" class="message"></div>
 
 
-<!-- ============================= -->
-<!-- الفلاتر -->
-<!-- ============================= -->
+    <!-- ============================= -->
+    <!-- الفلاتر -->
+    <!-- ============================= -->
 
-<div class="card">
+    <div class="card">
 
-    <div class="title">
-        📅 تحديد فترة كشف الراتب
-    </div>
+        <div class="title">
+            📅 تحديد فترة كشف الراتب
+        </div>
 
-    <div class="filters">
+        <div class="filters">
 
-        <div class="field">
+            <div class="field">
 
-            <label>
-                شهر الراتب
-            </label>
+                <label>
+                    شهر الراتب
+                </label>
 
-            <input
-                type="month"
-                id="month">
+                <input
+                    type="month"
+                    id="month">
+
+            </div>
+
+
+            <div class="field">
+
+                <label>
+                    الموظف
+                </label>
+
+                <select id="employee">
+
+                    <option value="">
+                        جميع الموظفين
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="field">
+
+                <label>
+                    البحث
+                </label>
+
+                <input
+                    type="text"
+                    id="search"
+                    placeholder="اسم الموظف أو الرقم الوظيفي">
+
+            </div>
+
+
+            <button
+                class="btn search-btn"
+                onclick="loadPayroll()">
+
+                🔍 عرض الكشف
+
+            </button>
 
         </div>
 
 
-        <div class="field">
+        <div class="actions">
 
-            <label>
-                الموظف
-            </label>
+            <button
+                class="btn print-btn"
+                onclick="printPayroll()">
 
-            <select id="employee">
+                🖨️ طباعة كشف الرواتب
 
-                <option value="">
-                    جميع الموظفين
-                </option>
+            </button>
 
-            </select>
+
+            <button
+                class="btn reset-btn"
+                onclick="resetFilters()">
+
+                🔄 إعادة ضبط
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- ============================= -->
+    <!-- الإحصائيات -->
+    <!-- ============================= -->
+
+    <div class="stats">
+
+        <div class="stat">
+
+            <small>
+                عدد الموظفين
+            </small>
+
+            <strong id="statEmployees">
+                0
+            </strong>
 
         </div>
 
 
-        <div class="field">
+        <div class="stat">
 
-            <label>
-                البحث
-            </label>
+            <small>
+                مجموع الرواتب
+            </small>
 
-            <input
-                type="text"
-                id="search"
-                placeholder="اسم الموظف أو الرقم الوظيفي">
+            <strong id="statSalary">
+                0
+            </strong>
 
         </div>
 
 
-        <button
-            class="btn search-btn"
-            onclick="loadPayroll()">
+        <div class="stat">
 
-            🔍 عرض الكشف
+            <small>
+                مجموع خصم الغياب
+            </small>
 
-        </button>
+            <strong
+                id="statAbsence"
+                class="deduction">
 
-    </div>
+                0
 
+            </strong>
 
-    <div class="actions">
-
-        <button
-            class="btn print-btn"
-            onclick="printPayroll()">
-
-            🖨️ طباعة كشف الرواتب
-
-        </button>
+        </div>
 
 
-        <button
-            class="btn reset-btn"
-            onclick="resetFilters()">
+        <div class="stat">
 
-            🔄 إعادة ضبط
+            <small>
+                مجموع السلف
+            </small>
 
-        </button>
+            <strong
+                id="statAdvances"
+                class="deduction">
 
-    </div>
+                0
 
-</div>
+            </strong>
 
-
-<!-- ============================= -->
-<!-- الإحصائيات -->
-<!-- ============================= -->
-
-<div class="stats">
-
-    <div class="stat">
-
-        <small>
-            عدد الموظفين
-        </small>
-
-        <strong id="statEmployees">
-            0
-        </strong>
-
-    </div>
+        </div>
 
 
-    <div class="stat">
+        <div class="stat">
 
-        <small>
-            مجموع الرواتب
-        </small>
+            <small>
+                صافي الرواتب
+            </small>
 
-        <strong id="statSalary">
-            0
-        </strong>
+            <strong
+                id="statNet"
+                class="net">
+
+                0
+
+            </strong>
+
+        </div>
 
     </div>
 
 
-    <div class="stat">
+    <!-- ============================= -->
+    <!-- الجدول -->
+    <!-- ============================= -->
 
-        <small>
-            مجموع خصم الغياب
-        </small>
+    <div class="card">
 
-        <strong
-            id="statAbsence"
-            class="deduction">
-
-            0
-
-        </strong>
-
-    </div>
+        <div class="title">
+            📋 كشف رواتب الموظفين
+        </div>
 
 
-    <div class="stat">
+        <div class="table-wrap">
 
-        <small>
-            مجموع السلف
-        </small>
+            <table>
 
-        <strong
-            id="statAdvances"
-            class="deduction">
+                <thead>
 
-            0
+                    <tr>
 
-        </strong>
+                        <th>
+                            #
+                        </th>
 
-    </div>
+                        <th>
+                            الرقم الوظيفي
+                        </th>
 
+                        <th>
+                            اسم الموظف
+                        </th>
 
-    <div class="stat">
+                        <th>
+                            الراتب الأساسي
+                        </th>
 
-        <small>
-            صافي الرواتب
-        </small>
+                        <th>
+                            أيام الغياب
+                        </th>
 
-        <strong
-            id="statNet"
-            class="net">
+                        <th>
+                            خصم الغياب
+                        </th>
 
-            0
+                        <th>
+                            السلف السابقة
+                        </th>
 
-        </strong>
+                        <th>
+                            السلفة الحالية
+                        </th>
 
-    </div>
+                        <th>
+                            مجموع السلف
+                        </th>
 
-</div>
+                        <th>
+                            صافي الراتب
+                        </th>
 
+                        <th>
+                            المتبقي
+                        </th>
 
-<!-- ============================= -->
-<!-- الجدول -->
-<!-- ============================= -->
+                        <th>
+                            التفاصيل
+                        </th>
 
-<div class="card">
+                    </tr>
 
-    <div class="title">
-        📋 كشف رواتب الموظفين
-    </div>
-
-
-    <div class="table-wrap">
-
-        <table>
-
-            <thead>
-
-                <tr>
-
-                    <th>
-                        #
-                    </th>
-
-                    <th>
-                        الرقم الوظيفي
-                    </th>
-
-                    <th>
-                        اسم الموظف
-                    </th>
-
-                    <th>
-                        الراتب الأساسي
-                    </th>
-
-                    <th>
-                        أيام الغياب
-                    </th>
-
-                    <th>
-                        خصم الغياب
-                    </th>
-
-                    <th>
-                        السلف السابقة
-                    </th>
-
-                    <th>
-                        السلفة الحالية
-                    </th>
-
-                    <th>
-                        مجموع السلف
-                    </th>
-
-                    <th>
-                        صافي الراتب
-                    </th>
-
-                    <th>
-                        المتبقي
-                    </th>
-
-                    <th>
-                        التفاصيل
-                    </th>
-
-                </tr>
-
-            </thead>
+                </thead>
 
 
-            <tbody id="payrollBody">
+                <tbody id="payrollBody">
 
-                <tr>
+                    <tr>
 
-                    <td
-                        colspan="12"
-                        class="loading">
+                        <td
+                            colspan="12"
+                            class="loading">
 
-                        ⏳ جاري تحميل كشف الرواتب...
+                            ⏳ جاري تحميل كشف الرواتب...
 
-                    </td>
+                        </td>
 
-                </tr>
+                    </tr>
 
-            </tbody>
+                </tbody>
 
-        </table>
+            </table>
+
+        </div>
 
     </div>
 
 </div>
-```
-
-</div>
 
 <!-- ============================= -->
-
 <!-- نافذة التفاصيل -->
-
 <!-- ============================= -->
 
 <div
     id="detailModal"
     class="modal">
 
-```
-<div class="modal-content">
+    <div class="modal-content">
 
-    <div class="modal-header">
+        <div class="modal-header">
 
-        <div
-            id="modalTitle"
-            class="employee-title">
+            <div
+                id="modalTitle"
+                class="employee-title">
 
-            تفاصيل الموظف
+                تفاصيل الموظف
+
+            </div>
+
+            <button
+                class="close"
+                onclick="closeModal()">
+
+                ×
+
+            </button>
 
         </div>
 
-        <button
-            class="close"
-            onclick="closeModal()">
 
-            ×
+        <div
+            id="modalBody">
 
-        </button>
+        </div>
 
     </div>
-
-
-    <div
-        id="modalBody">
-
-    </div>
-
-</div>
-```
 
 </div>
 
 <!-- ============================= -->
-
 <!-- منطقة الطباعة -->
-
 <!-- ============================= -->
 
 <div
     id="printArea"
     class="print-area">
 
-```
-<div class="print-header">
+    <div class="print-header">
 
-    <h1>
-        اسم الشركة / المطعم
-    </h1>
+        <h1>
+            اسم الشركة / المطعم
+        </h1>
 
-    <p>
-        إدارة الموارد البشرية
-    </p>
+        <p>
+            إدارة الموارد البشرية
+        </p>
 
-</div>
-
-
-<div class="print-title">
-    كشف رواتب الموظفين
-</div>
-
-
-<div class="print-info">
-
-    <div>
-        الشهر:
-        <strong id="printMonth">
-            -
-        </strong>
     </div>
 
-    <div>
-        تاريخ الطباعة:
-        <strong id="printDate">
-            -
-        </strong>
+
+    <div class="print-title">
+        كشف رواتب الموظفين
     </div>
 
-</div>
 
+    <div class="print-info">
 
-<table class="print-table">
+        <div>
+            الشهر:
+            <strong id="printMonth">
+                -
+            </strong>
+        </div>
 
-    <thead>
+        <div>
+            تاريخ الطباعة:
+            <strong id="printDate">
+                -
+            </strong>
+        </div>
 
-        <tr>
-
-            <th>
-                #
-            </th>
-
-            <th>
-                الرقم الوظيفي
-            </th>
-
-            <th>
-                اسم الموظف
-            </th>
-
-            <th>
-                الراتب
-            </th>
-
-            <th>
-                الغياب
-            </th>
-
-            <th>
-                خصم الغياب
-            </th>
-
-            <th>
-                السلف السابقة
-            </th>
-
-            <th>
-                السلفة الحالية
-            </th>
-
-            <th>
-                مجموع السلف
-            </th>
-
-            <th>
-                صافي الراتب
-            </th>
-
-            <th>
-                المتبقي
-            </th>
-
-        </tr>
-
-    </thead>
-
-
-    <tbody id="printBody">
-
-    </tbody>
-
-</table>
-
-
-<div class="print-total">
-
-    <span>
-        مجموع الرواتب:
-        <strong id="printTotalSalary">
-            0
-        </strong>
-    </span>
-
-    <span>
-        مجموع السلف:
-        <strong id="printTotalAdvances">
-            0
-        </strong>
-    </span>
-
-    <span>
-        صافي الرواتب:
-        <strong id="printTotalNet">
-            0
-        </strong>
-    </span>
-
-</div>
-
-
-<div class="print-footer">
-
-    <div>
-        مسؤول الموارد البشرية
-        <br><br>
-        الاسم: __________________
-        <br>
-        التوقيع: ________________
     </div>
 
-    <div>
-        الإدارة المالية
-        <br><br>
-        الاسم: __________________
-        <br>
-        التوقيع: ________________
+
+    <table class="print-table">
+
+        <thead>
+
+            <tr>
+
+                <th>
+                    #
+                </th>
+
+                <th>
+                    الرقم الوظيفي
+                </th>
+
+                <th>
+                    اسم الموظف
+                </th>
+
+                <th>
+                    الراتب
+                </th>
+
+                <th>
+                    الغياب
+                </th>
+
+                <th>
+                    خصم الغياب
+                </th>
+
+                <th>
+                    السلف السابقة
+                </th>
+
+                <th>
+                    السلفة الحالية
+                </th>
+
+                <th>
+                    مجموع السلف
+                </th>
+
+                <th>
+                    صافي الراتب
+                </th>
+
+                <th>
+                    المتبقي
+                </th>
+
+            </tr>
+
+        </thead>
+
+
+        <tbody id="printBody">
+
+        </tbody>
+
+    </table>
+
+
+    <div class="print-total">
+
+        <span>
+            مجموع الرواتب:
+            <strong id="printTotalSalary">
+                0
+            </strong>
+        </span>
+
+        <span>
+            مجموع السلف:
+            <strong id="printTotalAdvances">
+                0
+            </strong>
+        </span>
+
+        <span>
+            صافي الرواتب:
+            <strong id="printTotalNet">
+                0
+            </strong>
+        </span>
+
     </div>
 
-</div>
-```
+
+    <div class="print-footer">
+
+        <div>
+            مسؤول الموارد البشرية
+            <br><br>
+            الاسم: __________________
+            <br>
+            التوقيع: ________________
+        </div>
+
+        <div>
+            الإدارة المالية
+            <br><br>
+            الاسم: __________________
+            <br>
+            التوقيع: ________________
+        </div>
+
+    </div>
 
 </div>
 
@@ -1940,10 +1948,6 @@ function printPayroll(){
 /* ================================================= */
 
 function printSingle(index){
-
-    const original =
-        payrollRows;
-
 
     const row =
         payrollRows[index];
