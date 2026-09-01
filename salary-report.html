@@ -1605,7 +1605,7 @@ async function generateReport(){
 
             advances:
                 advances
-
+await savePayrollRow(currentReport);
         };
 
 
@@ -2438,7 +2438,65 @@ function safe(value){
         );
 
 }
+async function savePayrollRow(data){
 
+    const employee =
+        data.employee || {};
+
+    const result =
+        await postAPI({
+
+            action:"savePayrollRow",
+
+            month:
+                data.month,
+
+            employeeName:
+                employee["الاسم"] || "",
+
+            department:
+                employee["القسم"] || "",
+
+            salary:
+                data.salary,
+
+            bonuses:
+                0,
+
+            totalAdvance:
+                data.totalAdvance,
+
+            absenceDeduction:
+                data.absenceDeduction,
+
+            absenceDays:
+                data.absenceDays,
+
+            netSalary:
+                data.netSalary,
+
+            paymentStatus:
+                "غير مدفوع",
+
+            paymentDate:
+                ""
+
+        });
+
+
+    if(
+        result.status !==
+        "success"
+    ){
+
+        throw new Error(
+            result.message ||
+            "تعذر حفظ كشف الراتب"
+        );
+
+    }
+
+}
 </script>
 
 </body>
